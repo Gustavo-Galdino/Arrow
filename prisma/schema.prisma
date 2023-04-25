@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String         @id @default(cuid())
+  username String         @unique
+  tables   WorkoutTable[]
+
+  @@map("users")
+}
+
+model WorkoutTable {
+  id        String @id @default(cuid())
+  tableName String
+  userId    String
+
+  user                 User                   @relation(fields: [userId], references: [id])
+  WorkoutTableExercise WorkoutTableExercise[]
+
+  @@map("workoutTables")
+}
+
+model WorkoutTableExercise {
+  id String @id @default(cuid())
+
+  exercise       Exercise[]
+  WorkoutTable   WorkoutTable @relation(fields: [workoutTableId], references: [id])
+  workoutTableId String
+
+  @@map("workoutTableExercises")
+}
+
+model Exercise {
+  id           String @id @default(cuid())
+  exerciseName String
+  series       Int
+  volume       Int
+
+  tables WorkoutTableExercise[]
+
+  @@map("exercises")
+}
