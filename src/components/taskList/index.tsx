@@ -11,6 +11,7 @@ import { Check, Plus, X } from 'phosphor-react'
 interface Table {
   id: string
   tableName: string
+  workoutTableExerciseId: string
 }
 
 interface User {
@@ -21,15 +22,14 @@ interface User {
 
 interface Exercice {
   id: string
-  workoutTableId: string
+  exerciseName: string
+  series: number
+  volume: number
 }
 
 interface ExerciceTable {
   id: string
-  exerciseName: string
-  series: number
-  volume: number
-  tables: Exercice[]
+  exercise: Exercice[]
 }
 
 interface TaskListProps {
@@ -39,8 +39,8 @@ interface TaskListProps {
 
 export function TaskList({ userData, exerciceTable }: TaskListProps) {
   const { register, getValues, reset, handleSubmit } = useForm()
-  const [tasks, setTasks] = useState<ExerciceTable[]>(exerciceTable)
   const [tables, setTables] = useState<User[]>([])
+  const [task, setTasks] = useState<ExerciceTable[]>(exerciceTable)
 
   useEffect(() => {
     setTables((state) => [...state, userData])
@@ -53,14 +53,13 @@ export function TaskList({ userData, exerciceTable }: TaskListProps) {
     .flatMap((user) => user.tables)
     .find((table) => table.id === tableId)
 
-  const checkTableId = tasks.filter((task) =>
-    task.tables.some((t) => t.workoutTableId === tableId),
-  )
-  const filteredTables = checkTableId.flatMap((table) =>
-    table.tables.filter((t) => t.workoutTableId === tableId),
-  )
-  const captureIdTable = filteredTables.map((table) => table.id)
-  const idTable = captureIdTable[0]
+  const exercises = task
+    .filter((table) => table.id === selectedTable?.workoutTableExerciseId)
+    .flatMap((exercise) => exercise.exercise)
+
+  const exerciseTableId = task.find(
+    (table) => table.id === selectedTable?.workoutTableExerciseId,
+  )?.id
 
   async function handleNewTask() {
     const nameTask = getValues('task').toLowerCase()
@@ -71,15 +70,21 @@ export function TaskList({ userData, exerciceTable }: TaskListProps) {
     )
 
     if (nameTask) {
-      await fetch('http://localhost:3000/api/tables', {
+      await fetch('http://localhost:3000/api/exercices', {
         method: 'POST',
         body: JSON.stringify({
           exerciseName,
           series,
           volume,
-          idTable,
+          exerciseTableId,
         }),
       })
+
+      const response = await fetch('http://localhost:3000/api/exercices')
+      const data = await response.json()
+      setTasks(data)
+
+      reset()
     }
   }
 
@@ -93,8 +98,8 @@ export function TaskList({ userData, exerciceTable }: TaskListProps) {
           onSubmit={handleSubmit(handleNewTask)}
           className="flex flex-col gap-4"
         >
-          {checkTableId.length > 0 &&
-            checkTableId.map((task) => (
+          {exercises.length > 0 &&
+            exercises.map((task) => (
               <li
                 key={task.id}
                 className="border-b-2 border-zinc-500 px-1 flex items-center justify-between"

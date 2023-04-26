@@ -10,17 +10,13 @@ CREATE TABLE "workoutTables" (
     "tableName" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "workoutTableExerciseId" TEXT NOT NULL,
-    "workoutTableNoteId" TEXT NOT NULL,
-    CONSTRAINT "workoutTables_workoutTableExerciseId_fkey" FOREIGN KEY ("workoutTableExerciseId") REFERENCES "workoutTableExercises" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
-    CONSTRAINT "workoutTables_workoutTableNoteId_fkey" FOREIGN KEY ("workoutTableNoteId") REFERENCES "workoutTableNotes" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
-    CONSTRAINT "workoutTables_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    CONSTRAINT "workoutTables_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT "workoutTables_workoutTableExerciseId_fkey" FOREIGN KEY ("workoutTableExerciseId") REFERENCES "workoutTableExercises" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable
 CREATE TABLE "workoutTableExercises" (
-    "id" TEXT NOT NULL PRIMARY KEY,
-    "tableId" TEXT NOT NULL,
-    "exerciseId" TEXT NOT NULL
+    "id" TEXT NOT NULL PRIMARY KEY
 );
 
 -- CreateTable
@@ -29,20 +25,6 @@ CREATE TABLE "exercises" (
     "exerciseName" TEXT NOT NULL,
     "series" INTEGER NOT NULL,
     "volume" INTEGER NOT NULL
-);
-
--- CreateTable
-CREATE TABLE "workoutTableNotes" (
-    "id" TEXT NOT NULL PRIMARY KEY,
-    "tableId" TEXT NOT NULL,
-    "noteId" TEXT NOT NULL,
-    CONSTRAINT "workoutTableNotes_noteId_fkey" FOREIGN KEY ("noteId") REFERENCES "notes" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
-);
-
--- CreateTable
-CREATE TABLE "notes" (
-    "id" TEXT NOT NULL PRIMARY KEY,
-    "note" TEXT NOT NULL
 );
 
 -- CreateTable

@@ -3,31 +3,28 @@ import { NextResponse } from 'next/server'
 
 const prisma = new PrismaClient()
 
-export async function GET() {
-  const tables = await prisma.exercise.findMany({
-    include: {
-      tables: true,
-    },
+export async function POST(req: Request) {
+  const { tableName, userId } = await req.json()
+
+  const createExerciseTable = await prisma.workoutTableExercise.create({
+    data: {},
   })
 
-  return NextResponse.json(tables)
-}
-
-export async function POST(req: Request) {
-  const { exerciseName, series, volume, idTable } = await req.json()
-
-  const createdExercise = await prisma.exercise.create({
+  const createdExercise = await prisma.workoutTable.create({
     data: {
-      exerciseName,
-      series,
-      volume,
-      tables: {
-        connect: { id: idTable },
-      },
+      tableName,
+      userId,
+      workoutTableExerciseId: createExerciseTable.id,
     },
   })
 
   return new Response(JSON.stringify(createdExercise), {
     status: 201,
   })
+}
+
+export async function GET() {
+  const tables = await prisma.workoutTable.findMany()
+
+  return NextResponse.json(tables)
 }

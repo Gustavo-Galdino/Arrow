@@ -20,19 +20,19 @@ export default async function Page() {
   })
   const userData: User = await user.json()
 
-  const tables = await fetch('http://localhost:3000/api/tables', {
+  const exercices = await fetch('http://localhost:3000/api/exercices', {
     cache: 'no-store',
   })
 
-  const tablesData = await tables.json()
+  const exercicesData = await exercices.json()
 
   return (
     <main className="mt-24 flex">
-      <AsideUserLayout name={userData.username} tables={userData.tables} />
+      <AsideUserLayout user={userData} tables={userData.tables} />
 
       <section className="px-5 ml-72">
         <article>
-          <TaskList userData={userData} exerciceTable={tablesData} />
+          <TaskList userData={userData} exerciceTable={exercicesData} />
         </article>
 
         <article className="mt-20">
