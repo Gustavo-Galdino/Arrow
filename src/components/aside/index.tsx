@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { Plus, User } from 'phosphor-react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 interface Table {
@@ -22,6 +23,7 @@ interface AsideProps {
 
 export function AsideUserLayout({ user, tables }: AsideProps) {
   const { register, getValues, reset } = useForm()
+  const [asideTables, setAsideTables] = useState<Table[]>(tables)
 
   async function handleCreateTable() {
     const tableName = getValues('newTable')
@@ -35,6 +37,10 @@ export function AsideUserLayout({ user, tables }: AsideProps) {
           userId,
         }),
       })
+
+      const response = await fetch('http://localhost:3000/api/tables')
+      const data = await response.json()
+      setAsideTables(data)
 
       reset()
     }
@@ -55,7 +61,7 @@ export function AsideUserLayout({ user, tables }: AsideProps) {
 
       <section className="ml-10">
         <ul className="flex flex-col items-start gap-4 list-disc">
-          {tables.map((table) => (
+          {asideTables.map((table) => (
             <li
               key={table.id}
               className="cursor-pointer hover:font-bold hover:underline underline-offset-4"

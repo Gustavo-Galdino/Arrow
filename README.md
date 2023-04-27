@@ -4,6 +4,6 @@
 [x] criar banco de dados da pagia de treino.
 [x] logica novo exercicio
 [x] seção anotações
-[] Sistema de expadir anotaçoes
-[] fazer a logica de adicionar nova tabela
-[] editar tabela especifica.
+[x] fazer a logica de adicionar nova tabela
+[x] adicionar tabela de notas na db.
+[] editar/excluir tabela especifica.

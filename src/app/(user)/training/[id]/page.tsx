@@ -26,6 +26,12 @@ export default async function Page() {
 
   const exercicesData = await exercices.json()
 
+  const notes = await fetch('http://localhost:3000/api/notes', {
+    cache: 'no-store',
+  })
+
+  const notesData = await notes.json()
+
   return (
     <main className="mt-24 flex">
       <AsideUserLayout user={userData} tables={userData.tables} />
@@ -36,7 +42,7 @@ export default async function Page() {
         </article>
 
         <article className="mt-20">
-          <Annotations />
+          <Annotations noteTable={notesData} userTable={userData} />
         </article>
       </section>
       <General />

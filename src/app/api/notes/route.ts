@@ -4,25 +4,23 @@ import { NextResponse } from 'next/server'
 const prisma = new PrismaClient()
 
 export async function GET() {
-  const tables = await prisma.workoutTableExercise.findMany({
+  const notes = await prisma.workoutTableNote.findMany({
     include: {
-      exercise: true,
+      notes: true,
     },
   })
 
-  return NextResponse.json(tables)
+  return NextResponse.json(notes)
 }
 
 export async function POST(req: Request) {
-  const { exerciseName, series, volume, exerciseTableId } = await req.json()
+  const { annotationValue, noteTableId } = await req.json()
 
-  const createdExercise = await prisma.exercise.create({
+  const createdExercise = await prisma.note.create({
     data: {
-      exerciseName,
-      series,
-      volume,
+      annotation: annotationValue,
       tables: {
-        connect: { id: exerciseTableId },
+        connect: { id: noteTableId },
       },
     },
   })
@@ -35,7 +33,7 @@ export async function POST(req: Request) {
 export async function DELETE(req: Request) {
   const { id } = await req.json()
 
-  await prisma.exercise.deleteMany({
+  await prisma.note.deleteMany({
     where: {
       id,
     },

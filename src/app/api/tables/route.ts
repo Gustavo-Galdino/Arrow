@@ -10,11 +10,14 @@ export async function POST(req: Request) {
     data: {},
   })
 
+  const createNoteTable = await prisma.workoutTableNote.create({ data: {} })
+
   const createdExercise = await prisma.workoutTable.create({
     data: {
       tableName,
       userId,
       workoutTableExerciseId: createExerciseTable.id,
+      workoutTableNoteId: createNoteTable.id,
     },
   })
 

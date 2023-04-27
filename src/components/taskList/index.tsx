@@ -11,7 +11,8 @@ import { Check, Plus, X } from 'phosphor-react'
 interface Table {
   id: string
   tableName: string
-  workoutTableExerciseId: string
+  workoutTableExerciseId?: string
+  workoutTableNoteId?: string
 }
 
 interface User {
@@ -88,6 +89,19 @@ export function TaskList({ userData, exerciceTable }: TaskListProps) {
     }
   }
 
+  async function handleDeleteTask(id: string) {
+    await fetch('http://localhost:3000/api/exercices', {
+      method: 'DELETE',
+      body: JSON.stringify({
+        id,
+      }),
+    })
+
+    const response = await fetch('http://localhost:3000/api/exercices')
+    const data = await response.json()
+    setTasks(data)
+  }
+
   return (
     <>
       <h2 className="text-5xl font-bold mb-20">{selectedTable?.tableName}</h2>
@@ -125,7 +139,7 @@ export function TaskList({ userData, exerciceTable }: TaskListProps) {
                     Series: {task.series} / {task.volume}
                   </p>
                 </div>
-                <button>
+                <button type="button" onClick={() => handleDeleteTask(task.id)}>
                   <X weight="bold" className="text-red-500" />
                 </button>
               </li>

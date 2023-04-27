@@ -15,19 +15,34 @@ interface User {
 }
 
 export default async function Training() {
-  const response = await fetch('http://localhost:3000/api/users', {
+  const user = await fetch('http://localhost:3000/api/users', {
     cache: 'no-store',
   })
-  const data: User = await response.json()
+  const userData: User = await user.json()
+
+  const exercices = await fetch('http://localhost:3000/api/exercices', {
+    cache: 'no-store',
+  })
+
+  const exercicesData = await exercices.json()
+
+  const notes = await fetch('http://localhost:3000/api/notes', {
+    cache: 'no-store',
+  })
+
+  const notesData = await notes.json()
 
   return (
     <main className="mt-24 flex">
-      <AsideUserLayout name={data.username} tables={data.tables} />
+      <AsideUserLayout user={userData} tables={userData.tables} />
 
       <section className="px-5 ml-72">
-        <h2 className="text-5xl font-bold">{data.tables[0].tableName}</h2>
-        <article className="mt-20">
-          <TaskList />
+        <article>
+          <TaskList
+            userData={userData}
+            exerciceTable={exercicesData}
+            noteTable={notesData}
+          />
         </article>
 
         <article className="mt-20">

@@ -22,7 +22,9 @@ model WorkoutTable {
 
   user                   User                 @relation(fields: [userId], references: [id])
   WorkoutTableExercise   WorkoutTableExercise @relation(fields: [workoutTableExerciseId], references: [id])
+  WorkoutTableNote       WorkoutTableNote     @relation(fields: [workoutTableNoteId], references: [id])
   workoutTableExerciseId String
+  workoutTableNoteId     String
 
   @@map("workoutTables")
 }
@@ -45,4 +47,22 @@ model Exercise {
   tables WorkoutTableExercise[]
 
   @@map("exercises")
+}
+
+model WorkoutTableNote {
+  id String @id @default(cuid())
+
+  notes        Note[]
+  WorkoutTable WorkoutTable[]
+
+  @@map("workoutTableNotes")
+}
+
+model Note {
+  id         String @id @default(cuid())
+  annotation String
+
+  tables WorkoutTableNote[]
+
+  @@map("notes")
 }

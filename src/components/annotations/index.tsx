@@ -1,25 +1,94 @@
 'use client'
 
+import { usePathname } from 'next/navigation'
 import { X } from 'phosphor-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-interface AnnotationType {
+interface Note {
+  id: string
   annotation: string
 }
 
-export function Annotations() {
-  const [annotations, setAnnotations] = useState<AnnotationType[]>([])
+interface NoteTable {
+  id: string
+  notes: Note[]
+}
+
+interface Table {
+  id: string
+  tableName: string
+  workoutTableNoteId?: string
+}
+
+interface UserTable {
+  id: string
+  username: string
+  tables: Table[]
+}
+
+interface AnnotationType {
+  noteTable: NoteTable[]
+  userTable: UserTable
+}
+
+export function Annotations({ noteTable, userTable }: AnnotationType) {
   const { register, handleSubmit, getValues, reset } = useForm()
+  const [notes, setNotes] = useState<NoteTable[]>(noteTable)
+  const [table, setTable] = useState<UserTable[]>([userTable])
 
-  function handleNewAnnotation() {
-    const annotationContent = getValues('annotations')
+  useEffect(() => {
+    setTable([userTable])
+  }, [userTable])
 
-    if (annotationContent) {
-      setAnnotations((state) => [...state, { annotation: annotationContent }])
-      reset()
+  const pathname = usePathname()
+  const tableId = pathname.replace(/\/training\/([^/]+)/, '$1')
+
+  const selectedTable = table
+    .flatMap((user) => user.tables)
+    .find((table) => table.id === tableId)
+
+  const annotations = notes
+    .filter((annotation) => annotation.id === selectedTable?.workoutTableNoteId)
+    .flatMap((note) => note.notes)
+
+  const noteTableId = notes.find(
+    (table) => table.id === selectedTable?.workoutTableNoteId,
+  )?.id
+
+  async function handleNewAnnotation() {
+    const annotationValue = getValues('annotations')
+
+    if (annotationValue) {
+      await fetch('http://localhost:3000/api/notes', {
+        method: 'POST',
+        body: JSON.stringify({
+          annotationValue,
+          noteTableId,
+        }),
+      })
     }
+
+    const response = await fetch('http://localhost:3000/api/notes')
+    const data = await response.json()
+    setNotes(data)
+
+    reset()
   }
+
+  async function handleDeleteNote(id: string) {
+    await fetch('http://localhost:3000/api/notes', {
+      method: 'DELETE',
+      body: JSON.stringify({
+        id,
+      }),
+    })
+
+    const response = await fetch('http://localhost:3000/api/notes')
+    const data = await response.json()
+    setNotes(data)
+  }
+
   return (
     <section>
       <h2 className="text-2xl font-semibold mb-5">Anotações</h2>
@@ -32,7 +101,12 @@ export function Annotations() {
               className="flex items-center justify-between border-b-2 border-zinc-500 px-1"
             >
               <p className="truncate w-11/12">{annotation.annotation}</p>
-              <X weight="bold" className="text-red-500" />
+              <button
+                type="button"
+                onClick={() => handleDeleteNote(annotation.id)}
+              >
+                <X weight="bold" className="text-red-500" />
+              </button>
             </div>
           ))}
 
