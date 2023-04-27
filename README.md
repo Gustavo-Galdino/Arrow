@@ -1,4 +1,4 @@
-# Projeto Para Portifolio
+# Projeto Para Portfolio
 
 Consolidar conhecimentos em Nextjs e typescript
 
