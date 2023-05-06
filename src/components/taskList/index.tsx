@@ -1,12 +1,13 @@
 'use client'
 
 import { useForm } from 'react-hook-form'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
-
 import * as Checkbox from '@radix-ui/react-checkbox'
 
-import { Check, Plus, X } from 'phosphor-react'
+import { Check, Plus } from 'phosphor-react'
+import { DeleteModal } from '../DeleteModal'
+import { TrainingContext } from '@/context/trainingContext'
 
 interface Table {
   id: string
@@ -42,6 +43,7 @@ export function TaskList({ userData, exerciceTable }: TaskListProps) {
   const { register, getValues, reset, handleSubmit } = useForm()
   const [tables, setTables] = useState<User[]>([])
   const [task, setTasks] = useState<ExerciceTable[]>(exerciceTable)
+  const { handleCheckTask } = useContext(TrainingContext)
 
   useEffect(() => {
     setTables((state) => [...state, userData])
@@ -108,83 +110,90 @@ export function TaskList({ userData, exerciceTable }: TaskListProps) {
       <h3 className="text-2xl font-semibold mb-5">Exercicios</h3>
 
       <ul>
-        <form
-          onSubmit={handleSubmit(handleNewTask)}
-          className="flex flex-col gap-4"
-        >
+        <div className="flex flex-col gap-4">
           {exercises.length > 0 &&
             exercises.map((task) => (
               <li
                 key={task.id}
-                className="border-b-2 border-zinc-500 px-1 flex items-center justify-between"
+                className="border-b-2 border-zinc-500 flex gap-4"
               >
-                <div className="flex items-center gap-2 w-1/3">
+                <div
+                  className="flex items-center gap-2 w-2/4"
+                  onClick={() => handleCheckTask()}
+                >
                   <Checkbox.Root
-                    className="w-4 h-4 border border-gray-300 rounded focus:ring-blue-500 flex items-center justify-center"
+                    className="w-4 h-4 p-2 border border-gray-300 rounded focus:ring-blue-500 flex items-center justify-center"
                     id={task.id}
                   >
                     <Checkbox.Indicator>
                       <Check color="white" size={12} weight="bold" />
                     </Checkbox.Indicator>
                   </Checkbox.Root>
-                  <label
-                    htmlFor={task.exerciseName}
-                    className="w-full text-base"
-                  >
+                  <label htmlFor={task.id} className="break-all">
                     {task.exerciseName}
                   </label>
                 </div>
-                <div>
+                <div className="">
                   <p>
                     Series: {task.series} / {task.volume}
                   </p>
                 </div>
-                <button type="button" onClick={() => handleDeleteTask(task.id)}>
-                  <X weight="bold" className="text-red-500" />
+                <button
+                  type="button"
+                  className="ml-auto pr-2 hover:text-red-500"
+                >
+                  <DeleteModal
+                    onDeleteTable={() => handleDeleteTask(task.id)}
+                  />
                 </button>
               </li>
             ))}
 
-          <li className="bg-zinc-800 p-1 rounded border border-zinc-600 flex items-center">
-            <div className="flex items-center gap-2 w-1/2">
-              <button type="submit">
-                <Plus weight="bold" className="text-zinc-100" />
-              </button>
+          <li className="bg-zinc-800 p-1 rounded border border-zinc-600 flex gap-4">
+            <form onSubmit={handleSubmit(handleNewTask)} className="flex gap-4">
+              <div className="flex items-center">
+                <button type="submit">
+                  <Plus weight="bold" className="text-zinc-100" />
+                </button>
 
-              <input
-                type="text"
-                id="newExercice"
-                placeholder="Adicionar Exercicio"
-                {...register('task')}
-                className="bg-transparent border-none text-sm outline-none w-full"
-              />
-            </div>
-
-            <div className="flex items-center justify-center w-36 gap-2">
-              <div className="flex items-center gap-2">
-                <label htmlFor="series">Series:</label>
                 <input
                   type="text"
-                  id="series"
-                  placeholder="4"
-                  {...register('series')}
-                  className="w-4 bg-transparent border-none text-sm outline-none"
+                  id="newExercice"
+                  placeholder="Adicionar Exercicio"
+                  required
+                  {...register('task')}
+                  className="bg-transparent border-none text-sm outline-none w-full"
                 />
               </div>
 
-              <div className="flex items-center gap-2">
-                <label htmlFor="volume">/</label>
-                <input
-                  type="text"
-                  id="volume"
-                  placeholder="12"
-                  {...register('volume')}
-                  className="w-4 bg-transparent border-none text-sm outline-none"
-                />
+              <div className="flex items-center justify-center gap-2">
+                <div className="flex items-center gap-2">
+                  <label htmlFor="series">Series:</label>
+                  <input
+                    type="number"
+                    id="series"
+                    placeholder="4"
+                    required
+                    {...register('series')}
+                    className="w-8 bg-transparent border-none text-sm outline-none"
+                  />
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <label htmlFor="volume">/</label>
+                  <input
+                    type="number"
+                    id="volume"
+                    placeholder="12"
+                    required
+                    {...register('volume')}
+                    className="w-8 bg-transparent border-none text-sm outline-none"
+                  />
+                </div>
               </div>
-            </div>
+            </form>
           </li>
-        </form>
+        </div>
       </ul>
     </>
   )

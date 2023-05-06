@@ -100,7 +100,7 @@ export function Annotations({ noteTable, userTable }: AnnotationType) {
               key={annotation.annotation}
               className="flex items-center justify-between border-b-2 border-zinc-500 px-1"
             >
-              <p className="truncate w-11/12">{annotation.annotation}</p>
+              <p className="w-11/12">{annotation.annotation}</p>
               <button
                 type="button"
                 onClick={() => handleDeleteNote(annotation.id)}

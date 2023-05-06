@@ -31,3 +31,17 @@ export async function GET() {
 
   return NextResponse.json(tables)
 }
+
+export async function DELETE(req: Request) {
+  const { id } = await req.json()
+
+  await prisma.workoutTable.deleteMany({
+    where: {
+      id,
+    },
+  })
+
+  return new Response(JSON.stringify('OK'), {
+    status: 200,
+  })
+}

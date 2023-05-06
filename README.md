@@ -10,4 +10,8 @@ Consolidar conhecimentos em Nextjs e typescript
 * [x] seção anotações
 * [x] fazer a logica de adicionar nova tabela
 * [x] adicionar tabela de notas na db.
-* [] editar/excluir tabela especifica.
+* [x] excluir tabela especifica.
+* [X] Arrumar CSS
+* [X] criar validações
+* [] Adicionar Data da Anotação ??????
+* [ ] Criar a sessão Geral

@@ -8,9 +8,11 @@ datasource db {
 }
 
 model User {
-  id       String         @id @default(cuid())
-  username String         @unique
-  tables   WorkoutTable[]
+  id         String         @id @default(cuid())
+  username   String         @unique
+  nivel      Int
+  experience Int
+  tables     WorkoutTable[]
 
   @@map("users")
 }

@@ -1,7 +1,9 @@
 -- CreateTable
 CREATE TABLE "users" (
     "id" TEXT NOT NULL PRIMARY KEY,
-    "username" TEXT NOT NULL
+    "username" TEXT NOT NULL,
+    "nivel" INTEGER NOT NULL,
+    "experience" INTEGER NOT NULL
 );
 
 -- CreateTable

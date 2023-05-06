@@ -13,3 +13,18 @@ export async function GET() {
 
   return NextResponse.json(users)
 }
+
+export async function PATCH(req: Request) {
+  const { userId, updateNivel } = await req.json()
+
+  const updatedUser = await prisma.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      nivel: updateNivel,
+    },
+  })
+
+  return NextResponse.json(updatedUser)
+}
