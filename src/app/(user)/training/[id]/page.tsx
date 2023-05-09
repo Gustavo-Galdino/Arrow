@@ -1,5 +1,4 @@
 import { TaskList } from '@/components/taskList'
-import { General } from '../components/general'
 import { Annotations } from '@/components/annotations'
 import { AsideUserLayout } from '@/components/aside'
 
@@ -22,10 +21,6 @@ export default async function Page() {
   })
   const userData: User = await user.json()
 
-  const TablesAmout = userData.tables.length
-  const userNivel = userData.nivel
-  const userExperience = userData.experience
-
   const exercices = await fetch('http://localhost:3000/api/exercices', {
     cache: 'no-store',
   })
@@ -42,21 +37,14 @@ export default async function Page() {
     <main className="mt-24 flex justify-between">
       <AsideUserLayout user={userData} tables={userData.tables} />
 
-      <section className="px-6 ml-72 w-full">
-        <article>
+      <section className="ml-72 grid grid-cols-2 w-full gap-2">
+        <article className="px-4">
           <TaskList userData={userData} exerciceTable={exercicesData} />
         </article>
-
-        <article className="mt-20">
+        <article className="mt-20 w-full border-l-2 border-zinc-500 px-4 h-full">
           <Annotations noteTable={notesData} userTable={userData} />
         </article>
       </section>
-      <General
-        userId={userData.id}
-        TablesAmout={TablesAmout}
-        nivel={userNivel}
-        experiencee={userExperience}
-      />
     </main>
   )
 }

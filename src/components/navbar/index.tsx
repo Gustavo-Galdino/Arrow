@@ -19,18 +19,18 @@ export function Navbar() {
       <section className="flex gap-4 mr-10">
         <Link
           href="/"
-          className="font-bold underline hover:underline underline-offset-4"
+          className="no-underline hover:underline underline-offset-4"
         >
           Home
         </Link>
         <Link
-          href="/"
+          href="/diet"
           className="no-underline hover:underline underline-offset-4"
         >
           Plano Alimentar
         </Link>
         <Link
-          href="/"
+          href="/training"
           className="no-underline hover:underline underline-offset-4"
         >
           Plano de Treinamento

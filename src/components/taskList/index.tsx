@@ -1,13 +1,12 @@
 'use client'
 
 import { useForm } from 'react-hook-form'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import * as Checkbox from '@radix-ui/react-checkbox'
 
 import { Check, Plus } from 'phosphor-react'
 import { DeleteModal } from '../DeleteModal'
-import { TrainingContext } from '@/context/trainingContext'
 
 interface Table {
   id: string
@@ -43,7 +42,6 @@ export function TaskList({ userData, exerciceTable }: TaskListProps) {
   const { register, getValues, reset, handleSubmit } = useForm()
   const [tables, setTables] = useState<User[]>([])
   const [task, setTasks] = useState<ExerciceTable[]>(exerciceTable)
-  const { handleCheckTask } = useContext(TrainingContext)
 
   useEffect(() => {
     setTables((state) => [...state, userData])
@@ -117,10 +115,7 @@ export function TaskList({ userData, exerciceTable }: TaskListProps) {
                 key={task.id}
                 className="border-b-2 border-zinc-500 flex gap-4"
               >
-                <div
-                  className="flex items-center gap-2 w-2/4"
-                  onClick={() => handleCheckTask()}
-                >
+                <div className="flex items-center gap-2 w-2/4">
                   <Checkbox.Root
                     className="w-4 h-4 p-2 border border-gray-300 rounded focus:ring-blue-500 flex items-center justify-center"
                     id={task.id}
@@ -149,9 +144,12 @@ export function TaskList({ userData, exerciceTable }: TaskListProps) {
               </li>
             ))}
 
-          <li className="bg-zinc-800 p-1 rounded border border-zinc-600 flex gap-4">
-            <form onSubmit={handleSubmit(handleNewTask)} className="flex gap-4">
-              <div className="flex items-center">
+          <li className="bg-zinc-800 p-1 rounded border border-zinc-600">
+            <form
+              onSubmit={handleSubmit(handleNewTask)}
+              className="flex items-center gap-4"
+            >
+              <div className="flex items-center gap-1 w-2/4">
                 <button type="submit">
                   <Plus weight="bold" className="text-zinc-100" />
                 </button>

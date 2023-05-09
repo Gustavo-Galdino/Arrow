@@ -1,8 +1,7 @@
 'use client'
 
-import { TrainingContext } from '@/context/trainingContext'
 import * as Progress from '@radix-ui/react-progress'
-import { useContext, useEffect, useState } from 'react'
+import { useState } from 'react'
 
 interface GeneralProps {
   TablesAmout: number
@@ -17,22 +16,13 @@ export function General({
   nivel,
   experiencee,
 }: GeneralProps) {
-  const { experience, setExperience } = useContext(TrainingContext)
   const [updateNivel, setUpdateNivel] = useState(nivel)
-
-  useEffect(() => {
-    setExperience(experiencee)
-  }, [setExperience, experiencee])
 
   const [exp, setExp] = useState(100 * nivel)
 
   const [progress, setProgress] = useState(0)
 
   console.log(updateNivel)
-
-  useEffect(() => {
-    setProgress((experience / exp) * 100)
-  }, [exp, experience])
 
   async function update() {
     if (progress === 100) {
@@ -46,7 +36,6 @@ export function General({
       })
 
       setExp(100 * nivel)
-      setExperience(0)
     }
   }
 

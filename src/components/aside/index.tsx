@@ -5,7 +5,7 @@ import { Plus, User } from 'phosphor-react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { DeleteModal } from '../DeleteModal'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 interface Table {
   id: string
@@ -28,6 +28,8 @@ export function AsideUserLayout({ user, tables }: AsideProps) {
   const [asideTables, setAsideTables] = useState<Table[]>(tables)
 
   const router = useRouter()
+  const pathname = usePathname()
+  const tableId = pathname.replace(/\/training\/([^/]+)/, '$1')
 
   async function handleCreateTable() {
     const tableName = getValues('newTable')
@@ -64,6 +66,7 @@ export function AsideUserLayout({ user, tables }: AsideProps) {
 
     router.push('training')
   }
+
   return (
     <aside className="fixed top-16 bg-zinc-800 p-6 flex flex-col gap-4 h-full">
       <section className="flex gap-2 items-center">
@@ -83,9 +86,16 @@ export function AsideUserLayout({ user, tables }: AsideProps) {
           {asideTables.map((table) => (
             <li
               key={table.id}
-              className="cursor-pointer hover:font-bold hover:underline hover:underline-offset-4 flex items-center justify-between w-full"
+              className="cursor-pointer hover:font-bold hover:underline hover:underline-offset-4 flex items-center justify-between w-full text-zinc-400"
             >
-              <Link href={`/training/${table.id}`}>{table.tableName}</Link>
+              <Link
+                href={`/training/${table.id}`}
+                className={
+                  tableId === table.id ? 'font-bold text-zinc-100' : ''
+                }
+              >
+                {table.tableName}
+              </Link>
               <button type="button" className="hover:text-red-500">
                 <DeleteModal
                   onDeleteTable={() => handleDeleteTable(table.id)}

@@ -90,8 +90,8 @@ export function Annotations({ noteTable, userTable }: AnnotationType) {
   }
 
   return (
-    <section>
-      <h2 className="text-2xl font-semibold mb-5">Anotações</h2>
+    <>
+      <h2 className="text-2xl font-semibold mb-5 mt-10">Anotações</h2>
 
       <div className="flex flex-col gap-4">
         {annotations.length > 0 &&
@@ -126,6 +126,6 @@ export function Annotations({ noteTable, userTable }: AnnotationType) {
           </button>
         </form>
       </div>
-    </section>
+    </>
   )
 }
