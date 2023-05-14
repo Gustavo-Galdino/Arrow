@@ -13,6 +13,7 @@ model User {
   nivel      Int
   experience Int
   tables     WorkoutTable[]
+  diettTable DietTable[]
 
   @@map("users")
 }
@@ -67,4 +68,46 @@ model Note {
   tables WorkoutTableNote[]
 
   @@map("notes")
+}
+
+model DietTable {
+  id        String @id @default(cuid())
+  tableName String
+  days      String
+  userId    String
+
+  user    User      @relation(fields: [userId], references: [id])
+  dietBox DietBox[]
+
+  @@map("dietTables")
+}
+
+model DietBox {
+  id   String @id @default(cuid())
+  week String
+
+  dietaTable  DietTable  @relation(fields: [dietTableId], references: [id])
+  dietTableId String
+  dietList    DietList[]
+
+  @@map("dietTableExercises")
+}
+
+model DietList {
+  id   String @id @default(cuid())
+  meal String
+
+  dietBox DietBox @relation(fields: [dietBoxId], references: [id])
+
+  food      Food[]
+  dietBoxId String
+}
+
+model Food {
+  id       String @id @default(cuid())
+  foodName String
+
+  tables DietList[]
+
+  @@map("foods")
 }

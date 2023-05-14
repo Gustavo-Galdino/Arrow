@@ -89,7 +89,7 @@ export function AsideUserLayout({ user, tables }: AsideProps) {
               className="cursor-pointer hover:font-bold hover:underline hover:underline-offset-4 flex items-center justify-between w-full text-zinc-400"
             >
               <Link
-                href={`/training/${table.id}`}
+                href={`${pathname}/${table.id}`}
                 className={
                   tableId === table.id ? 'font-bold text-zinc-100' : ''
                 }

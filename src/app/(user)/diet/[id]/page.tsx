@@ -4,12 +4,13 @@ import { TableDiet } from '@/components/tableDiet'
 interface Table {
   id: string
   tableName: string
+  days: string
 }
 
 interface User {
   id: string
   username: string
-  tables: Table[]
+  DiettTable: Table[]
 }
 
 export default async function Diet() {
@@ -18,14 +19,19 @@ export default async function Diet() {
   })
   const userData: User = await user.json()
 
+  const dietTable = await fetch('http://localhost:3000/api/dietTable', {
+    cache: 'no-store',
+  })
+  const dietTableData = await dietTable.json()
+
   return (
     <main className="mt-24 flex">
-      <AsideUserLayout user={userData} tables={userData.tables} />
+      <AsideUserLayout user={userData} tables={userData.DiettTable} />
 
-      <section className="px-5 ml-72">
+      <section className="px-6 ml-72 w-full">
         <h1>Plano 1</h1>
 
-        <TableDiet />
+        <TableDiet dietTables={dietTableData} />
       </section>
     </main>
   )

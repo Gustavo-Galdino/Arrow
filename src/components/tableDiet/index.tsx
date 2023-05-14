@@ -1,6 +1,7 @@
 'use client'
 
-import { ChangeEvent, useState } from 'react'
+import { Trash } from 'phosphor-react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 interface List {
@@ -9,30 +10,73 @@ interface List {
   food: string
 }
 
-export function TableDiet() {
+interface Meal {
+  name: string
+  list: List[]
+}
+
+interface Food {
+  id: string
+  foodooName: string
+}
+
+interface DietList {
+  id: string
+  meal: string
+  food: Food[]
+}
+
+interface DietBox {
+  id: string
+  week: string
+  DietList: DietList[]
+}
+
+interface TableDietProps {
+  dietTables: DietBox[]
+}
+
+export function TableDiet({ dietTables }: TableDietProps) {
   const { handleSubmit, register, getValues, reset } = useForm()
-  const [week, setWeek] = useState(['Semanal'])
-  const [list, setList] = useState<List[]>([])
+  const [week, setWeek] = useState<DietBox[]>([])
+
+  useEffect(() => {
+    setWeek(dietTables)
+  }, [dietTables])
 
   function handleNewList() {
-    const time = getValues('time')
-    const gram = getValues('gram')
-    const food = getValues('food')
+    // const time = getValues('time')
+    // const gram = getValues('gram')
+    // const food = getValues('food')
+    // const mealName = getValues('meal')
+    // setMeals((state) => {
+    //   return state.map((meal) => {
+    //     if (meal.name === mealName) {
+    //       return {
+    //         ...meal,
+    //         list: [...meal.list, { time, gram, food }],
+    //       }
+    //     }
+    //     return meal
+    //   })
+    // })
+    // reset()
+  }
 
-    setList((state) => [...state, { time, gram, food }])
-
-    reset()
+  function handleMealTitle() {
+    // const meal = getValues('meal')
+    // setMeals((state) => [...state, { name: meal, list: [] }])
   }
 
   function handleOptionChange(event: ChangeEvent<HTMLSelectElement>) {
-    const selectedOption = event.target.value
-    if (selectedOption === 'semanal') {
-      setWeek(['Semanal'])
-    } else if (selectedOption === 'seg_a_sex') {
-      setWeek(['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta'])
-    } else if (selectedOption === 'seg_a_sab') {
-      setWeek(['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'])
-    }
+    // const selectedOption = event.target.value
+    // if (selectedOption === 'semanal') {
+    //   setWeek(['Semanal'])
+    // } else if (selectedOption === 'seg_a_sex') {
+    //   setWeek(['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta'])
+    // } else if (selectedOption === 'seg_a_sab') {
+    //   setWeek(['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'])
+    // }
   }
 
   return (
@@ -50,79 +94,82 @@ export function TableDiet() {
       </div>
 
       <form
-        onSubmit={handleSubmit(handleNewList)}
+        onSubmit={handleSubmit(handleMealTitle)}
         className="mt-20 flex flex-wrap gap-6"
       >
         {week.map((day) => (
           <article
-            key={day}
-            className="border border-zinc-600 rounded p-6 flex flex-col gap-5"
+            key={day.id}
+            className="border border-zinc-600 rounded p-6 flex flex-col gap-5 w-2/4"
           >
-            <h2 className="text-3xl font-semibold">{day}</h2>
-            <ul className="flex flex-col gap-2">
-              <input
-                type="text"
-                placeholder="ex: café da manha"
-                className="p-1 rounded bg-zinc-600 w-2/6"
-              />
-              {list.map((li) => (
-                <li
-                  key={li.food}
-                  className="flex items-center justify-between py-1 px-2 gap-6 border-b"
-                >
-                  <span>{li.time}</span>
+            <h2 className="text-3xl font-semibold">{day.week}</h2>
 
-                  <section className="flex items-center gap-1">
-                    <span>
-                      {li.gram}
-                      <span className="text-xs text-zinc-300">(g)</span>
-                    </span>
-                    <span>{li.food}</span>
-                  </section>
-
-                  <button
-                    type="submit"
-                    className="border rounded px-1 text-xs text-center"
-                  >
-                    X
-                  </button>
-                </li>
-              ))}
-
-              <li className="flex items-center gap-4 py-2">
-                <select
-                  id=""
-                  {...register('time')}
-                  className="rounded p-1 bg-zinc-600"
-                >
-                  <option value="08:00">08:00</option>
-                  <option value="0">08:00</option>
-                  <option value="1">08:00</option>
-                </select>
-
-                <section className="flex gap-2">
-                  <div className="flex items-center gap-1 w-1/6">
-                    <label htmlFor="">g:</label>
-                    <input
-                      type="text"
-                      placeholder="(g)"
-                      className="w-full text-center rounded bg-zinc-600 py-1"
-                      {...register('gram')}
-                    />
+            <div className="flex flex-col gap-2">
+              {day.DietList.map((meal) => (
+                <ul key={meal.id}>
+                  <div className="flex items-center gap-2 text-xl font-semibold border-b mb-5 py-1">
+                    <span>08:00 |</span>
+                    <h4 className="">{meal.meal}</h4>
                   </div>
-                  <input
-                    type="text"
-                    placeholder="Alimento"
-                    className="px-1 w-full rounded bg-zinc-600 py-1"
-                    {...register('food')}
-                  />
-                </section>
-
-                <button type="submit" className="border rounded px-2">
-                  OK
-                </button>
-              </li>
-            </ul>
+                  {meal.food.map((food) => (
+                    <li
+                      key={food.id}
+                      className="grid grid-cols-3 gap-1 py-1 items-center"
+                    >
+                      <strong>{food.foodooName}</strong>
+                      <div className="flex items-center gap-2">
+                        <span>C: 0</span>
+                        <span>P: 0</span>
+                        <span>G: 0</span>
+                      </div>
+                      <button className="justify-self-end hover:text-red-500">
+                        <Trash />
+                      </button>
+                    </li>
+                  ))}
+                  <div className="flex items-center gap-4 border  rounded px-2 py-4 mt-5">
+                    <div>
+                      <h5>Adicionar alimento</h5>
+                      <input
+                        type="text"
+                        id="food"
+                        placeholder="arroz, feijao..."
+                        className="bg-zinc-500 rounded text-center"
+                      />
+                    </div>
+                    <div className="flex items-center gap-2 w-2/5 self-end">
+                      <div className="flex items-center gap-1">
+                        <label htmlFor="carbo">C:</label>
+                        <input
+                          type="text"
+                          placeholder="30g"
+                          className="w-full bg-zinc-500 rounded text-center"
+                        />
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <label htmlFor="protein">P:</label>
+                        <input
+                          type="text"
+                          placeholder="30g"
+                          className="w-full bg-zinc-500 rounded text-center"
+                        />
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <label htmlFor="fat">C:</label>
+                        <input
+                          type="text"
+                          placeholder="30g"
+                          className="w-full bg-zinc-500 rounded text-center"
+                        />
+                      </div>
+                    </div>
+                    <button className="self-end border border-green-700 rounded px-1 bg-green-500 cursor-pointer hover:bg-green-400">
+                      OK
+                    </button>
+                  </div>
+                </ul>
+              ))}
+            </div>
           </article>
         ))}
       </form>

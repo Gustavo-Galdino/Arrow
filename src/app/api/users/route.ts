@@ -8,6 +8,7 @@ export async function GET() {
   const users = await prisma.user.findFirstOrThrow({
     include: {
       tables: true,
+      DiettTable: true,
     },
   })
 
