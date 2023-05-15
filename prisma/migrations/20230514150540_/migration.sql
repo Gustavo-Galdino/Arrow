@@ -45,8 +45,6 @@ CREATE TABLE "notes" (
 -- CreateTable
 CREATE TABLE "dietTables" (
     "id" TEXT NOT NULL PRIMARY KEY,
-    "tableName" TEXT NOT NULL,
-    "days" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     CONSTRAINT "dietTables_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
@@ -54,7 +52,6 @@ CREATE TABLE "dietTables" (
 -- CreateTable
 CREATE TABLE "dietTableExercises" (
     "id" TEXT NOT NULL PRIMARY KEY,
-    "week" TEXT NOT NULL,
     "dietTableId" TEXT NOT NULL,
     CONSTRAINT "dietTableExercises_dietTableId_fkey" FOREIGN KEY ("dietTableId") REFERENCES "dietTables" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
@@ -70,7 +67,7 @@ CREATE TABLE "DietList" (
 -- CreateTable
 CREATE TABLE "foods" (
     "id" TEXT NOT NULL PRIMARY KEY,
-    "foodooName" TEXT NOT NULL
+    "foodName" TEXT NOT NULL
 );
 
 -- CreateTable

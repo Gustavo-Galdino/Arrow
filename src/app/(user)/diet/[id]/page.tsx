@@ -1,5 +1,5 @@
 import { AsideUserLayout } from '@/components/aside'
-import { TableDiet } from '@/components/tableDiet'
+import { NewMeatTable } from '@/components/tableDiet/components/newMeatTable'
 
 interface Table {
   id: string
@@ -19,19 +19,16 @@ export default async function Diet() {
   })
   const userData: User = await user.json()
 
-  const dietTable = await fetch('http://localhost:3000/api/dietTable', {
+  const tables = await fetch('http://localhost:3000/api/dietTable', {
     cache: 'no-store',
-  })
-  const dietTableData = await dietTable.json()
+  }).then((response) => response.json())
 
   return (
     <main className="mt-24 flex">
-      <AsideUserLayout user={userData} tables={userData.DiettTable} />
-
-      <section className="px-6 ml-72 w-full">
+      <section className="px-6 ml-72">
         <h1>Plano 1</h1>
 
-        <TableDiet dietTables={dietTableData} />
+        <NewMeatTable table={tables} />
       </section>
     </main>
   )

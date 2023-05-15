@@ -71,10 +71,8 @@ model Note {
 }
 
 model DietTable {
-  id        String @id @default(cuid())
-  tableName String
-  days      String
-  userId    String
+  id     String @id @default(cuid())
+  userId String
 
   user    User      @relation(fields: [userId], references: [id])
   dietBox DietBox[]
@@ -83,8 +81,8 @@ model DietTable {
 }
 
 model DietBox {
-  id   String @id @default(cuid())
-  week String
+  id    String @id @default(cuid())
+  title String
 
   dietaTable  DietTable  @relation(fields: [dietTableId], references: [id])
   dietTableId String
