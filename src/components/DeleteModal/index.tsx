@@ -14,21 +14,21 @@ export function DeleteModal({ onDeleteTable }: DeleteModalProps) {
 
       <Dialog.Portal>
         <Dialog.Overlay className="absolute" />
-        <Dialog.Content className="bg-zinc-700 rounded-md fixed top-2/4 left-2/4 -translate-x-1/2 -translate-y-1/2 p-6">
-          <Dialog.Title className="text-2xl font-bold mb-5">
+        <Dialog.Content className="fixed left-2/4 top-2/4 -translate-x-1/2 -translate-y-1/2 rounded-md bg-zinc-700 p-6">
+          <Dialog.Title className="mb-5 text-2xl font-bold">
             Deletar Treino?
           </Dialog.Title>
           <Dialog.Description className="mb-5">
             Ao clicar deletar seu treino sera excluido.
           </Dialog.Description>
-          <div className="flex gap-2 items-center justify-end">
+          <div className="flex items-center justify-end gap-2">
             <Dialog.Close asChild>
-              <button className="px-2 py-1 rounded-md font-semibold border hover:bg-zinc-600">
+              <button className="rounded-md border px-2 py-1 font-semibold hover:bg-zinc-600">
                 Cancelar
               </button>
             </Dialog.Close>
             <button
-              className="bg-red-500 hover:bg-red-600 px-2 py-1 rounded-md font-semibold"
+              className="rounded-md bg-red-500 px-2 py-1 font-semibold hover:bg-red-600"
               onClick={() => onDeleteTable()}
             >
               Deletar

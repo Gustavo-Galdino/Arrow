@@ -10,7 +10,7 @@ interface Table {
 interface User {
   id: string
   username: string
-  DiettTable: Table[]
+  diettTable: Table[]
 }
 
 export default async function Diet() {
@@ -25,7 +25,12 @@ export default async function Diet() {
 
   return (
     <main className="mt-24 flex">
-      <section className="px-6 ml-72">
+      <AsideUserLayout
+        user={userData}
+        tables={userData.diettTable}
+        tableName="Plano Alimentar"
+      />
+      <section className="ml-72 px-6">
         <h1>Plano 1</h1>
 
         <NewMeatTable table={tables} />

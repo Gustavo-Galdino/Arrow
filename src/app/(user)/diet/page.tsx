@@ -5,10 +5,17 @@ interface Table {
   tableName: string
 }
 
+interface DiettTable {
+  id: string
+  tableName: string
+  days: string
+}
+
 interface User {
   id: string
   username: string
   tables: Table[]
+  diettTable: DiettTable[]
 }
 
 export default async function Diet() {
@@ -19,9 +26,13 @@ export default async function Diet() {
 
   return (
     <main className="mt-24 flex">
-      <AsideUserLayout user={userData} tables={userData.tables} />
+      <AsideUserLayout
+        user={userData}
+        tables={userData.diettTable}
+        tableName="Plano Alimentar"
+      />
 
-      <section className="px-5 ml-72">
+      <section className="ml-72 px-5">
         <h1>Pagina de Dieta</h1>
       </section>
     </main>

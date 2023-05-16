@@ -3,18 +3,18 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 export async function POST(req: Request) {
-  const { meal, dietBoxId } = await req.json()
+  const { foodName, dietListId } = await req.json()
 
-  const createNewTable = await prisma.dietList.create({
+  const createNewFood = await prisma.food.create({
     data: {
-      meal,
-      dietBox: {
-        connect: { id: dietBoxId },
+      foodName,
+      tables: {
+        connect: { id: dietListId },
       },
     },
   })
 
-  return new Response(JSON.stringify(createNewTable), {
+  return new Response(JSON.stringify(createNewFood), {
     status: 201,
   })
 }
@@ -22,7 +22,7 @@ export async function POST(req: Request) {
 export async function DELETE(req: Request) {
   const { id } = await req.json()
 
-  await prisma.dietList.deleteMany({
+  await prisma.food.deleteMany({
     where: {
       id,
     },

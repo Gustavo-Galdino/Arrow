@@ -104,8 +104,8 @@ export function TaskList({ userData, exerciceTable }: TaskListProps) {
 
   return (
     <>
-      <h2 className="text-5xl font-bold mb-20">{selectedTable?.tableName}</h2>
-      <h3 className="text-2xl font-semibold mb-5">Exercicios</h3>
+      <h2 className="mb-20 text-5xl font-bold">{selectedTable?.tableName}</h2>
+      <h3 className="mb-5 text-2xl font-semibold">Exercicios</h3>
 
       <ul>
         <div className="flex flex-col gap-4">
@@ -113,11 +113,11 @@ export function TaskList({ userData, exerciceTable }: TaskListProps) {
             exercises.map((task) => (
               <li
                 key={task.id}
-                className="border-b-2 border-zinc-500 flex gap-4"
+                className="flex gap-4 border-b-2 border-zinc-500"
               >
-                <div className="flex items-center gap-2 w-2/4">
+                <div className="flex w-2/4 items-center gap-2">
                   <Checkbox.Root
-                    className="w-4 h-4 p-2 border border-gray-300 rounded focus:ring-blue-500 flex items-center justify-center"
+                    className="flex h-4 w-4 items-center justify-center rounded border border-gray-300 p-2 focus:ring-blue-500"
                     id={task.id}
                   >
                     <Checkbox.Indicator>
@@ -144,12 +144,12 @@ export function TaskList({ userData, exerciceTable }: TaskListProps) {
               </li>
             ))}
 
-          <li className="bg-zinc-800 p-1 rounded border border-zinc-600">
+          <li className="rounded border border-zinc-600 bg-zinc-800 p-1">
             <form
               onSubmit={handleSubmit(handleNewTask)}
               className="flex items-center gap-4"
             >
-              <div className="flex items-center gap-1 w-2/4">
+              <div className="flex w-2/4 items-center gap-1">
                 <button type="submit">
                   <Plus weight="bold" className="text-zinc-100" />
                 </button>
@@ -160,7 +160,7 @@ export function TaskList({ userData, exerciceTable }: TaskListProps) {
                   placeholder="Adicionar Exercicio"
                   required
                   {...register('task')}
-                  className="bg-transparent border-none text-sm outline-none w-full"
+                  className="w-full border-none bg-transparent text-sm outline-none"
                 />
               </div>
 
@@ -173,7 +173,7 @@ export function TaskList({ userData, exerciceTable }: TaskListProps) {
                     placeholder="4"
                     required
                     {...register('series')}
-                    className="w-8 bg-transparent border-none text-sm outline-none"
+                    className="w-8 border-none bg-transparent text-sm outline-none"
                   />
                 </div>
 
@@ -185,7 +185,7 @@ export function TaskList({ userData, exerciceTable }: TaskListProps) {
                     placeholder="12"
                     required
                     {...register('volume')}
-                    className="w-8 bg-transparent border-none text-sm outline-none"
+                    className="w-8 border-none bg-transparent text-sm outline-none"
                   />
                 </div>
               </div>

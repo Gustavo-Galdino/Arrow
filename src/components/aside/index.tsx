@@ -20,10 +20,11 @@ interface UserData {
 
 interface AsideProps {
   user: UserData
+  tableName?: string
   tables: Table[]
 }
 
-export function AsideUserLayout({ user, tables }: AsideProps) {
+export function AsideUserLayout({ user, tables, tableName }: AsideProps) {
   const { register, getValues, reset, handleSubmit } = useForm()
   const [asideTables, setAsideTables] = useState<Table[]>(tables)
 
@@ -68,25 +69,25 @@ export function AsideUserLayout({ user, tables }: AsideProps) {
   }
 
   return (
-    <aside className="fixed top-16 bg-zinc-800 p-6 flex flex-col gap-4 h-full">
-      <section className="flex gap-2 items-center">
-        <div className="border rounded-full bg-white w-14 h-14 flex items-center justify-center">
+    <aside className="fixed top-16 flex h-full flex-col gap-4 bg-zinc-800 p-6">
+      <section className="flex items-center gap-2">
+        <div className="flex h-14 w-14 items-center justify-center rounded-full border bg-white">
           <User size={32} color="#000" />
         </div>
         <div>
           <h3>{user.username}</h3>
-          <p className="text-zinc-300 text-sm">Frango</p>
+          <p className="text-sm text-zinc-300">Frango</p>
         </div>
       </section>
 
-      <div className="border border-zinc-300 rounded-full w-56" />
+      <div className="w-56 rounded-full border border-zinc-300" />
 
       <section>
         <ul className="flex flex-col gap-2">
           {asideTables.map((table) => (
             <li
               key={table.id}
-              className="cursor-pointer hover:font-bold hover:underline hover:underline-offset-4 flex items-center justify-between w-full text-zinc-400"
+              className="flex w-full cursor-pointer items-center justify-between text-zinc-400 hover:font-bold hover:underline hover:underline-offset-4"
             >
               <Link
                 href={`${pathname}/${table.id}`}
@@ -94,7 +95,7 @@ export function AsideUserLayout({ user, tables }: AsideProps) {
                   tableId === table.id ? 'font-bold text-zinc-100' : ''
                 }
               >
-                {table.tableName}
+                {table.tableName || tableName}
               </Link>
               <button type="button" className="hover:text-red-500">
                 <DeleteModal
@@ -104,7 +105,7 @@ export function AsideUserLayout({ user, tables }: AsideProps) {
             </li>
           ))}
 
-          <li className="bg-zinc-700 p-1 rounded border border-zinc-600 flex items-center">
+          <li className="flex items-center rounded border border-zinc-600 bg-zinc-700 p-1">
             <form
               className="flex items-center gap-2"
               onClick={handleSubmit(handleCreateTable)}
@@ -118,8 +119,8 @@ export function AsideUserLayout({ user, tables }: AsideProps) {
                 placeholder="Adicionar Tabela"
                 {...register('newTable')}
                 className="
-                  bg-transparent
                   border-none
+                  bg-transparent
                   text-sm
                   outline-none
                 "

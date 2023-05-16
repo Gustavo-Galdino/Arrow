@@ -31,3 +31,17 @@ export async function POST(req: Request) {
     status: 201,
   })
 }
+
+export async function DELETE(req: Request) {
+  const { id } = await req.json()
+
+  await prisma.dietBox.deleteMany({
+    where: {
+      id,
+    },
+  })
+
+  return new Response(JSON.stringify('OK'), {
+    status: 200,
+  })
+}
