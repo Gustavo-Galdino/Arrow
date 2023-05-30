@@ -36,6 +36,13 @@ CREATE TABLE "users" (
 );
 
 -- CreateTable
+CREATE TABLE "VerificationToken" (
+    "identifier" TEXT NOT NULL,
+    "token" TEXT NOT NULL,
+    "expires" DATETIME NOT NULL
+);
+
+-- CreateTable
 CREATE TABLE "workoutTables" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "tableName" TEXT NOT NULL,
@@ -98,13 +105,6 @@ CREATE TABLE "DietList" (
 CREATE TABLE "foods" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "foodName" TEXT NOT NULL
-);
-
--- CreateTable
-CREATE TABLE "VerificationToken" (
-    "identifier" TEXT NOT NULL,
-    "token" TEXT NOT NULL,
-    "expires" DATETIME NOT NULL
 );
 
 -- CreateTable

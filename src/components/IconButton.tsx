@@ -3,6 +3,7 @@
 import Image, { StaticImageData } from 'next/image'
 import * as Popover from '@radix-ui/react-popover'
 import { ArrowRight } from 'lucide-react'
+import Link from 'next/link'
 
 interface IconButtonProps {
   img: StaticImageData
@@ -12,6 +13,9 @@ interface IconButtonProps {
   description: string
   popoverContainerStyles: string
   popoverArrowStyles: string
+  linkColor: string
+  linkText: string
+  linkHref: string
   popoverPosition: 'top' | 'left' | 'right' | 'bottom' | undefined
 }
 
@@ -23,13 +27,16 @@ export function IconButton({
   description,
   popoverContainerStyles,
   popoverArrowStyles,
+  linkColor,
+  linkText,
+  linkHref,
   popoverPosition,
 }: IconButtonProps) {
   return (
     <Popover.Root>
       <Popover.Trigger asChild>
         <button
-          className={`absolute ${top} ${left} h-16 w-16 cursor-pointer rounded-full shadow  hover:border-2 hover:border-sky-700`}
+          className={`absolute ${top} ${left} h-16 w-16 cursor-pointer rounded-full shadow  hover:border-2 hover:border-sky-500`}
         >
           <Image
             src={img}
@@ -47,14 +54,19 @@ export function IconButton({
           side={popoverPosition}
           align="center"
         >
-          <h2>{title}</h2>
-          <p> {description}</p>
-          <Popover.Close asChild>
-            <button className="flex items-center gap-1.5 rounded-lg border px-4 py-2">
-              Ir para Plano de Treino
-              <ArrowRight />
-            </button>
-          </Popover.Close>
+          <div className="flex flex-col items-center gap-2 text-center">
+            <h2 className="text-2xl font-bold underline">{title}</h2>
+            <p>{description}</p>
+            <Popover.Close asChild>
+              <Link
+                href={linkHref}
+                className={`${linkColor} flex items-center gap-1.5 rounded-lg px-4 py-2 shadow`}
+              >
+                {linkText}
+                <ArrowRight />
+              </Link>
+            </Popover.Close>
+          </div>
           <Popover.Arrow
             className={popoverArrowStyles}
             width={20}

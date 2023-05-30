@@ -9,9 +9,8 @@ import trainingIcon from '@/assets/training_icon.png'
 import foodIcon from '@/assets/food_icon.png'
 import stokeIcon from '@/assets/stoke_icon.png'
 import coachIcon from '@/assets/coach_icon.png'
-import Link from 'next/link'
-import { LogIn } from 'lucide-react'
 import { IconButton } from './IconButton'
+import { UserAuthenticate } from './UserAuthenticate'
 
 export function Hero() {
   return (
@@ -20,17 +19,7 @@ export function Hero() {
       <div className="relative m-auto w-[1440px]">
         <Image src={banner} alt="" className="rounded-lg object-cover shadow" />
         <div className="absolute top-6 flex w-full items-center justify-between px-6 ">
-          <Link href="/" className="text-5xl font-bold underline">
-            Arrow
-          </Link>
-
-          <Link
-            href="/"
-            className="flex items-center gap-1.5 text-lg font-semibold transition-colors hover:text-green-300"
-          >
-            Login
-            <LogIn />
-          </Link>
+          <UserAuthenticate />
         </div>
 
         <div className="absolute left-[35%] top-64">
@@ -40,10 +29,13 @@ export function Hero() {
             top="-top-16"
             left="-left-4"
             title="Plano de Treinamento"
-            description="aodjaosidjasoidjoiajoid jasoifjaodisfjadsoifjasodifjadso igjadosifjasopdikdmfa sdnfgadosij"
+            description="Cadastre sua rotina de treino, acompanhe seus exercicios e progresso atravez de uma tabela personalizada."
             popoverContainerStyles="bg-orange-400 p-4 rounded shadow w-96"
-            popoverArrowStyles="fill-orange-400"
+            popoverArrowStyles="fill-orange-400 shadow"
             popoverPosition="left"
+            linkColor="bg-orange-600 hover:bg-orange-500 hover:text-gray-50"
+            linkHref="/training"
+            linkText="Começar"
           />
         </div>
 
@@ -53,8 +45,14 @@ export function Hero() {
             img={stokeIcon}
             top="-top-16"
             left="-left-5"
-            title="Test"
-            description="Testtt"
+            title="Estoque"
+            description="Uma dispensa para ter controle dos itens da dieta, para não deixar faltar nada."
+            popoverContainerStyles="bg-sky-400 p-4 rounded shadow w-96"
+            popoverArrowStyles="fill-sky-400 shadow"
+            popoverPosition="right"
+            linkColor="bg-sky-600 hover:bg-sky-500 hover:text-gray-50"
+            linkHref="/stoke"
+            linkText="Começar"
           />
         </div>
 
@@ -64,8 +62,14 @@ export function Hero() {
             img={foodIcon}
             top="top-16"
             left="-left-4"
-            title="Test"
-            description="Testtt"
+            title="Plano Alimentar"
+            description="Cadatre seu plano alimentar e acompanhe o consumo diario de calorias e macronutrientes."
+            popoverContainerStyles="bg-amber-300 p-4 rounded shadow w-96"
+            popoverArrowStyles="fill-amber-400 shadow"
+            popoverPosition="left"
+            linkColor="bg-amber-400 hover:bg-amber-300 hover:text-gray-50"
+            linkHref="/diet"
+            linkText="Começar"
           />
         </div>
 
@@ -75,8 +79,14 @@ export function Hero() {
             img={coachIcon}
             top="top-52"
             left="left-36"
-            title="Test"
-            description="Testtt"
+            title="Profissional"
+            description="Não sabe como montar a melhor estrategia? Contrate um profissional que ira traçar o melhor plano e acompanhar seu progresso junto a voce!"
+            popoverContainerStyles="bg-amber-600 p-4 rounded shadow w-96"
+            popoverArrowStyles="fill-amber-600 shadow"
+            popoverPosition="top"
+            linkColor="bg-amber-800 hover:bg-amber-700 hover:text-gray-50"
+            linkHref="/pro"
+            linkText="Começar"
           />
         </div>
       </div>
