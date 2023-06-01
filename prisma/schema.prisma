@@ -45,8 +45,8 @@ model User {
   experience    Int?
   accounts      Account[]
   sessions      Session[]
-  tables        WorkoutTable[]
-  diettTable    DietTable[]
+  workoutTable  WorkoutTable[]
+  dietTable     DietTable[]
 
   @@map("users")
 }
@@ -60,55 +60,36 @@ model VerificationToken {
 }
 
 model WorkoutTable {
-  id        String @id @default(cuid())
-  tableName String
-  userId    String
+  id     String @id @default(cuid())
+  userId String
 
-  user                   User                 @relation(fields: [userId], references: [id])
-  WorkoutTableExercise   WorkoutTableExercise @relation(fields: [workoutTableExerciseId], references: [id])
-  WorkoutTableNote       WorkoutTableNote     @relation(fields: [workoutTableNoteId], references: [id])
-  workoutTableExerciseId String
-  workoutTableNoteId     String
+  user                 User                   @relation(fields: [userId], references: [id])
+  WorkoutTableExercise WorkoutTableExercise[]
 
   @@map("workoutTables")
 }
 
 model WorkoutTableExercise {
-  id String @id @default(cuid())
+  id    String @id @default(cuid())
+  title String
 
-  exercise     Exercise[]
-  WorkoutTable WorkoutTable[]
+  exercise       Exercise[]
+  WorkoutTable   WorkoutTable @relation(fields: [workoutTableId], references: [id])
+  workoutTableId String
 
   @@map("workoutTableExercises")
 }
 
 model Exercise {
-  id           String @id @default(cuid())
+  id           String  @id @default(cuid())
   exerciseName String
   series       Int
   volume       Int
+  annotation   String?
 
   tables WorkoutTableExercise[]
 
   @@map("exercises")
-}
-
-model WorkoutTableNote {
-  id String @id @default(cuid())
-
-  notes        Note[]
-  WorkoutTable WorkoutTable[]
-
-  @@map("workoutTableNotes")
-}
-
-model Note {
-  id         String @id @default(cuid())
-  annotation String
-
-  tables WorkoutTableNote[]
-
-  @@map("notes")
 }
 
 model DietTable {

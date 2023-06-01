@@ -3,6 +3,7 @@ import { hash } from 'bcryptjs'
 import { prisma } from '@/lib/prisma'
 
 export interface UserProps {
+  id: string
   name: string
   email: string
   password: string
@@ -20,6 +21,8 @@ export async function POST(request: Request) {
         password: hashedPassword,
         experience: 0,
         nivel: 0,
+        workoutTable: { create: {} },
+        dietTable: { create: {} },
       },
     })
 

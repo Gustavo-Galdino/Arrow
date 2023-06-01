@@ -10,7 +10,7 @@ import foodIcon from '@/assets/food_icon.png'
 import stokeIcon from '@/assets/stoke_icon.png'
 import coachIcon from '@/assets/coach_icon.png'
 import { IconButton } from './IconButton'
-import { UserAuthenticate } from './UserAuthenticate'
+import { Header } from './Header'
 
 export function Hero() {
   return (
@@ -18,8 +18,8 @@ export function Hero() {
       <Image src={banner} alt="" className="fixed h-full w-screen opacity-30" />
       <div className="relative m-auto w-[1440px]">
         <Image src={banner} alt="" className="rounded-lg object-cover shadow" />
-        <div className="absolute top-6 flex w-full items-center justify-between px-6 ">
-          <UserAuthenticate />
+        <div className="absolute top-0 flex w-full items-center justify-between px-6 ">
+          <Header />
         </div>
 
         <div className="absolute left-[35%] top-64">
