@@ -8,8 +8,6 @@ import { z } from 'zod'
 
 const FormNewExerciseSchema = z.object({
   name: z.string().nonempty({ message: 'Nome do exercicio é obrigatorio.' }),
-  series: z.number().min(1, { message: 'Series são obrigatórias.' }),
-  volume: z.number().min(1, { message: 'Volume é obrigatorio.' }),
 })
 
 interface FormNewExerciceProps {
@@ -66,6 +64,7 @@ export function FormNewExercise({ exerciseTableId }: FormNewExerciceProps) {
       <div className="flex items-center gap-1.5">
         <div className="flex flex-col">
           <input
+            required
             type="number"
             {...register('series')}
             placeholder="Series"
@@ -79,6 +78,7 @@ export function FormNewExercise({ exerciseTableId }: FormNewExerciceProps) {
         </div>
         <div className="flex flex-col">
           <input
+            required
             type="number"
             {...register('volume')}
             placeholder="Volume"

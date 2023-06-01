@@ -7,8 +7,6 @@ export function Header() {
   const { data: session } = useSession()
   const user = session?.user
 
-  console.log(user)
-
   return (
     <header className="h-20 w-full">
       <nav className="container flex h-full items-center justify-between">

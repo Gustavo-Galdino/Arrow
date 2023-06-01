@@ -10,9 +10,9 @@ export async function GET() {
     return NextResponse.json({ error: 'Not authenticated' })
   }
 
-  const users = await prisma.user.findMany({
+  const users = await prisma.user.findUniqueOrThrow({
     where: {
-      email: session.user?.email,
+      email: session.user?.email!,
     },
     include: {
       workoutTable: {
@@ -32,18 +32,36 @@ export async function GET() {
 }
 
 export async function PATCH(req: Request) {
-  const { userId, updateNivel } = await req.json()
+  const session = await getServerSession(authOptions)
 
-  const updatedUser = await prisma.user.update({
-    where: {
-      id: userId,
-    },
-    data: {
-      nivel: updateNivel,
-    },
-  })
+  if (!session) {
+    return NextResponse.json({ error: 'Not authenticated' })
+  }
 
-  return NextResponse.json(updatedUser)
+  try {
+    const user = session.user
+
+    const { experience, nivel } = await req.json()
+
+    const updatedUser = await prisma.user.update({
+      where: {
+        email: user?.email!,
+      },
+      data: {
+        experience,
+        nivel,
+      },
+    })
+
+    return NextResponse.json(updatedUser)
+  } catch (error: any) {
+    return new Response(
+      JSON.stringify({ status: 'error', message: error.message }),
+      {
+        status: 500,
+      },
+    )
+  }
 }
 
 export async function POST(req: Request) {
@@ -59,6 +77,32 @@ export async function POST(req: Request) {
 
     return new Response(JSON.stringify(createdExercise), {
       status: 201,
+    })
+  } catch (error: any) {
+    return new Response(
+      JSON.stringify({ status: 'error', message: error.message }),
+      {
+        status: 500,
+      },
+    )
+  }
+}
+
+export async function DELETE(req: Request) {
+  try {
+    const { id } = await req.json()
+
+    await prisma.workoutTableExercise.delete({
+      where: {
+        id,
+      },
+      include: {
+        exercise: true,
+      },
+    })
+
+    return new Response(JSON.stringify('OK'), {
+      status: 200,
     })
   } catch (error: any) {
     return new Response(

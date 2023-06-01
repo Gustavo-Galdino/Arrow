@@ -8,15 +8,17 @@ interface DeleteModalProps {
   exerciseId: string
   title: string
   description: string
+  whereApi: string
 }
 
 export function DeleteModal({
   exerciseId,
   title,
   description,
+  whereApi,
 }: DeleteModalProps) {
   async function handleDeleteTask(id: string) {
-    await api.delete('/api/exercices', {
+    await api.delete(`/api/${whereApi}`, {
       data: {
         id,
       },
