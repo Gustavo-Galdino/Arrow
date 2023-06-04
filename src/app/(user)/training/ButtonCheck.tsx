@@ -1,7 +1,7 @@
 'use client'
 
 import { api } from '@/lib/api'
-import { Check } from 'lucide-react'
+import { Check, RotateCcw } from 'lucide-react'
 import { useState } from 'react'
 
 interface WorkoutTableExercice {
@@ -18,15 +18,25 @@ interface User {
   id?: string
   nivel: number
   experience: number
+  completed: boolean
   workoutTable?: WorkoutTable[]
 }
 
 interface ButtonCheckProps {
   tableId: string
+  complete?: boolean
+  nivel: number
+  experience: number
 }
 
-export function ButtonCheck({ tableId }: ButtonCheckProps) {
-  const [completed, setCompleted] = useState(false)
+export function ButtonCheck({
+  tableId,
+  complete,
+  nivel,
+  experience,
+}: ButtonCheckProps) {
+  const [completed, setCompleted] = useState(complete)
+
   async function handleChecked() {
     try {
       const response = await api.get('/api/users')
@@ -47,29 +57,53 @@ export function ButtonCheck({ tableId }: ButtonCheckProps) {
         experience = 0
       }
 
-      await api.patch('/api/users', {
+      const patchResponse = await api.patch('/api/users', {
         nivel,
         experience,
+        completed: true,
+        WorkoutTableExerciseId: tableId,
       })
 
-      setCompleted(true)
+      if (patchResponse.status === 200) {
+        setCompleted(true)
+      }
     } catch (error) {
       console.log(error)
     }
   }
 
+  async function restart() {
+    setCompleted(false)
+
+    await api.patch('/api/users', {
+      nivel,
+      experience,
+      WorkoutTableExerciseId: tableId,
+      completed: false,
+    })
+  }
+
   return (
-    <button
-      type="button"
-      disabled={completed}
-      className="rounded border p-0.5 hover:bg-green-400 hover:transition-colors disabled:cursor-not-allowed disabled:border-none disabled:bg-transparent"
-      onClick={() => handleChecked()}
-    >
+    <div className="flex items-center gap-2">
       {completed ? (
-        <Check size={24} className="text-green-400" />
+        <div className="flex items-center gap-2">
+          <span>
+            <Check className="text-green-300 " />
+          </span>
+          <button onClick={() => restart()}>
+            <RotateCcw size={18} />
+          </button>
+        </div>
       ) : (
-        <strong className="px-1 text-sm font-semibold">Concluir</strong>
+        <button
+          type="button"
+          disabled={completed}
+          className="rounded border p-0.5 hover:bg-green-400 hover:transition-colors disabled:cursor-not-allowed disabled:border-none disabled:bg-transparent"
+          onClick={() => handleChecked()}
+        >
+          <strong className="px-1 text-sm font-semibold ">Concluir</strong>
+        </button>
       )}
-    </button>
+    </div>
   )
 }

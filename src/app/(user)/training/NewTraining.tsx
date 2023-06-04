@@ -1,10 +1,9 @@
-'use client'
-
 import { api } from '@/lib/api'
 import { FilePlus } from 'lucide-react'
 import { useForm, FieldError } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+import { useStore } from '@/context/store'
 
 const NewTrainingFormSchema = z.object({
   title: z.string().nonempty({ message: 'Titulo é obrigatorio.' }),
@@ -13,6 +12,7 @@ const NewTrainingFormSchema = z.object({
 interface NewTrainingProps {
   workoutTableId: string
 }
+
 export function NewTraining({ workoutTableId }: NewTrainingProps) {
   const {
     register,
@@ -25,22 +25,29 @@ export function NewTraining({ workoutTableId }: NewTrainingProps) {
   })
 
   async function handleNewTraining() {
-    const title = getValues('title')
+    try {
+      const title = getValues('title')
 
-    if (title) {
-      await api.post('/api/users', {
-        title,
-        WorkoutTableExercise: workoutTableId,
-      })
+      if (title) {
+        await api.post('/api/users', {
+          title,
+          WorkoutTableExercise: workoutTableId,
+        })
+        const response = await api.get('/api/users')
+        const user = response.data
+        useStore.setState({ user })
+      }
+
+      reset()
+    } catch (error) {
+      console.log(error)
     }
-
-    reset()
   }
 
   return (
     <form
       onSubmit={handleSubmit(handleNewTraining)}
-      className="mx-6 flex flex-col items-center justify-center gap-2 rounded-lg border border-gray-800 p-6 text-gray-300 shadow"
+      className="mx-20 flex flex-col items-center justify-center gap-2 rounded-lg border border-gray-800 p-6 text-gray-300 shadow"
     >
       <div className="flex flex-col">
         <label className="self-start text-xs" htmlFor="title">

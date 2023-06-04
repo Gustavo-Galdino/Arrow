@@ -1,5 +1,6 @@
 'use client'
 
+import { useStore } from '@/context/store'
 import { api } from '@/lib/api'
 import * as Dialog from '@radix-ui/react-dialog'
 import { Trash } from 'lucide-react'
@@ -23,6 +24,9 @@ export function DeleteModal({
         id,
       },
     })
+    const response = await api.get('/api/users')
+    const user = response.data
+    useStore.setState({ user })
   }
 
   return (

@@ -25,7 +25,7 @@ export function ExerciseList({
           exerciseId={exerciseId}
           title="Deletar Exercicio?"
           description="Ao deleter o exercicio sera apagado permanentemente"
-          whereApi="exercises"
+          whereApi="exercise"
         />
       </div>
     </div>

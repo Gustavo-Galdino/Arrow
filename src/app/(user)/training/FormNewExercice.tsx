@@ -32,7 +32,7 @@ export function FormNewExercise({ exerciseTableId }: FormNewExerciceProps) {
     const volume = parseInt(getValues('volume'))
 
     if (exerciseName) {
-      await api.post('/api/exercices', {
+      await api.post('/api/exercise', {
         exerciseName,
         series,
         volume,

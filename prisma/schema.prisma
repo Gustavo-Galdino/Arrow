@@ -70,8 +70,9 @@ model WorkoutTable {
 }
 
 model WorkoutTableExercise {
-  id    String @id @default(cuid())
-  title String
+  id        String  @id @default(cuid())
+  title     String
+  completed Boolean @default(false)
 
   exercise       Exercise[]
   WorkoutTable   WorkoutTable @relation(fields: [workoutTableId], references: [id])

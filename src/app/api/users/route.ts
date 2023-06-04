@@ -41,7 +41,8 @@ export async function PATCH(req: Request) {
   try {
     const user = session.user
 
-    const { experience, nivel } = await req.json()
+    const { experience, nivel, WorkoutTableExerciseId, completed } =
+      await req.json()
 
     const updatedUser = await prisma.user.update({
       where: {
@@ -53,7 +54,16 @@ export async function PATCH(req: Request) {
       },
     })
 
-    return NextResponse.json(updatedUser)
+    const updateTable = await prisma.workoutTableExercise.update({
+      where: {
+        id: WorkoutTableExerciseId,
+      },
+      data: {
+        completed,
+      },
+    })
+
+    return NextResponse.json(`${updatedUser} ${updateTable}`)
   } catch (error: any) {
     return new Response(
       JSON.stringify({ status: 'error', message: error.message }),
