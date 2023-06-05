@@ -26,12 +26,6 @@ export default async function Diet() {
 
   return (
     <main className="mt-24 flex">
-      <AsideUserLayout
-        user={userData}
-        tables={userData.diettTable}
-        tableName="Plano Alimentar"
-      />
-
       <section className="ml-72 px-5">
         <h1>Pagina de Dieta</h1>
       </section>

@@ -1,10 +1,9 @@
-'use client'
-
 import { useForm, FieldError } from 'react-hook-form'
 import { Check } from 'lucide-react'
 import { api } from '@/lib/api'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+import { useStore } from '@/context/store'
 
 const FormNewExerciseSchema = z.object({
   name: z.string().nonempty({ message: 'Nome do exercicio é obrigatorio.' }),
@@ -38,6 +37,9 @@ export function FormNewExercise({ exerciseTableId }: FormNewExerciceProps) {
         volume,
         exerciseTableId,
       })
+      const response = await api.get('/api/users')
+      const user = response.data
+      useStore.setState({ user })
 
       reset()
     }
@@ -45,7 +47,7 @@ export function FormNewExercise({ exerciseTableId }: FormNewExerciceProps) {
 
   return (
     <form
-      className="grid grid-cols-3 items-center justify-between gap-4"
+      className="grid w-full grid-cols-3 items-center justify-between gap-4 border-t border-gray-400 pt-4"
       onSubmit={handleSubmit(handleNewExercise)}
     >
       <div className="flex flex-col">
@@ -53,7 +55,7 @@ export function FormNewExercise({ exerciseTableId }: FormNewExerciceProps) {
           type="text"
           {...register('name')}
           placeholder="Nome do exercicio"
-          className="rounded bg-gray-600 px-1 py-1 placeholder:text-sm"
+          className="rounded bg-gray-600 px-1 py-1 placeholder:text-xs"
         />
         {errors.name && (
           <span className="px-1 py-1 text-xs text-red-300">
@@ -68,7 +70,7 @@ export function FormNewExercise({ exerciseTableId }: FormNewExerciceProps) {
             type="number"
             {...register('series')}
             placeholder="Series"
-            className="w-full rounded bg-gray-600 px-1 py-1 placeholder:text-sm"
+            className="w-full rounded bg-gray-600 px-1 py-1 placeholder:text-xs"
           />
           {errors.series && (
             <span className="px-1 py-1 text-xs text-red-300">
@@ -82,7 +84,7 @@ export function FormNewExercise({ exerciseTableId }: FormNewExerciceProps) {
             type="number"
             {...register('volume')}
             placeholder="Volume"
-            className="w-full rounded bg-gray-600 px-1 py-1 placeholder:text-sm"
+            className="w-full rounded bg-gray-600 px-1 py-1 placeholder:text-xs"
           />
           {errors.volume && (
             <span className="px-1 py-1 text-xs text-red-300">

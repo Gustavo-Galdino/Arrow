@@ -28,6 +28,32 @@ export async function POST(req: Request) {
   }
 }
 
+export async function PATCH(req: Request) {
+  try {
+    const { id, annotation } = await req.json()
+
+    const updatedExercise = await prisma.exercise.update({
+      where: {
+        id,
+      },
+      data: {
+        annotation,
+      },
+    })
+
+    return new Response(JSON.stringify(updatedExercise), {
+      status: 200,
+    })
+  } catch (error: any) {
+    return new Response(
+      JSON.stringify({ status: 'error', message: error.message }),
+      {
+        status: 500,
+      },
+    )
+  }
+}
+
 export async function DELETE(req: Request) {
   try {
     const { id } = await req.json()

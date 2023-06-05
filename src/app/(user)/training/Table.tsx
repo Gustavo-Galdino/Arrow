@@ -44,14 +44,16 @@ export function Table() {
       {user.workoutTable.map((table) => (
         <section
           key={table.id}
-          className="mt-16 flex flex-wrap items-start justify-center gap-4"
+          className="mt-16 grid gap-4 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
         >
           {table.WorkoutTableExercise.map((tableExercise) => (
             <ul
               key={tableExercise.id}
-              className="relative flex max-w-md flex-col gap-4 rounded-lg border border-gray-400 p-6 shadow"
+              className={`shadow-gray-900/102 relative box-border flex w-full flex-col gap-4 rounded  p-4 text-base shadow-lg ${
+                tableExercise.completed ? 'bg-slate-700' : 'bg-gray-700'
+              }`}
             >
-              <div className="absolute right-0 top-0 p-2">
+              <div className="absolute right-0 top-0 px-5 py-3">
                 <DeleteModal
                   title={`Deletar tabela ${tableExercise.title}?`}
                   description="Isso ira deletar a tabela completa!"
@@ -60,7 +62,7 @@ export function Table() {
                 />
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 xl:flex-col 2xl:flex-row">
                 <h2 className="text-2xl font-bold">{tableExercise.title}</h2>
                 <ButtonCheck
                   tableId={tableExercise.id}
@@ -69,16 +71,25 @@ export function Table() {
                   nivel={user.nivel}
                 />
               </div>
-              {tableExercise.exercise.map((exercise) => (
-                <li key={exercise.id}>
-                  <ExerciseList
-                    exerciseId={exercise.id}
-                    name={exercise.exerciseName}
-                    series={exercise.series}
-                    volume={exercise.volume}
-                  />
-                </li>
-              ))}
+              {tableExercise.exercise.length > 0 ? (
+                <>
+                  {tableExercise.exercise.map((exercise) => (
+                    <li key={exercise.id}>
+                      <ExerciseList
+                        exerciseId={exercise.id}
+                        name={exercise.exerciseName}
+                        series={exercise.series}
+                        volume={exercise.volume}
+                        annotation={exercise.annotation}
+                      />
+                    </li>
+                  ))}
+                </>
+              ) : (
+                <p className="mt-4 text-center text-gray-400">
+                  Lista de Treino Vazia
+                </p>
+              )}
               <FormNewExercise exerciseTableId={tableExercise.id} />
             </ul>
           ))}

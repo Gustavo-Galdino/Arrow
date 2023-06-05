@@ -5,7 +5,7 @@ interface Exercise {
   exerciseName: string
   series: number
   volume: number
-  annotation?: string
+  annotation: string
 }
 interface WorkoutTableExercice {
   id: string

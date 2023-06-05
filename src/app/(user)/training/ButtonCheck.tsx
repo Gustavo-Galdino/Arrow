@@ -1,5 +1,4 @@
-'use client'
-
+import { useStore } from '@/context/store'
 import { api } from '@/lib/api'
 import { Check, RotateCcw } from 'lucide-react'
 import { useState } from 'react'
@@ -67,6 +66,10 @@ export function ButtonCheck({
       if (patchResponse.status === 200) {
         setCompleted(true)
       }
+
+      const reloadResponse = await api.get('/api/users')
+      const reloadUser = reloadResponse.data
+      useStore.setState({ user: reloadUser })
     } catch (error) {
       console.log(error)
     }
@@ -98,7 +101,7 @@ export function ButtonCheck({
         <button
           type="button"
           disabled={completed}
-          className="rounded border p-0.5 hover:bg-green-400 hover:transition-colors disabled:cursor-not-allowed disabled:border-none disabled:bg-transparent"
+          className="box-border rounded bg-gray-500 px-2 py-1 text-xs shadow-lg hover:bg-green-500 hover:transition-colors"
           onClick={() => handleChecked()}
         >
           <strong className="px-1 text-sm font-semibold ">Concluir</strong>

@@ -30,7 +30,7 @@ export function Header() {
               </li>
               <li>
                 <Link className="hover:text-gray-50" href="/register">
-                  Register
+                  Registrar
                 </Link>
               </li>
             </>
@@ -39,11 +39,11 @@ export function Header() {
             <>
               <li>
                 <Link className="hover:text-gray-50" href="/profile">
-                  Profile
+                  Perfil
                 </Link>
               </li>
               <li className="cursor-pointer" onClick={() => signOut()}>
-                Logout
+                Sair
               </li>
             </>
           )}
