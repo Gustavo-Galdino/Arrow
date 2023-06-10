@@ -1,20 +1,40 @@
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '@/lib/prisma'
 
-const prisma = new PrismaClient()
+export async function PATCH(req: Request) {
+  const { id, foodId } = await req.json()
 
-export async function POST(req: Request) {
-  const { meal, dietBoxId } = await req.json()
-
-  const createNewTable = await prisma.dietList.create({
+  const updateTable = await prisma.dietList.update({
+    where: {
+      id,
+    },
     data: {
-      meal,
-      dietBox: {
-        connect: { id: dietBoxId },
+      food: {
+        connect: {
+          id: foodId,
+        },
       },
     },
   })
 
-  return new Response(JSON.stringify(createNewTable), {
+  return new Response(JSON.stringify(updateTable), {
+    status: 201,
+  })
+}
+
+export async function PUT(req: Request) {
+  const { id, meal, time } = await req.json()
+
+  const updateTable = await prisma.dietList.update({
+    where: {
+      id,
+    },
+    data: {
+      meal,
+      time,
+    },
+  })
+
+  return new Response(JSON.stringify(updateTable), {
     status: 201,
   })
 }

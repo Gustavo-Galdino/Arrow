@@ -1,14 +1,18 @@
-import { PrismaClient } from '@prisma/client'
+import { getServerSession } from 'next-auth'
 import { NextResponse } from 'next/server'
-
-const prisma = new PrismaClient()
+import { authOptions } from '../auth/[...nextauth]/route'
+import { prisma } from '@/lib/prisma'
 
 export async function GET() {
-  const tables = await prisma.dietBox.findMany({
+  const tables = await prisma.dietTable.findMany({
     include: {
-      dietList: {
+      dietBox: {
         include: {
-          food: true,
+          dietList: {
+            include: {
+              food: true,
+            },
+          },
         },
       },
     },
@@ -22,8 +26,36 @@ export async function POST(req: Request) {
 
   const createNewTable = await prisma.dietBox.create({
     data: {
-      dietTableId,
       title,
+      dietTableId,
+    },
+  })
+
+  return new Response(JSON.stringify(createNewTable), {
+    status: 201,
+  })
+}
+
+export async function PATCH(req: Request) {
+  const session = await getServerSession(authOptions)
+
+  if (!session) {
+    return NextResponse.json({ error: 'Not authenticated' })
+  }
+
+  const { meal, id, time } = await req.json()
+
+  const createNewTable = await prisma.dietBox.update({
+    where: {
+      id,
+    },
+    data: {
+      dietList: {
+        create: {
+          meal,
+          time,
+        },
+      },
     },
   })
 
@@ -35,7 +67,13 @@ export async function POST(req: Request) {
 export async function DELETE(req: Request) {
   const { id } = await req.json()
 
-  await prisma.dietBox.deleteMany({
+  await prisma.dietList.deleteMany({
+    where: {
+      dietBoxId: id,
+    },
+  })
+
+  await prisma.dietBox.delete({
     where: {
       id,
     },

@@ -24,7 +24,19 @@ export async function GET() {
           },
         },
       },
-      dietTable: true,
+      dietTable: {
+        include: {
+          dietBox: {
+            include: {
+              dietList: {
+                include: {
+                  food: true,
+                },
+              },
+            },
+          },
+        },
+      },
     },
   })
 

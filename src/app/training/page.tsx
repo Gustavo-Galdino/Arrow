@@ -4,7 +4,7 @@ import { cookies } from 'next/headers'
 import { Table } from './Table'
 import { useStore } from '@/context/store'
 import { StoreInitializer } from '@/components/StoreInitializer'
-import { Experience } from './experience'
+import { Experience } from '../../components/experience'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 
@@ -48,6 +48,7 @@ export default async function Training() {
   const user: User = response.data
 
   useStore.setState({ user })
+
   return (
     <main className="px-10">
       <StoreInitializer user={user} />

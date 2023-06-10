@@ -1,34 +1,85 @@
-import { AsideUserLayout } from '@/components/aside'
+import { Experience } from '@/components/experience'
+import { Header } from '@/components/Header'
+import { StoreInitializer } from '@/components/StoreInitializer'
+import { api } from '@/lib/api'
+import { ArrowRight } from 'lucide-react'
+import { cookies } from 'next/headers'
+import Link from 'next/link'
+import { Table } from './Table'
+import { useStore } from '@/context/store'
 
-interface Table {
+interface Food {
   id: string
-  tableName: string
+  foodName: string
+}
+interface DietList {
+  id: string
+  meal: string
+  food: Food[]
+}
+interface DietBox {
+  id: string
+  title: string
+  dietList: DietList[]
 }
 
-interface DiettTable {
+interface DietTable {
   id: string
-  tableName: string
-  days: string
+  dietBox: DietBox[]
 }
 
 interface User {
   id: string
-  username: string
-  tables: Table[]
-  diettTable: DiettTable[]
+  name: string
+  nivel: number
+  experience: number
+  dietTable: DietTable[]
 }
 
 export default async function Diet() {
-  const user = await fetch('http://localhost:3000/api/users', {
-    cache: 'no-store',
+  const token = cookies().get('next-auth.session-token')?.value
+
+  const response = await api.get('/api/users', {
+    withCredentials: true,
+    headers: {
+      Cookie: `next-auth.session-token=${token}`,
+    },
   })
-  const userData: User = await user.json()
+
+  const user: User = response.data
+
+  useStore.setState({ user })
 
   return (
-    <main className="mt-24 flex">
-      <section className="ml-72 px-5">
-        <h1>Pagina de Dieta</h1>
+    <main className="px-10">
+      <StoreInitializer user={user} />
+      <Header />
+
+      <section className="mt-16 flex flex-col items-center justify-center">
+        <div className="flex w-full justify-between border-b pb-2">
+          <div>
+            <Experience />
+            <div className="flex items-center gap-1">
+              <strong className="text-xl uppercase leading-relaxed tracking-widest">
+                {user.name}
+              </strong>
+              <span className="font-bold">|</span>
+              <span className="text-sm text-gray-200">Frango</span>
+            </div>
+          </div>
+          <Link
+            href="/training"
+            className="flex items-center gap-1 self-end text-sm"
+          >
+            Ir para Plano de Treino
+            <ArrowRight size={14} />
+          </Link>
+        </div>
+
+        <Table />
       </section>
+
+      <footer className="mt-20" />
     </main>
   )
 }

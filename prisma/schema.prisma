@@ -117,6 +117,7 @@ model DietBox {
 model DietList {
   id   String @id @default(cuid())
   meal String
+  time String
 
   dietBox DietBox @relation(fields: [dietBoxId], references: [id])
 
@@ -126,7 +127,12 @@ model DietList {
 
 model Food {
   id       String @id @default(cuid())
+  category String
   foodName String
+  amount   Int
+  carbo    Float
+  protein  Float
+  fat      Float
 
   tables DietList[]
 

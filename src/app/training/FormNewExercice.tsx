@@ -95,7 +95,7 @@ export function FormNewExercise({ exerciseTableId }: FormNewExerciceProps) {
       </div>
       <button
         type="submit"
-        className="cursor-pointer justify-self-start rounded border px-1 py-1 hover:border-green-400 hover:bg-green-500 hover:text-gray-50 hover:transition-colors"
+        className="justify-self-start rounded bg-indigo-500 px-2 py-1 text-white transition duration-200 ease-in-out hover:bg-indigo-600"
       >
         <Check size={16} />
       </button>

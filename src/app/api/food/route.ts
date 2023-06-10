@@ -1,16 +1,22 @@
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '@/lib/prisma'
 
-const prisma = new PrismaClient()
+export async function GET() {
+  const foods = await prisma.food.findMany()
+
+  return new Response(JSON.stringify(foods), { status: 200 })
+}
 
 export async function POST(req: Request) {
-  const { foodName, dietListId } = await req.json()
+  const { foodName, amount, category, carbo, protein, fat } = await req.json()
 
   const createNewFood = await prisma.food.create({
     data: {
       foodName,
-      tables: {
-        connect: { id: dietListId },
-      },
+      amount,
+      category,
+      carbo,
+      protein,
+      fat,
     },
   })
 
@@ -19,12 +25,19 @@ export async function POST(req: Request) {
   })
 }
 
-export async function DELETE(req: Request) {
-  const { id } = await req.json()
+export async function PATCH(req: Request) {
+  const { foodId, tableId } = await req.json()
 
-  await prisma.food.deleteMany({
+  await prisma.food.update({
     where: {
-      id,
+      id: foodId,
+    },
+    data: {
+      tables: {
+        disconnect: {
+          id: tableId,
+        },
+      },
     },
   })
 
