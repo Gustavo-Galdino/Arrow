@@ -4,26 +4,27 @@ import { X } from 'lucide-react'
 
 interface FoodListProps {
   name: string
+  grams: number
   carbo: number
   protein: number
   fat: number
   foodId: string
-  tableId: string
 }
 
 export function FoodList({
   carbo,
   fat,
   name,
+  grams,
   protein,
   foodId,
-  tableId,
 }: FoodListProps) {
   async function handleRemoveFood() {
     try {
-      await api.patch('/api/food', {
-        foodId,
-        tableId,
+      await api.delete('/api/foodInGrams', {
+        data: {
+          id: foodId,
+        },
       })
 
       const response = await api.get('/api/users')
@@ -34,13 +35,20 @@ export function FoodList({
     }
   }
 
+  const carboCalc = ((carbo * grams) / 100).toFixed(1)
+  const proteinCalc = ((protein * grams) / 100).toFixed(1)
+  const fatCalc = ((fat * grams) / 100).toFixed(1)
+
   return (
     <div className="box-border grid grid-cols-1 items-center justify-between gap-2 rounded-md border border-gray-500 px-2 py-1.5 text-sm transition-colors duration-200 ease-in-out sm:grid-cols-3 sm:text-base">
-      <strong className="text-base text-white sm:text-base">{name}</strong>
+      <div className="flex items-center gap-1">
+        <span>{grams}g</span>
+        <strong className="text-base text-white sm:text-base">{name}</strong>
+      </div>
       <div className="flex items-center gap-2 sm:gap-4">
-        <p className="text-gray-300">C: {carbo}</p>
-        <p className="text-gray-300">P: {protein}</p>
-        <p className="text-gray-300">G: {fat}</p>
+        <p className="text-gray-300">C: {carboCalc}</p>
+        <p className="text-gray-300">P: {proteinCalc}</p>
+        <p className="text-gray-300">G: {fatCalc}</p>
       </div>
 
       <div className="mt-2 justify-self-end sm:mt-0">

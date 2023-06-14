@@ -65,12 +65,12 @@ export function Table() {
                                 {list.food.map((food) => (
                                   <li key={food.id} className="list-none">
                                     <FoodList
-                                      carbo={food.carbo}
-                                      fat={food.fat}
-                                      protein={food.protein}
+                                      grams={food.grams}
+                                      carbo={food.food.carbo}
+                                      fat={food.food.fat}
+                                      protein={food.food.protein}
                                       foodId={food.id}
-                                      tableId={list.id}
-                                      name={food.foodName}
+                                      name={food.food.foodName}
                                     />
                                   </li>
                                 ))}

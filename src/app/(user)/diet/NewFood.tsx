@@ -8,6 +8,7 @@ import { useState } from 'react'
 interface FoodOption {
   id: string
   label: string
+  amount: number
   carbo: number
   protein: number
   fat: number
@@ -18,7 +19,7 @@ interface NewFoodProps {
 }
 
 export function NewFood({ dietListId }: NewFoodProps) {
-  const { handleSubmit, reset, register, setValue } = useForm()
+  const { handleSubmit, reset, register, setValue, getValues } = useForm()
 
   const [selectedFood, setSelectedFood] = useState<FoodOption | null>(null)
   const [foodOptions, setFoodOptions] = useState<FoodOption[]>([])
@@ -26,6 +27,8 @@ export function NewFood({ dietListId }: NewFoodProps) {
   const handleInputChange = debounce((value) => {
     loadOptions(value)
   }, 500)
+
+  console.log(selectedFood)
 
   const loadOptions = async (inputValue: string) => {
     if (!inputValue) return
@@ -38,20 +41,28 @@ export function NewFood({ dietListId }: NewFoodProps) {
     const options: FoodOption[] = response.data.map((food: any) => ({
       id: food.id,
       label: food.foodName,
+      amount: food.amount,
       carbo: food.carbo,
       protein: food.protein,
       fat: food.fat,
     }))
-
     setFoodOptions(options)
   }
 
   async function handleNewFood() {
     if (selectedFood) {
+      const amount = selectedFood.amount - parseInt(getValues('amount'))
+      const grams = parseInt(getValues('amount'))
       try {
-        await api.patch('/api/dietList', {
-          id: dietListId,
+        await api.post('/api/foodInGrams', {
+          dietListId,
           foodId: selectedFood.id,
+          grams,
+        })
+
+        await api.patch('api/food', {
+          id: selectedFood.id,
+          amount,
         })
 
         const response = await api.get('/api/users')
@@ -122,6 +133,12 @@ export function NewFood({ dietListId }: NewFoodProps) {
       />
 
       <div className="mb-2 flex w-full flex-col gap-2 md:mb-0 md:w-auto md:flex-row">
+        <input
+          type="text"
+          {...register('amount')}
+          placeholder="grams"
+          className="w-full rounded bg-gray-600 p-1 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 md:w-24"
+        />
         <input
           type="text"
           {...register('carbo')}

@@ -1,19 +1,28 @@
 import { create } from 'zustand'
 
-interface Food {
+export interface Food {
   id: string
   foodName: string
   carbo: number
   protein: number
   fat: number
   amount: number
+  category: string
 }
+
+interface FoodInGrams {
+  id: string
+  grams: number
+  food: Food
+}
+
 interface DietList {
   id: string
   meal: string
   time: number
-  food: Food[]
+  food: FoodInGrams[]
 }
+
 export interface DietBox {
   id: string
   title: string

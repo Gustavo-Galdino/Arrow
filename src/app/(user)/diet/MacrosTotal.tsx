@@ -13,9 +13,9 @@ export function MacrosTotal({ dietBox }: MacrosTotalProps) {
 
   dietBox.dietList.forEach((dietList) => {
     dietList.food.forEach((food) => {
-      totalCarbo += food.carbo
-      totalProtein += food.protein
-      totalFat += food.fat
+      totalCarbo += food.food.carbo
+      totalProtein += food.food.protein
+      totalFat += food.food.fat
     })
   })
 

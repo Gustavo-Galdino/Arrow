@@ -30,13 +30,18 @@ export async function GET() {
             include: {
               dietList: {
                 include: {
-                  food: true,
+                  food: {
+                    include: {
+                      food: true,
+                    },
+                  },
                 },
               },
             },
           },
         },
       },
+      Stoke: true,
     },
   })
 

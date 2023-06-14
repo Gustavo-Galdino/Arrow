@@ -11,13 +11,28 @@ import { useStore } from '@/context/store'
 interface Food {
   id: string
   foodName: string
+  carbo: number
+  protein: number
+  fat: number
+  amount: number
+  grams: number
+  category: string
 }
+
+interface FoodInGrams {
+  id: string
+  grams: number
+  food: Food
+}
+
 interface DietList {
   id: string
   meal: string
-  food: Food[]
+  time: number
+  food: FoodInGrams[]
 }
-interface DietBox {
+
+export interface DietBox {
   id: string
   title: string
   dietList: DietList[]
@@ -67,13 +82,23 @@ export default async function Diet() {
               <span className="text-sm text-gray-200">Frango</span>
             </div>
           </div>
-          <Link
-            href="/training"
-            className="flex items-center gap-1 self-end text-sm"
-          >
-            Ir para Plano de Treino
-            <ArrowRight size={14} />
-          </Link>
+          <div className="flex flex-col items-center gap-1">
+            <Link
+              href="/stoke"
+              className="flex items-center gap-1 self-end text-sm hover:text-gray-200"
+            >
+              Estoque
+              <ArrowRight size={14} />
+            </Link>
+
+            <Link
+              href="/training"
+              className="flex items-center gap-1 self-end text-sm hover:text-gray-200"
+            >
+              Ir para Plano de Treino
+              <ArrowRight size={14} />
+            </Link>
+          </div>
         </div>
 
         <Table />

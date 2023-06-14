@@ -47,6 +47,7 @@ model User {
   sessions      Session[]
   workoutTable  WorkoutTable[]
   dietTable     DietTable[]
+  Stoke         Stoke[]
 
   @@map("users")
 }
@@ -121,7 +122,7 @@ model DietList {
 
   dietBox DietBox @relation(fields: [dietBoxId], references: [id])
 
-  food      Food[]
+  food      FoodInGrams[]
   dietBoxId String
 }
 
@@ -134,7 +135,27 @@ model Food {
   protein  Float
   fat      Float
 
-  tables DietList[]
+  Stoke       Stoke?        @relation(fields: [stokeId], references: [id])
+  stokeId     String?
+  FoodInGrams FoodInGrams[]
 
   @@map("foods")
+}
+
+model FoodInGrams {
+  id         String    @id @default(cuid())
+  grams      Int
+  food       Food      @relation(fields: [foodId], references: [id])
+  foodId     String
+  DietList   DietList? @relation(fields: [dietListId], references: [id])
+  dietListId String?
+}
+
+model Stoke {
+  id     String @id @default(cuid())
+  food   Food[]
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  @@map("stoke")
 }

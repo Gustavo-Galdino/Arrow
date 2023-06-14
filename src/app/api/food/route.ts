@@ -7,7 +7,8 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  const { foodName, amount, category, carbo, protein, fat } = await req.json()
+  const { foodName, amount, category, carbo, protein, fat, stokeId } =
+    await req.json()
 
   const createNewFood = await prisma.food.create({
     data: {
@@ -17,6 +18,11 @@ export async function POST(req: Request) {
       carbo,
       protein,
       fat,
+      Stoke: {
+        connect: {
+          id: stokeId,
+        },
+      },
     },
   })
 
@@ -26,18 +32,14 @@ export async function POST(req: Request) {
 }
 
 export async function PATCH(req: Request) {
-  const { foodId, tableId } = await req.json()
+  const { id, amount } = await req.json()
 
   await prisma.food.update({
     where: {
-      id: foodId,
+      id,
     },
     data: {
-      tables: {
-        disconnect: {
-          id: tableId,
-        },
-      },
+      amount,
     },
   })
 
