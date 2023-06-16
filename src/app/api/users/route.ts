@@ -41,7 +41,11 @@ export async function GET() {
           },
         },
       },
-      Stoke: true,
+      Stoke: {
+        include: {
+          food: true,
+        },
+      },
     },
   })
 

@@ -59,7 +59,7 @@ export function Table() {
                               </div>
                             </ul>
                           </Accordion.Trigger>
-                          <Accordion.Content className="space-y-4">
+                          <Accordion.Content className="mt-2 space-y-4">
                             {list.food.length > 0 ? (
                               <>
                                 {list.food.map((food) => (

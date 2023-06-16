@@ -42,13 +42,21 @@ interface DietTable {
   id: string
   dietBox: DietBox[]
 }
-
-interface User {
+interface Stoke {
   id: string
-  name: string
-  nivel: number
-  experience: number
-  dietTable: DietTable[]
+  userId: string
+  food: Food[]
+}
+
+export interface User {
+  data: {
+    id: string
+    name: string
+    nivel: number
+    experience: number
+    dietTable: DietTable[]
+    Stoke: Stoke[]
+  }
 }
 
 export default async function Diet() {
@@ -61,8 +69,7 @@ export default async function Diet() {
     },
   })
 
-  const user: User = response.data
-
+  const { data: user }: User = response
   useStore.setState({ user })
 
   return (

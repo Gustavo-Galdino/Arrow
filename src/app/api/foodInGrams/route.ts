@@ -19,11 +19,23 @@ export async function POST(req: Request) {
 }
 
 export async function DELETE(req: Request) {
-  const { id } = await req.json()
+  try {
+    const { id } = await req.json()
 
-  await prisma.foodInGrams.delete({
-    where: {
-      id,
-    },
-  })
+    const food = await prisma.foodInGrams.delete({
+      where: {
+        id,
+      },
+    })
+
+    return new Response(JSON.stringify(food), {
+      status: 200,
+    })
+  } catch (error) {
+    console.error(error)
+
+    return new Response(JSON.stringify(error), {
+      status: 500,
+    })
+  }
 }

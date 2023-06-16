@@ -13,9 +13,9 @@ export function MacrosTotal({ dietBox }: MacrosTotalProps) {
 
   dietBox.dietList.forEach((dietList) => {
     dietList.food.forEach((food) => {
-      totalCarbo += food.food.carbo
-      totalProtein += food.food.protein
-      totalFat += food.food.fat
+      totalCarbo += (food.food.carbo * food.grams) / 100
+      totalProtein += (food.food.protein * food.grams) / 100
+      totalFat += (food.food.fat * food.grams) / 100
     })
   })
 
@@ -23,6 +23,9 @@ export function MacrosTotal({ dietBox }: MacrosTotalProps) {
   const totalCarboCal = totalCarbo * 4
   const totalProteinCal = totalProtein * 4
   const totalFatCal = totalFat * 9
+  const totalCal = totalCarboCal + totalProteinCal + totalFatCal
+
+  console.log(totalFat)
 
   // Calculando porcentagens
   const percentCarbo = (totalCarboCal / objetivo) * 100
@@ -49,6 +52,9 @@ export function MacrosTotal({ dietBox }: MacrosTotalProps) {
         <div style={{ width: `${percentProtein}%` }} className="bg-blue-500" />
         <div style={{ width: `${percentFat}%` }} className="bg-red-500" />
       </div>
+      <p>
+        {totalCal} kcal - restam: {(objetivo - totalCal).toFixed(2)}
+      </p>
     </div>
   )
 }

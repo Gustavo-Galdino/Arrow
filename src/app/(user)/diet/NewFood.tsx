@@ -28,8 +28,6 @@ export function NewFood({ dietListId }: NewFoodProps) {
     loadOptions(value)
   }, 500)
 
-  console.log(selectedFood)
-
   const loadOptions = async (inputValue: string) => {
     if (!inputValue) return
     const response = await api.get('/api/food', {

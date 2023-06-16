@@ -10,6 +10,12 @@ export interface Food {
   category: string
 }
 
+interface Stoke {
+  id: string
+  userId: string
+  food: Food[]
+}
+
 interface FoodInGrams {
   id: string
   grams: number
@@ -60,6 +66,7 @@ interface User {
   experience: number
   workoutTable?: WorkoutTable[]
   dietTable?: DietTable[]
+  Stoke: Stoke[]
 }
 
 export const useStore = create<{ user: User | null }>((set) => ({
