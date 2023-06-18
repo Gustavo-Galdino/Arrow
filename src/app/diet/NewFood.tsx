@@ -8,7 +8,6 @@ import { useState } from 'react'
 interface FoodOption {
   id: string
   label: string
-  amount: number
   carbo: number
   protein: number
   fat: number
@@ -49,18 +48,12 @@ export function NewFood({ dietListId }: NewFoodProps) {
 
   async function handleNewFood() {
     if (selectedFood) {
-      const amount = selectedFood.amount - parseInt(getValues('amount'))
       const grams = parseInt(getValues('amount'))
       try {
         await api.post('/api/foodInGrams', {
           dietListId,
           foodId: selectedFood.id,
           grams,
-        })
-
-        await api.patch('api/food', {
-          id: selectedFood.id,
-          amount,
         })
 
         const response = await api.get('/api/users')

@@ -18,6 +18,23 @@ export async function POST(req: Request) {
   })
 }
 
+export async function PATCH(req: Request) {
+  const { grams, id } = await req.json()
+
+  const createNewFood = await prisma.foodInGrams.update({
+    where: {
+      id,
+    },
+    data: {
+      grams,
+    },
+  })
+
+  return new Response(JSON.stringify(createNewFood), {
+    status: 200,
+  })
+}
+
 export async function DELETE(req: Request) {
   try {
     const { id } = await req.json()

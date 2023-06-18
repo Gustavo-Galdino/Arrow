@@ -44,16 +44,16 @@ export function MacrosTotal({ dietBox }: MacrosTotalProps) {
         Total Protein: {totalProtein}g ({percentProtein.toFixed(2)}%)
       </p>
       <p className="mt-1 flex items-center justify-center">
-        <span className="mr-2 inline-block h-3 w-3 rounded-full bg-red-500"></span>
+        <span className="mr-2 inline-block h-3 w-3 rounded-full bg-orange-500"></span>
         Total Fat: {totalFat}g ({percentFat.toFixed(2)}%)
       </p>
       <div className="mt-3 flex h-2 w-2/4 overflow-hidden rounded border border-gray-500 bg-gray-600">
         <div style={{ width: `${percentCarbo}%` }} className="bg-green-500" />
         <div style={{ width: `${percentProtein}%` }} className="bg-blue-500" />
-        <div style={{ width: `${percentFat}%` }} className="bg-red-500" />
+        <div style={{ width: `${percentFat}%` }} className="bg-orange-500" />
       </div>
       <p>
-        {totalCal} kcal - restam: {(objetivo - totalCal).toFixed(2)}
+        {totalCal.toFixed(2)} kcal - restam: {(objetivo - totalCal).toFixed(2)}
       </p>
     </div>
   )

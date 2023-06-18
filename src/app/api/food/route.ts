@@ -1,7 +1,11 @@
 import { prisma } from '@/lib/prisma'
 
 export async function GET() {
-  const foods = await prisma.food.findMany()
+  const foods = await prisma.food.findMany({
+    include: {
+      FoodInGrams: true,
+    },
+  })
 
   return new Response(JSON.stringify(foods), { status: 200 })
 }

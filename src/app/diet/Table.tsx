@@ -5,13 +5,15 @@ import { useStore } from '@/context/store'
 import { NewDiet } from './NewDiet'
 import { FormNewMeal } from './FormNewMeal'
 import { NewFood } from './NewFood'
-import { ChevronRight } from 'lucide-react'
+import { ChevronDown, ChevronRight } from 'lucide-react'
 import { FoodList } from './FoodList'
 import * as Accordion from '@radix-ui/react-accordion'
 import { EditUl } from './EditUl'
 import { MacrosTotal } from './MacrosTotal'
+import { useState } from 'react'
 
 export function Table() {
+  const [open, setOpen] = useState(false)
   const user = useStore((state) => state.user)
 
   if (!user) return null
@@ -47,11 +49,17 @@ export function Table() {
                       <Accordion.Root type="single" collapsible>
                         <Accordion.Item value={list.meal}>
                           <Accordion.Trigger asChild>
-                            <ul className="flex cursor-pointer flex-col gap-4 hover:text-gray-200">
+                            <ul
+                              className="flex cursor-pointer flex-col gap-4 hover:text-gray-200"
+                              onClick={() => setOpen(!open)}
+                            >
                               <div className="flex items-center gap-1.5">
-                                <span>
-                                  <ChevronRight size={16} />
-                                </span>
+                                {open ? (
+                                  <ChevronDown size={14} />
+                                ) : (
+                                  <ChevronRight size={14} />
+                                )}
+
                                 <h2 className="text-xl font-semibold uppercase">
                                   {list.time} - {list.meal}
                                 </h2>
@@ -71,6 +79,7 @@ export function Table() {
                                       protein={food.food.protein}
                                       foodId={food.id}
                                       name={food.food.foodName}
+                                      idGrams={food.id}
                                     />
                                   </li>
                                 ))}

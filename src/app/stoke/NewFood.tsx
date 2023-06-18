@@ -3,6 +3,7 @@
 import { useStore } from '@/context/store'
 import { api } from '@/lib/api'
 import { useForm } from 'react-hook-form'
+import { Information } from './information'
 
 interface NewFoodProps {
   stokeId: string
@@ -60,12 +61,15 @@ export function NewFoodStoke({ stokeId }: NewFoodProps) {
         {...register('foodName')}
         className="w-full rounded bg-gray-600 p-1 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 md:w-24"
       />
-      <input
-        type="text"
-        placeholder="Quantidade"
-        {...register('amount')}
-        className="w-full rounded bg-gray-600 p-1 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 md:w-24"
-      />
+      <div className="relative">
+        <Information />
+        <input
+          type="text"
+          placeholder="Porção"
+          {...register('amount')}
+          className="w-full rounded bg-gray-600 p-1 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 md:w-24"
+        />
+      </div>
 
       <div className="mb-2 flex w-full flex-col gap-2 md:mb-0 md:w-auto md:flex-row">
         <input
