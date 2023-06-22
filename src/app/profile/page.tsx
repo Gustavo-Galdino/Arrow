@@ -1,34 +1,59 @@
-import { getServerSession } from 'next-auth'
-import { Header } from '@/components/Header'
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+'use client'
 
-export default async function Profile() {
-  const session = await getServerSession(authOptions)
-  const user = session?.user
+import { Header } from '@/components/Header'
+import { api } from '@/lib/api'
+import { useUser } from '@clerk/nextjs'
+import { useForm } from 'react-hook-form'
+
+export default function Profile() {
+  const { user } = useUser()
+  const { handleSubmit, register, getValues } = useForm()
+
+  if (!user) return null
+
+  async function handleCreateUser() {
+    await api.post('/api/user', {
+      userId: user?.id,
+    })
+  }
 
   return (
-    <>
+    <main className="px-10">
       <Header />
-      <section className="min-h-screen  bg-gray-600 pt-20">
-        <div className="bg-ct-dark-100 mx-auto flex h-[20rem] max-w-4xl items-center justify-center rounded-md">
-          <div>
-            <p className="mb-3 text-center text-5xl font-semibold">
-              Profile Page
-            </p>
-            <pre>{JSON.stringify(user)}</pre>
-            {!user ? (
-              <p>Loading...</p>
-            ) : (
-              <div className="flex items-center gap-8">
-                <div className="mt-8">
-                  <p className="mb-3">Name: {user.name}</p>
-                  <p className="mb-3">Email: {user.email}</p>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
-    </>
+      <div className="m-auto mt-16 w-96 space-y-5 rounded-lg bg-gray-600 p-6 shadow-md">
+        <strong className="text-xl font-bold uppercase">{user.fullName}</strong>
+        <form
+          className="flex flex-col items-start justify-center gap-2"
+          onSubmit={handleSubmit(handleCreateUser)}
+        >
+          <label className="block">
+            <span className="block">Peso</span>
+            <input type="number" className="rounded bg-gray-500 px-2 py-1" />
+          </label>
+
+          <label className="block">
+            <span className="block">Altura</span>
+            <input type="number" className="rounded bg-gray-500 px-2 py-1" />
+          </label>
+
+          <label className="block">
+            <span className="block">Idade</span>
+            <input type="date" className="rounded bg-gray-500 px-2 py-1" />
+          </label>
+
+          <label className="block">
+            <span className="block">Atividade</span>
+            <input type="text" className="rounded bg-gray-500 px-2 py-1" />
+          </label>
+
+          <button
+            type="submit"
+            className="mt-2 rounded-md bg-violet-500 px-4 py-2 hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300 active:bg-violet-700 dark:md:hover:bg-fuchsia-600"
+          >
+            Salvar
+          </button>
+        </form>
+      </div>
+    </main>
   )
 }

@@ -8,5 +8,5 @@ Consolidar conhecimentos em Nextjs e typescript
 - [x] adicionar anotação ao adicionar alimento
 - [x] criar logica de mudança das gramas na pagina diet
 - [ ] fazer a pagina de perfil
-- [ ] refazer home page
 - [ ] migrar do nextath para clerk
+- [ ] refazer home page

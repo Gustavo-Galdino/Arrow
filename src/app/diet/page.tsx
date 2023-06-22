@@ -1,4 +1,4 @@
-import { Experience } from '@/components/experience'
+import { Experience } from '@/components/UserInformations'
 import { Header } from '@/components/Header'
 import { StoreInitializer } from '@/components/StoreInitializer'
 import { api } from '@/lib/api'

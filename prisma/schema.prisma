@@ -7,65 +7,28 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Account {
-  id                String  @id @default(cuid())
-  userId            String
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String?
-  access_token      String?
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String?
-  session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerAccountId])
-}
-
-model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
 model User {
-  id            String         @id @default(cuid())
-  name          String?
-  email         String?        @unique
-  password      String
-  emailVerified DateTime?
-  image         String?
-  nivel         Int?
-  experience    Int?
-  accounts      Account[]
-  sessions      Session[]
-  workoutTable  WorkoutTable[]
-  dietTable     DietTable[]
-  Stoke         Stoke[]
+  id           String         @id @default(cuid())
+  userId       String
+  nivel        Int?           @default(1)
+  experience   Int?           @default(0)
+  weight       Float
+  height       Float
+  age          DateTime
+  activity     Float
+  workoutTable WorkoutTable[]
+  dietTable    DietTable[]
+  stoke        Stoke[]
 
   @@map("users")
-}
-
-model VerificationToken {
-  identifier String
-  token      String   @unique
-  expires    DateTime
-
-  @@unique([identifier, token])
 }
 
 model WorkoutTable {
   id     String @id @default(cuid())
   userId String
 
-  user                 User                   @relation(fields: [userId], references: [id])
   WorkoutTableExercise WorkoutTableExercise[]
+  User                 User                   @relation(fields: [userId], references: [id])
 
   @@map("workoutTables")
 }
@@ -98,8 +61,8 @@ model DietTable {
   id     String @id @default(cuid())
   userId String
 
-  user    User      @relation(fields: [userId], references: [id])
   dietBox DietBox[]
+  User    User      @relation(fields: [userId], references: [id])
 
   @@map("dietTables")
 }
@@ -154,8 +117,8 @@ model FoodInGrams {
 model Stoke {
   id     String @id @default(cuid())
   food   Food[]
-  user   User   @relation(fields: [userId], references: [id])
   userId String
+  User   User   @relation(fields: [userId], references: [id])
 
   @@map("stoke")
 }

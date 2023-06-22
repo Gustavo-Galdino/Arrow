@@ -59,7 +59,7 @@ interface WorkoutTable {
   WorkoutTableExercise: WorkoutTableExercice[]
 }
 
-interface User {
+export interface User {
   id: string
   name: string
   nivel: number
