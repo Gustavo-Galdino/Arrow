@@ -1,5 +1,4 @@
 import { User, useStore } from '@/context/store'
-import { Header } from '@/components/Header'
 import { StoreInitializer } from '@/components/StoreInitializer'
 import { auth } from '@clerk/nextjs'
 import { Table } from './table'
@@ -26,7 +25,6 @@ export default async function Stock() {
   return (
     <main className="px-10">
       <StoreInitializer user={user} />
-      <Header />
 
       <UserInformations />
 

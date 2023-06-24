@@ -18,7 +18,7 @@ export default function Register() {
     const weight = parseFloat(getValues('weight'))
     const height = parseFloat(getValues('height'))
     const age = new Date(getValues('age')).toISOString()
-    const activity = parseFloat(getValues('activity'))
+    const goal = parseInt(getValues('goal'))
 
     try {
       await api.post('/api/user', {
@@ -26,7 +26,7 @@ export default function Register() {
         weight,
         height,
         age,
-        activity,
+        goal,
       })
 
       router.push('/')
@@ -72,12 +72,15 @@ export default function Register() {
           </label>
 
           <label className="block">
-            <span className="block">Atividade</span>
-            <input
-              type="text"
-              {...register('activity')}
+            <span className="block">Objetivo</span>
+            <select
+              {...register('goal')}
               className="rounded bg-gray-500 px-2 py-1"
-            />
+            >
+              <option value="-500">Cutting</option>
+              <option value="0">Normocalorica</option>
+              <option value="500">Bulking</option>
+            </select>
           </label>
 
           <button

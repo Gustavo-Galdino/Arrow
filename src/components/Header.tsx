@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export function Header() {
   return (
-    <header className="flex items-center justify-between p-5">
+    <header className="flex items-center justify-between px-6 py-5">
       <Link href="/" className="text-4xl font-bold">
         Arrow
       </Link>
@@ -13,6 +13,7 @@ export function Header() {
           <Link href="/training">Treino</Link>
           <Link href="/diet">Dieta</Link>
           <Link href="/stoke">Estoque</Link>
+          <Link href="/profile">Perfil</Link>
           <UserButton afterSignOutUrl="/" />
         </div>
       </SignedIn>

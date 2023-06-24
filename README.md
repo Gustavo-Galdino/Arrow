@@ -9,6 +9,7 @@ Consolidar conhecimentos em Nextjs e typescript
 - [x] criar logica de mudança das gramas na pagina diet
 - [x] fazer a pagina de perfil
 - [x] migrar do nextath para clerk
-- [ ] criar as conquistas personalizadas e o sistema
-- [ ] adicionar objetivo ao usuario
+- [x] adicionar objetivo ao usuario
+- [x] criar as conquistas personalizadas e o sistema
+- [ ] adicionar unidade ao estoque
 - [ ] refazer home page

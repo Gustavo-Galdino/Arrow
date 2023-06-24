@@ -16,7 +16,7 @@ export function MacrosTotal({ dietBox }: MacrosTotalProps) {
   const age = new Date().getFullYear() - new Date(user.age).getFullYear()
 
   const calcMetabolism =
-    66 + 13.8 * user.weight + 5 * user.height - 6.8 * age + 500
+    66 + 13.8 * user.weight + 5 * user.height - 6.8 * age + user.goal
 
   dietBox.dietList.forEach((dietList) => {
     dietList.food.forEach((food) => {

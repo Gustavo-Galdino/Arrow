@@ -1,4 +1,3 @@
-import { Header } from '@/components/Header'
 import { auth } from '@clerk/nextjs'
 import { UserInfos } from './UserInfos'
 import { User, useStore } from '@/context/store'
@@ -21,7 +20,6 @@ export default async function Profile() {
   return (
     <main className="px-10">
       <StoreInitializer user={user} />
-      <Header />
 
       <UserInfos />
     </main>

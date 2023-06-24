@@ -10,17 +10,14 @@ import foodIcon from '@/assets/food_icon.png'
 import stokeIcon from '@/assets/stoke_icon.png'
 import coachIcon from '@/assets/coach_icon.png'
 import { IconButton } from './IconButton'
-import { Header } from './Header'
 
 export function Hero() {
   return (
     <main>
       <Image src={banner} alt="" className="fixed h-full w-screen opacity-30" />
-      <div className="relative m-auto w-[1440px]">
+      <div className="relative m-auto max-w-[1440px]">
         <Image src={banner} alt="" className="rounded-lg object-cover shadow" />
-        <div className="absolute top-0 w-full">
-          <Header />
-        </div>
+        <div className="absolute top-0 w-full"></div>
 
         <div className="absolute left-[35%] top-64">
           <Image src={arrow1} alt="" />

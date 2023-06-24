@@ -62,7 +62,7 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
-  const { userId, weight, height, age, activity } = await req.json()
+  const { userId, weight, height, age, goal } = await req.json()
   try {
     await prisma.user.create({
       data: {
@@ -70,10 +70,37 @@ export async function POST(req: Request) {
         weight,
         height,
         age,
-        activity,
+        goal,
         dietTable: { create: {} },
         stoke: { create: {} },
         workoutTable: { create: {} },
+      },
+    })
+
+    return new Response(JSON.stringify({ status: 'ok' }), {
+      status: 201,
+    })
+  } catch (error: any) {
+    return new Response(
+      JSON.stringify({ status: 'error', message: error.message }),
+      {
+        status: 500,
+      },
+    )
+  }
+}
+
+export async function PATCH(req: Request) {
+  const { goal, weight, userId } = await req.json()
+
+  try {
+    await prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        goal,
+        weight,
       },
     })
 

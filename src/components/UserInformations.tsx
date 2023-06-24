@@ -3,6 +3,7 @@
 import { useStore } from '@/context/store'
 import { useUser } from '@clerk/nextjs'
 import * as Progress from '@radix-ui/react-progress'
+import { UserTitle } from './UserTitle'
 
 export function UserInformations() {
   const { user } = useUser()
@@ -34,7 +35,7 @@ export function UserInformations() {
             {user.fullName}
           </strong>
           <span className="font-bold">|</span>
-          <span className="text-sm text-gray-200">Frango</span>
+          <UserTitle />
         </div>
       </div>
     </section>

@@ -66,7 +66,7 @@ export interface User {
   weight: number
   height: number
   age: Date
-  activity: number
+  goal: number
   workoutTable?: WorkoutTable[]
   dietTable?: DietTable[]
   stoke?: Stoke[]

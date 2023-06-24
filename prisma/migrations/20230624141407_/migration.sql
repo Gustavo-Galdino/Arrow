@@ -7,7 +7,7 @@ CREATE TABLE "users" (
     "weight" REAL NOT NULL,
     "height" REAL NOT NULL,
     "age" DATETIME NOT NULL,
-    "activity" REAL NOT NULL
+    "goal" TEXT NOT NULL
 );
 
 -- CreateTable
