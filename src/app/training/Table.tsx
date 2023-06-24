@@ -7,37 +7,10 @@ import { FormNewExercise } from './FormNewExercice'
 import { NewTraining } from './NewTraining'
 import { useStore } from '@/context/store'
 
-interface Exercise {
-  id: string
-  exerciseName: string
-  series: number
-  volume: number
-  annotation?: string
-}
-interface WorkoutTableExercice {
-  id: string
-  title: string
-  completed: boolean
-  exercise: Exercise[]
-}
-
-interface WorkoutTable {
-  id: string
-  WorkoutTableExercise: WorkoutTableExercice[]
-}
-
-export interface User {
-  id: string
-  name: string
-  nivel: number
-  experience: number
-  workoutTable: WorkoutTable[]
-}
-
 export function Table() {
   const user = useStore((state) => state.user)
 
-  if (!user) return null
+  if (!user?.workoutTable) return null
 
   return (
     <>
@@ -65,6 +38,7 @@ export function Table() {
               <div className="flex items-center gap-2 xl:flex-col 2xl:flex-row">
                 <h2 className="text-2xl font-bold">{tableExercise.title}</h2>
                 <ButtonCheck
+                  userId={user.id}
                   tableId={tableExercise.id}
                   complete={tableExercise.completed}
                   experience={user.experience}

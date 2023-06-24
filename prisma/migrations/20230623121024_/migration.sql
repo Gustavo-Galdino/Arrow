@@ -1,7 +1,20 @@
 -- CreateTable
+CREATE TABLE "users" (
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "userId" TEXT NOT NULL,
+    "nivel" INTEGER DEFAULT 1,
+    "experience" INTEGER DEFAULT 0,
+    "weight" REAL NOT NULL,
+    "height" REAL NOT NULL,
+    "age" DATETIME NOT NULL,
+    "activity" REAL NOT NULL
+);
+
+-- CreateTable
 CREATE TABLE "workoutTables" (
     "id" TEXT NOT NULL PRIMARY KEY,
-    "userId" TEXT NOT NULL
+    "userId" TEXT NOT NULL,
+    CONSTRAINT "workoutTables_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -25,7 +38,8 @@ CREATE TABLE "exercises" (
 -- CreateTable
 CREATE TABLE "dietTables" (
     "id" TEXT NOT NULL PRIMARY KEY,
-    "userId" TEXT NOT NULL
+    "userId" TEXT NOT NULL,
+    CONSTRAINT "dietTables_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -71,7 +85,8 @@ CREATE TABLE "FoodInGrams" (
 -- CreateTable
 CREATE TABLE "stoke" (
     "id" TEXT NOT NULL PRIMARY KEY,
-    "userId" TEXT NOT NULL
+    "userId" TEXT NOT NULL,
+    CONSTRAINT "stoke_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable

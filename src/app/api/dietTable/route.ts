@@ -1,6 +1,3 @@
-import { getServerSession } from 'next-auth'
-import { NextResponse } from 'next/server'
-import { authOptions } from '../auth/[...nextauth]/route'
 import { prisma } from '@/lib/prisma'
 
 export async function GET() {
@@ -18,7 +15,9 @@ export async function GET() {
     },
   })
 
-  return NextResponse.json(tables)
+  return new Response(JSON.stringify(tables), {
+    status: 200,
+  })
 }
 
 export async function POST(req: Request) {
@@ -37,12 +36,6 @@ export async function POST(req: Request) {
 }
 
 export async function PATCH(req: Request) {
-  const session = await getServerSession(authOptions)
-
-  if (!session) {
-    return NextResponse.json({ error: 'Not authenticated' })
-  }
-
   const { meal, id, time } = await req.json()
 
   const createNewTable = await prisma.dietBox.update({

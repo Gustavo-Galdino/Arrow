@@ -29,11 +29,11 @@ export function NewTraining({ workoutTableId }: NewTrainingProps) {
       const title = getValues('title')
 
       if (title) {
-        await api.post('/api/users', {
+        await api.post('/api/workoutTable', {
           title,
-          WorkoutTableExercise: workoutTableId,
+          workoutTableId,
         })
-        const response = await api.get('/api/users')
+        const response = await api.get('/api/user')
         const user = response.data
         useStore.setState({ user })
       }

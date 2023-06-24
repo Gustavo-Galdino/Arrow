@@ -1,24 +1,35 @@
 import { prisma } from '@/lib/prisma'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '../auth/[...nextauth]/route'
+// import { auth } from '@clerk/nextjs'
 
-export async function GET() {
-  const session = await getServerSession(authOptions)
+// export async function GET() {
+//   const { userId } = auth()
 
-  const user = session?.user?.email
-  const foods = await prisma.stoke.findMany({
-    where: {
-      user: {
-        email: user,
-      },
-    },
-    include: {
-      food: true,
-    },
-  })
+//   if (!userId) {
+//     return new Response('Unauthorized', { status: 401 })
+//   }
 
-  return new Response(JSON.stringify(foods), { status: 200 })
-}
+//   try {
+//     const foods = await prisma.stoke.findMany({
+//       where: {
+//         User: {
+//           userId,
+//         },
+//       },
+//       include: {
+//         food: true,
+//       },
+//     })
+
+//     return new Response(JSON.stringify(foods), { status: 200 })
+//   } catch (error: any) {
+//     return new Response(
+//       JSON.stringify({ status: 'error', message: error.message }),
+//       {
+//         status: 500,
+//       },
+//     )
+//   }
+// }
 
 export async function DELETE(req: Request) {
   try {

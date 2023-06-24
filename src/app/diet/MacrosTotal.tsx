@@ -1,4 +1,4 @@
-import { DietBox } from '@/context/store'
+import { DietBox, useStore } from '@/context/store'
 import React from 'react'
 
 interface MacrosTotalProps {
@@ -6,10 +6,17 @@ interface MacrosTotalProps {
 }
 
 export function MacrosTotal({ dietBox }: MacrosTotalProps) {
+  const user = useStore((state) => state.user)
+
+  if (!user) return null
+
   let totalCarbo = 0
   let totalProtein = 0
   let totalFat = 0
-  const objetivo = 3000
+  const age = new Date().getFullYear() - new Date(user.age).getFullYear()
+
+  const calcMetabolism =
+    66 + 13.8 * user.weight + 5 * user.height - 6.8 * age + 500
 
   dietBox.dietList.forEach((dietList) => {
     dietList.food.forEach((food) => {
@@ -25,16 +32,16 @@ export function MacrosTotal({ dietBox }: MacrosTotalProps) {
   const totalFatCal = totalFat * 9
   const totalCal = totalCarboCal + totalProteinCal + totalFatCal
 
-  console.log(totalFat)
-
   // Calculando porcentagens
-  const percentCarbo = (totalCarboCal / objetivo) * 100
-  const percentProtein = (totalProteinCal / objetivo) * 100
-  const percentFat = (totalFatCal / objetivo) * 100
+  const percentCarbo = (totalCarboCal / calcMetabolism) * 100
+  const percentProtein = (totalProteinCal / calcMetabolism) * 100
+  const percentFat = (totalFatCal / calcMetabolism) * 100
 
   return (
     <div className="my-5 flex flex-col items-center text-center text-white">
-      <h2 className="text-2xl font-bold">Total Macros: {objetivo} calorias</h2>
+      <h2 className="text-2xl font-bold">
+        Total Macros: {calcMetabolism.toFixed(0)} calorias
+      </h2>
       <p className="mt-1 flex items-center justify-center">
         <span className="mr-2 inline-block h-3 w-3 rounded-full bg-green-500"></span>
         Total Carbo: {totalCarbo}g ({percentCarbo.toFixed(2)}%)
@@ -53,7 +60,8 @@ export function MacrosTotal({ dietBox }: MacrosTotalProps) {
         <div style={{ width: `${percentFat}%` }} className="bg-orange-500" />
       </div>
       <p>
-        {totalCal.toFixed(2)} kcal - restam: {(objetivo - totalCal).toFixed(2)}
+        {totalCal.toFixed(2)} kcal - restam:{' '}
+        {(calcMetabolism - totalCal).toFixed(2)}
       </p>
     </div>
   )

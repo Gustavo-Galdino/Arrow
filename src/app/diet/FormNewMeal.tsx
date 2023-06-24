@@ -34,7 +34,7 @@ export function FormNewMeal({ id }: FormNewListProps) {
         time,
       })
 
-      const response = await api.get('/api/users')
+      const response = await api.get('/api/user')
       const user = response.data
       useStore.setState({ user })
 

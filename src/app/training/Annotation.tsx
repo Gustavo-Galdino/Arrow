@@ -23,7 +23,7 @@ export function Annotation({ note, exerciseId }: AnnotationProps) {
 
       setEdit(false)
 
-      const reloadResponse = await api.get('/api/users')
+      const reloadResponse = await api.get('/api/user')
       const reloadUser = reloadResponse.data
       useStore.setState({ user: reloadUser })
     } catch (error) {

@@ -1,29 +1,5 @@
 import { prisma } from '@/lib/prisma'
 
-// export async function PATCH(req: Request) {
-//   const { id, foodId, grams, amount } = await req.json()
-
-//   const updateTable = await prisma.dietList.update({
-//     where: {
-//       id,
-//     },
-//     data: {
-//       food: {
-//         create: {
-//           grams,
-//           food: {
-//             connect: { id: foodId },
-//           },
-//         },
-//       },
-//     },
-//   })
-
-//   return new Response(JSON.stringify(updateTable), {
-//     status: 201,
-//   })
-// }
-
 export async function PATCH(req: Request) {
   const { id, meal, time } = await req.json()
 

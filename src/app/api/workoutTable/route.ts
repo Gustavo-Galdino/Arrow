@@ -1,25 +1,55 @@
 import { prisma } from '@/lib/prisma'
 
 export async function POST(req: Request) {
-  const { userId } = await req.json()
+  const { title, workoutTableId } = await req.json()
   try {
-    const tableExist = await prisma.workoutTable.findFirst({
-      where: {
-        userId,
+    await prisma.workoutTableExercise.create({
+      data: {
+        title,
+        WorkoutTable: { connect: { id: workoutTableId } },
       },
     })
 
-    if (!tableExist) {
-      const createWorkoutTable = await prisma.workoutTable.create({
-        data: {
-          userId,
-        },
-      })
+    return new Response(JSON.stringify('ok'), {
+      status: 201,
+    })
+  } catch (error: any) {
+    return new Response(
+      JSON.stringify({ status: 'error', message: error.message }),
+      {
+        status: 500,
+      },
+    )
+  }
+}
 
-      return new Response(JSON.stringify(createWorkoutTable), {
-        status: 201,
-      })
-    }
+export async function PATCH(req: Request) {
+  try {
+    const { completed, WorkoutTableExerciseId, nivel, experience, userId } =
+      await req.json()
+
+    await prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        nivel,
+        experience,
+      },
+    })
+
+    await prisma.workoutTableExercise.update({
+      where: {
+        id: WorkoutTableExerciseId,
+      },
+      data: {
+        completed,
+      },
+    })
+
+    return new Response(JSON.stringify('ok'), {
+      status: 200,
+    })
   } catch (error: any) {
     return new Response(
       JSON.stringify({ status: 'error', message: error.message }),

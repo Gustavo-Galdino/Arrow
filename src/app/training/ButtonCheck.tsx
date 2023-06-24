@@ -22,6 +22,7 @@ interface User {
 }
 
 interface ButtonCheckProps {
+  userId: string
   tableId: string
   complete?: boolean
   nivel: number
@@ -29,6 +30,7 @@ interface ButtonCheckProps {
 }
 
 export function ButtonCheck({
+  userId,
   tableId,
   complete,
   nivel,
@@ -38,7 +40,7 @@ export function ButtonCheck({
 
   async function handleChecked() {
     try {
-      const response = await api.get('/api/users')
+      const response = await api.get('/api/user')
       const user: User = response.data
 
       const experienceLenght = user.workoutTable?.flatMap(
@@ -56,7 +58,8 @@ export function ButtonCheck({
         experience = 0
       }
 
-      const patchResponse = await api.patch('/api/users', {
+      const patchResponse = await api.patch('/api/workoutTable', {
+        userId,
         nivel,
         experience,
         completed: true,
@@ -67,7 +70,7 @@ export function ButtonCheck({
         setCompleted(true)
       }
 
-      const reloadResponse = await api.get('/api/users')
+      const reloadResponse = await api.get('/api/user')
       const reloadUser = reloadResponse.data
       useStore.setState({ user: reloadUser })
     } catch (error) {
@@ -78,7 +81,8 @@ export function ButtonCheck({
   async function restart() {
     setCompleted(false)
 
-    await api.patch('/api/users', {
+    await api.patch('/api/workoutTable', {
+      userId,
       nivel,
       experience,
       WorkoutTableExerciseId: tableId,

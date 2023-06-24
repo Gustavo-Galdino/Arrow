@@ -1,14 +1,12 @@
 'use client'
 
-import Link from 'next/link'
 import { useStore } from '@/context/store'
 import { useUser } from '@clerk/nextjs'
 import * as Progress from '@radix-ui/react-progress'
-import { ArrowRight } from 'lucide-react'
 
 export function UserInformations() {
   const { user } = useUser()
-  // const user = useStore((state) => state.user)
+  const u = useStore((state) => state.user)
 
   if (!user) return null
 
@@ -17,7 +15,8 @@ export function UserInformations() {
       <div className="flex flex-col">
         <div>
           <strong className="text-xs">
-            <span className="text-green-300">Lv: 1</span> - exp: 10
+            <span className="text-green-300">Nv: {u?.nivel}</span> - exp:{' '}
+            {u?.experience}
           </strong>
 
           <Progress.Root
@@ -26,7 +25,7 @@ export function UserInformations() {
           >
             <Progress.Indicator
               className="h-full w-full bg-green-500 transition-transform"
-              style={{ transform: `translateX(-${100 - 20}%)` }}
+              style={{ transform: `translateX(-${100 - u?.experience!}%)` }}
             />
           </Progress.Root>
         </div>
@@ -38,11 +37,6 @@ export function UserInformations() {
           <span className="text-sm text-gray-200">Frango</span>
         </div>
       </div>
-
-      <Link href="/diet" className="flex items-center gap-1 self-end text-sm">
-        Ir para Plano Alimentar
-        <ArrowRight size={14} />
-      </Link>
     </section>
   )
 }

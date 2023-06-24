@@ -31,7 +31,7 @@ export function NewDiet({ dietTableId }: NewDietProps) {
           title,
           dietTableId,
         })
-        const response = await api.get('/api/users')
+        const response = await api.get('/api/user')
         const user = response.data
         useStore.setState({ user })
       }

@@ -56,7 +56,7 @@ export function NewFood({ dietListId }: NewFoodProps) {
           grams,
         })
 
-        const response = await api.get('/api/users')
+        const response = await api.get('/api/user')
         const user = response.data
         useStore.setState({ user })
 
@@ -109,47 +109,26 @@ export function NewFood({ dietListId }: NewFoodProps) {
       className="flex flex-col flex-wrap items-start gap-2 rounded bg-gray-800 p-4 text-sm md:flex-row md:items-center"
       onSubmit={handleSubmit(handleNewFood)}
     >
-      <Select
-        onInputChange={handleInputChange}
-        options={foodOptions}
-        onChange={(food) => {
-          setSelectedFood(food)
-          setValue('carbo', food?.carbo)
-          setValue('protein', food?.protein)
-          setValue('fat', food?.fat)
-        }}
-        placeholder="Alimento"
-        styles={customStyles}
-        className="mb-2 w-full md:mb-0"
-      />
+      <div className="flex w-full items-center gap-2">
+        <Select
+          onInputChange={handleInputChange}
+          options={foodOptions}
+          onChange={(food) => {
+            setSelectedFood(food)
+            setValue('carbo', food?.carbo)
+            setValue('protein', food?.protein)
+            setValue('fat', food?.fat)
+          }}
+          placeholder="Alimento"
+          styles={customStyles}
+          className="mb-2 w-full md:mb-0"
+        />
 
-      <div className="mb-2 flex w-full flex-col gap-2 md:mb-0 md:w-auto md:flex-row">
         <input
-          type="text"
+          type="number"
           {...register('amount')}
           placeholder="grams"
-          className="w-full rounded bg-gray-600 p-1 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 md:w-24"
-        />
-        <input
-          type="text"
-          {...register('carbo')}
-          value={selectedFood?.carbo}
-          placeholder="Carboidrato"
-          className="w-full rounded bg-gray-600 p-1 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 md:w-24"
-        />
-        <input
-          type="text"
-          {...register('protein')}
-          value={selectedFood?.protein}
-          placeholder="Proteina"
-          className="w-full rounded bg-gray-600 p-1 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 md:w-24"
-        />
-        <input
-          type="text"
-          {...register('fat')}
-          value={selectedFood?.fat}
-          placeholder="Gordura"
-          className="w-full rounded bg-gray-600 p-1 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 md:w-24"
+          className="w-full rounded bg-gray-600 px-1 py-2 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 md:w-24"
         />
       </div>
 
