@@ -1,6 +1,5 @@
 'use client'
 
-import { Header } from '@/components/Header'
 import { api } from '@/lib/api'
 import { useUser } from '@clerk/nextjs'
 import { useForm } from 'react-hook-form'
