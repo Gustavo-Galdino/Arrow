@@ -13,7 +13,7 @@ export default async function Training() {
 
   const token = await getToken()
 
-  const response = await fetch('http://localhost:3000/api/user', {
+  const response = await fetch('https://arrow-alpha.vercel.app/api/user', {
     headers: {
       Authorization: `Bearer ${token}`,
     },

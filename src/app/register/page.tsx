@@ -37,7 +37,6 @@ export default function Register() {
 
   return (
     <main className="px-10">
-      <Header />
       <div className="m-auto mt-16 w-96 space-y-5 rounded-lg bg-gray-600 p-6 shadow-md">
         <strong className="text-xl font-bold uppercase">{user.fullName}</strong>
         <form
