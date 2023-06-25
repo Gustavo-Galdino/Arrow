@@ -11,5 +11,7 @@ Consolidar conhecimentos em Nextjs e typescript
 - [x] migrar do nextath para clerk
 - [x] adicionar objetivo ao usuario
 - [x] criar as conquistas personalizadas e o sistema
-- [ ] adicionar unidade ao estoque
+- [x] adicionar unidade ao estoque
+- [x] refatorar responsivo
+- [x] adicionar modo light e dark
 - [ ] refazer home page

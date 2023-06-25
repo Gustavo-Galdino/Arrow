@@ -18,7 +18,7 @@ interface NewFoodProps {
 }
 
 export function NewFood({ dietListId }: NewFoodProps) {
-  const { handleSubmit, reset, register, setValue, getValues } = useForm()
+  const { handleSubmit, reset, register, getValues } = useForm()
 
   const [selectedFood, setSelectedFood] = useState<FoodOption | null>(null)
   const [foodOptions, setFoodOptions] = useState<FoodOption[]>([])
@@ -38,10 +38,6 @@ export function NewFood({ dietListId }: NewFoodProps) {
     const options: FoodOption[] = response.data.map((food: any) => ({
       id: food.id,
       label: food.foodName,
-      amount: food.amount,
-      carbo: food.carbo,
-      protein: food.protein,
-      fat: food.fat,
     }))
     setFoodOptions(options)
   }
@@ -70,7 +66,7 @@ export function NewFood({ dietListId }: NewFoodProps) {
   const customStyles = {
     control: (provided: any) => ({
       ...provided,
-      backgroundColor: 'rgb(75 85 99)',
+      backgroundColor: 'rgb(82 82 91)',
       borderColor: '#4B5563',
       boxShadow: 'none',
       '&:hover': {
@@ -106,7 +102,7 @@ export function NewFood({ dietListId }: NewFoodProps) {
 
   return (
     <form
-      className="flex flex-col flex-wrap items-start gap-2 rounded bg-gray-800 p-4 text-sm md:flex-row md:items-center"
+      className="flex flex-col flex-wrap items-center gap-2 rounded bg-zinc-400 p-4 text-sm dark:bg-zinc-800 md:flex-row md:items-center"
       onSubmit={handleSubmit(handleNewFood)}
     >
       <div className="flex w-full items-center gap-2">
@@ -115,20 +111,17 @@ export function NewFood({ dietListId }: NewFoodProps) {
           options={foodOptions}
           onChange={(food) => {
             setSelectedFood(food)
-            setValue('carbo', food?.carbo)
-            setValue('protein', food?.protein)
-            setValue('fat', food?.fat)
           }}
           placeholder="Alimento"
           styles={customStyles}
-          className="mb-2 w-full md:mb-0"
+          className="w-full"
         />
 
         <input
           type="number"
           {...register('amount')}
-          placeholder="grams"
-          className="w-full rounded bg-gray-600 px-1 py-2 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 md:w-24"
+          placeholder="g | un"
+          className="w-full rounded bg-zinc-600 px-1 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 md:w-24"
         />
       </div>
 

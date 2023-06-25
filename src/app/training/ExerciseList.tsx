@@ -27,7 +27,7 @@ export function ExerciseList({
         <Accordion.Trigger asChild>
           <div
             onClick={() => setOpen(!open)}
-            className="box-border grid grid-cols-3 items-center justify-between gap-2 rounded-md border border-gray-500 px-2 py-1.5 text-sm transition-colors duration-200 ease-in-out hover:bg-gray-500 sm:text-base"
+            className="box-border grid grid-cols-3 items-center justify-between gap-2 rounded-md border border-zinc-50 px-2 py-1.5 text-sm transition-colors duration-200 ease-in-out hover:bg-zinc-400 dark:border-zinc-500 dark:hover:bg-zinc-500 sm:text-base"
           >
             <div className="flex items-center gap-1">
               <div className="cursor-pointer">
@@ -36,8 +36,10 @@ export function ExerciseList({
               <strong className="overflow-hidden font-normal">{name}</strong>
             </div>
             <span className="justify-self-end">
-              <span className="text-xs text-gray-400">Series:</span> {series} /{' '}
-              {volume}
+              <span className="text-xs text-zinc-700 dark:text-zinc-400">
+                Series:
+              </span>{' '}
+              {series} / {volume}
             </span>
             <div className="flex gap-2 justify-self-end">
               <DeleteModal
@@ -49,7 +51,7 @@ export function ExerciseList({
             </div>
           </div>
         </Accordion.Trigger>
-        <Accordion.Content className="mt-1 rounded bg-gray-500 px-6 py-4 shadow-inner">
+        <Accordion.Content className="mt-1 rounded bg-gray-200 px-6 py-4 shadow-inner dark:bg-zinc-500">
           <Annotation note={annotation} exerciseId={exerciseId} />
         </Accordion.Content>
       </Accordion.Item>

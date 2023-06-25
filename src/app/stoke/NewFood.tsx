@@ -15,6 +15,7 @@ export function NewFoodStoke({ stokeId }: NewFoodProps) {
   async function handleNewFood() {
     const foodName = getValues('foodName')
     const amount = parseInt(getValues('amount'))
+    const type = getValues('type')
     const category = getValues('category')
     const carbo = parseFloat(getValues('carbo'))
     const protein = parseFloat(getValues('protein'))
@@ -25,6 +26,7 @@ export function NewFoodStoke({ stokeId }: NewFoodProps) {
       await api.post('/api/food', {
         foodName,
         amount,
+        type,
         grams,
         category,
         carbo,
@@ -45,11 +47,11 @@ export function NewFoodStoke({ stokeId }: NewFoodProps) {
   return (
     <form
       onSubmit={handleSubmit(handleNewFood)}
-      className="flex flex-col flex-wrap items-start gap-2 rounded bg-gray-800 text-sm md:flex-row md:items-center"
+      className="flex flex-col flex-wrap items-start gap-2 rounded-md bg-zinc-200 px-1 py-2 text-sm dark:bg-zinc-700 md:flex-row md:items-center"
     >
       <select
         {...register('category')}
-        className="rounded bg-gray-600 p-1 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        className="rounded bg-zinc-100 px-1 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-zinc-600"
       >
         <option value="Fontes de Carboidrato">Fontes de Carboidrato</option>
         <option value="Fontes de Proteína">Fontes de Proteína</option>
@@ -59,7 +61,7 @@ export function NewFoodStoke({ stokeId }: NewFoodProps) {
         type="text"
         placeholder="Nome"
         {...register('foodName')}
-        className="w-full rounded bg-gray-600 p-1 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 md:w-24"
+        className="rounded bg-zinc-100 px-1 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-zinc-600"
       />
       <div className="relative">
         <Information />
@@ -67,34 +69,41 @@ export function NewFoodStoke({ stokeId }: NewFoodProps) {
           type="text"
           placeholder="Porção"
           {...register('amount')}
-          className="w-full rounded bg-gray-600 p-1 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 md:w-24"
+          className="rounded bg-zinc-100 px-1 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-zinc-600"
         />
       </div>
+      <select
+        {...register('type')}
+        className="rounded bg-zinc-100 px-1 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-zinc-600"
+      >
+        <option value="g">g</option>
+        <option value="un">un</option>
+      </select>
 
       <div className="mb-2 flex w-full flex-col gap-2 md:mb-0 md:w-auto md:flex-row">
         <input
           type="text"
           placeholder="Carboidrato"
           {...register('carbo')}
-          className="w-full rounded bg-gray-600 p-1 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 md:w-24"
+          className="rounded bg-zinc-100 px-1 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-zinc-600"
         />
         <input
           type="text"
           placeholder="Proteina"
           {...register('protein')}
-          className="w-full rounded bg-gray-600 p-1 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 md:w-24"
+          className="rounded bg-zinc-100 px-1 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-zinc-600"
         />
         <input
           type="text"
           placeholder="Gordura"
           {...register('fat')}
-          className="w-full rounded bg-gray-600 p-1 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 md:w-24"
+          className="rounded bg-zinc-100 px-1 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-zinc-600"
         />
       </div>
 
       <button
         type="submit"
-        className="w-full rounded bg-indigo-600 px-2 py-1 font-bold text-white hover:bg-indigo-500 md:mt-0 md:w-auto"
+        className="w-full rounded bg-indigo-600 px-2 py-2 font-bold text-white hover:bg-indigo-500 md:mt-0 md:w-auto"
       >
         Adicionar
       </button>

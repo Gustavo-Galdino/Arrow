@@ -7,6 +7,7 @@ export interface Food {
   protein: number
   fat: number
   amount: number
+  type: string
   category: string
 }
 

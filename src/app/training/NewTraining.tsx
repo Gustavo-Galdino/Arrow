@@ -47,7 +47,7 @@ export function NewTraining({ workoutTableId }: NewTrainingProps) {
   return (
     <form
       onSubmit={handleSubmit(handleNewTraining)}
-      className="box-border flex flex-col items-center justify-center gap-2 rounded border border-gray-500 bg-gray-700/20 p-6 text-gray-300 shadow"
+      className="box-border flex flex-col items-center justify-center gap-2 rounded border bg-zinc-400 p-6 shadow-md dark:border-zinc-500 dark:bg-zinc-700/20"
     >
       <div className="flex flex-col">
         <label className="self-start text-xs" htmlFor="title">
@@ -57,7 +57,7 @@ export function NewTraining({ workoutTableId }: NewTrainingProps) {
           id="title"
           type="text"
           {...register('title')}
-          className="rounded bg-gray-600 px-2 py-1 text-gray-100 placeholder:text-sm"
+          className="rounded bg-zinc-50 px-2 py-1 text-zinc-100 placeholder:text-sm dark:bg-zinc-600"
           placeholder="ex: Peito, Braço..."
         />
         {errors.title && (
@@ -66,7 +66,7 @@ export function NewTraining({ workoutTableId }: NewTrainingProps) {
           </span>
         )}
       </div>
-      <button type="submit" className="hover:text-gray-100">
+      <button type="submit" className="hover:text-zinc-100">
         <FilePlus size={60} className="" />
       </button>
     </form>

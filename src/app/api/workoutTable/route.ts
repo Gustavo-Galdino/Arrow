@@ -59,3 +59,26 @@ export async function PATCH(req: Request) {
     )
   }
 }
+
+export async function DELETE(req: Request) {
+  try {
+    const { id } = await req.json()
+
+    await prisma.workoutTableExercise.deleteMany({
+      where: {
+        id,
+      },
+    })
+
+    return new Response(JSON.stringify('OK'), {
+      status: 200,
+    })
+  } catch (error: any) {
+    return new Response(
+      JSON.stringify({ status: 'error', message: error.message }),
+      {
+        status: 500,
+      },
+    )
+  }
+}

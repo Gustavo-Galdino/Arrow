@@ -44,11 +44,14 @@ export function NewDiet({ dietTableId }: NewDietProps) {
 
   return (
     <form
-      className=" rounded bg-gray-900 p-4 shadow-md"
+      className=" rounded bg-zinc-400 p-4 shadow-md dark:bg-zinc-900"
       onSubmit={handleSubmit(handleNewDiet)}
     >
       <div className="flex items-center gap-2">
-        <label htmlFor="diet" className="text-sm text-gray-200">
+        <label
+          htmlFor="diet"
+          className="text-sm text-zinc-600 dark:text-zinc-700"
+        >
           Nova Tabela:
         </label>
         <div className="flex flex-grow flex-col">
@@ -62,7 +65,7 @@ export function NewDiet({ dietTableId }: NewDietProps) {
             id="diet"
             {...register('title')}
             placeholder="ex: Segunda, Terça..."
-            className="w-full rounded border-2 border-gray-600 bg-gray-700 px-3 py-2 text-gray-100 outline-none"
+            className="w-full rounded-lg border-2 border-zinc-400 bg-zinc-100 px-3 py-2 outline-none dark:border-zinc-600 dark:bg-zinc-700"
           />
         </div>
         <button

@@ -27,9 +27,9 @@ export function Table() {
             {table.dietBox.map((tableBox) => (
               <article
                 key={tableBox.id}
-                className="shadow-gray-900/102 container relative box-border grid grid-cols-1 gap-4 rounded bg-gray-700 p-4 text-base shadow-lg md:grid-cols-2"
+                className="dark:shadow-zinc-900/102 shadow-zinc-100/102 container relative box-border grid grid-cols-1 gap-4 rounded bg-zinc-300 p-4 text-base shadow-lg dark:bg-zinc-700 md:grid-cols-2"
               >
-                <div className="border-gray-500 md:col-start-2 md:border-l">
+                <div className="border-zinc-500 md:col-start-2 md:border-l">
                   <MacrosTotal dietBox={tableBox} />
                 </div>
 
@@ -50,7 +50,7 @@ export function Table() {
                         <Accordion.Item value={list.meal}>
                           <Accordion.Trigger asChild>
                             <ul
-                              className="flex cursor-pointer flex-col gap-4 hover:text-gray-200"
+                              className="flex cursor-pointer flex-col gap-4 hover:text-zinc-600 dark:hover:text-zinc-200"
                               onClick={() => setOpen(!open)}
                             >
                               <div className="flex items-center gap-1.5">
@@ -73,6 +73,7 @@ export function Table() {
                                 {list.food.map((food) => (
                                   <li key={food.id} className="list-none">
                                     <FoodList
+                                      type={food.food.type}
                                       grams={food.grams}
                                       carbo={food.food.carbo}
                                       fat={food.food.fat}
@@ -85,7 +86,7 @@ export function Table() {
                                 ))}
                               </>
                             ) : (
-                              <p className="mt-4 text-center text-gray-400">
+                              <p className="mt-4 text-center text-zinc-700 dark:text-zinc-400">
                                 Lista de Alimentos Vazia
                               </p>
                             )}

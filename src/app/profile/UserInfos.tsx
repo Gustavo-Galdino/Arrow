@@ -11,7 +11,7 @@ export function UserInfos() {
   if (!user) return null
 
   return (
-    <div className="mt-16  space-y-10 rounded-lg bg-gray-700 p-6 shadow-md">
+    <div className="mt-16  space-y-10 rounded-lg bg-zinc-300 p-6 shadow-md dark:bg-zinc-700">
       <div className="flex items-center gap-1">
         <strong className="text-xl font-bold uppercase">{user.fullName}</strong>
         <span>|</span>

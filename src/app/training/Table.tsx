@@ -17,13 +17,15 @@ export function Table() {
       {user.workoutTable.map((table) => (
         <section
           key={table.id}
-          className="mt-16 grid gap-4 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
+          className="grid gap-4 py-10 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
         >
           {table.WorkoutTableExercise.map((tableExercise) => (
             <ul
               key={tableExercise.id}
-              className={`shadow-gray-900/102 relative box-border flex w-full flex-col gap-4 rounded  p-4 text-base shadow-lg ${
-                tableExercise.completed ? 'bg-slate-700' : 'bg-gray-700'
+              className={`dark:shadow-zinc-900/102 shadow-zinc-100/102 relative box-border flex w-full flex-col gap-4 rounded  p-4 text-base shadow-lg ${
+                tableExercise.completed
+                  ? 'bg-zinc-300 dark:bg-zinc-700'
+                  : 'bg-zinc-200 dark:bg-zinc-700'
               }`}
             >
               <div className="absolute right-0 top-0 px-5 py-3">
@@ -31,7 +33,7 @@ export function Table() {
                   title={`Deletar tabela ${tableExercise.title}?`}
                   description="Isso ira deletar a tabela completa!"
                   exerciseId={tableExercise.id}
-                  whereApi="users"
+                  whereApi="workoutTable"
                 />
               </div>
 
@@ -60,7 +62,7 @@ export function Table() {
                   ))}
                 </>
               ) : (
-                <p className="mt-4 text-center text-gray-400">
+                <p className="mt-4 text-center text-zinc-600 dark:text-zinc-400">
                   Lista de Treino Vazia
                 </p>
               )}

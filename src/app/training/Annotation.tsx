@@ -35,8 +35,8 @@ export function Annotation({ note, exerciseId }: AnnotationProps) {
     <div>
       {note && !edit ? (
         <div className="flex items-center justify-between">
-          <p className="px-1 text-sm text-gray-100">{note}</p>
-          <button className="hover:text-gray-200" onClick={() => setEdit(true)}>
+          <p className="px-1 text-sm">{note}</p>
+          <button className="hover:text-zinc-200" onClick={() => setEdit(true)}>
             <Pencil size={14} />
           </button>
         </div>
@@ -44,7 +44,7 @@ export function Annotation({ note, exerciseId }: AnnotationProps) {
         <form className="mt-2" onSubmit={handleSubmit(handleAddNote)}>
           <textarea
             {...register('note')}
-            className="w-full rounded border border-gray-300 bg-gray-600 p-2 transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            className="w-full rounded border border-zinc-50 bg-zinc-100 p-2 transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-400 dark:border-zinc-300 dark:bg-zinc-600"
             placeholder="Digite sua anotação"
           />
           <button

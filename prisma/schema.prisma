@@ -94,6 +94,7 @@ model Food {
   category String
   foodName String
   amount   Int
+  type     String
   carbo    Float
   protein  Float
   fat      Float

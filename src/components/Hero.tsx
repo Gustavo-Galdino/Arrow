@@ -13,10 +13,10 @@ import { IconButton } from './IconButton'
 
 export function Hero() {
   return (
-    <main>
+    <div>
       <Image src={banner} alt="" className="fixed h-full w-screen opacity-30" />
       <div className="relative m-auto max-w-[1440px]">
-        <Image src={banner} alt="" className="rounded-lg object-cover shadow" />
+        <Image src={banner} alt="" className="object-cover shadow" />
         <div className="absolute top-0 w-full"></div>
 
         <div className="absolute left-[35%] top-64">
@@ -87,6 +87,6 @@ export function Hero() {
           />
         </div>
       </div>
-    </main>
+    </div>
   )
 }

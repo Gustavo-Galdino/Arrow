@@ -12,6 +12,7 @@ interface FoodListProps {
   fat: number
   foodId: string
   idGrams: string
+  type: string
 }
 
 export function FoodList({
@@ -19,6 +20,7 @@ export function FoodList({
   fat,
   name,
   grams,
+  type,
   protein,
   foodId,
   idGrams,
@@ -60,12 +62,22 @@ export function FoodList({
     }
   }
 
-  const carboCalc = ((carbo * grams) / 100).toFixed(1)
-  const proteinCalc = ((protein * grams) / 100).toFixed(1)
-  const fatCalc = ((fat * grams) / 100).toFixed(1)
+  let carboCalc = ''
+  let proteinCalc = ''
+  let fatCalc = ''
+
+  if (type === 'g') {
+    carboCalc = ((carbo * grams) / 100).toFixed(1)
+    proteinCalc = ((protein * grams) / 100).toFixed(1)
+    fatCalc = ((fat * grams) / 100).toFixed(1)
+  } else {
+    carboCalc = (carbo * grams).toFixed(1)
+    proteinCalc = (protein * grams).toFixed(1)
+    fatCalc = (fat * grams).toFixed(1)
+  }
 
   return (
-    <div className="box-border grid grid-cols-1 items-center justify-between gap-2 rounded-md border border-gray-900 bg-gray-800 px-2 py-1.5 text-sm shadow-md transition-colors duration-200 ease-in-out sm:grid-cols-3 sm:text-base">
+    <div className="box-border grid grid-cols-2 items-center justify-between gap-2 rounded-md bg-zinc-200 px-2 py-1.5 text-sm shadow-md transition-colors duration-200 ease-in-out dark:bg-zinc-800 sm:text-base">
       <div className="flex items-center gap-1">
         {editGrams ? (
           <form
@@ -76,34 +88,37 @@ export function FoodList({
               type="text"
               {...register('grams')}
               placeholder={`${grams}`}
-              className="w-full rounded bg-gray-500"
+              className="w-2/4 rounded bg-zinc-100 dark:bg-zinc-50"
             />
             <button type="submit" className="rounded-lg border px-1">
               ok
             </button>
           </form>
         ) : (
-          <div className="flex items-center gap-0.5 pr-1">
-            <span>{grams}g</span>
+          <div className="flex items-center gap-1">
+            <span className="font-bold">
+              {grams}
+              {type}
+            </span>
             <Edit2
               size={12}
               onClick={() => setEditGrams(true)}
-              className="cursor-pointer hover:text-gray-500"
+              className="cursor-pointer hover:text-zinc-500"
             />
           </div>
         )}
-        <strong className="text-base text-white sm:text-base">{name}</strong>
+        <span className="text-base font-bold">{name}</span>
       </div>
-      <div className="flex items-center gap-2 sm:gap-4">
-        <p className="text-gray-300">C: {carboCalc}</p>
-        <p className="text-gray-300">P: {proteinCalc}</p>
-        <p className="text-gray-300">G: {fatCalc}</p>
-      </div>
+      <div className="flex items-center justify-between gap-2">
+        <p>C: {carboCalc}</p>
+        <p>P: {proteinCalc}</p>
+        <p>G: {fatCalc}</p>
 
-      <div className="mt-2 justify-self-end sm:mt-0">
-        <button onClick={() => handleRemoveFood()}>
-          <X size={16} />
-        </button>
+        <div className="flex">
+          <button onClick={() => handleRemoveFood()}>
+            <X size={16} />
+          </button>
+        </div>
       </div>
     </div>
   )

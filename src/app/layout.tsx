@@ -1,6 +1,6 @@
 import './globals.css'
 import { ReactNode } from 'react'
-import { Inter } from 'next/font/google'
+import { Roboto } from 'next/font/google'
 import { ClerkProvider } from '@clerk/nextjs'
 import { ptBR } from '@clerk/localizations'
 import { Header } from '@/components/Header'
@@ -9,13 +9,16 @@ export const metadata = {
   title: 'Arrow',
 }
 
-const inter = Inter({ subsets: ['latin'] })
+const roboto = Roboto({
+  weight: '400',
+  subsets: ['latin'],
+})
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <ClerkProvider localization={ptBR}>
-      <html lang="en" className={inter.className}>
-        <body className="bg-gray-100 text-gray-950 dark:bg-gray-800 dark:text-gray-50">
+      <html lang="pt-BR" className={roboto.className}>
+        <body className="bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-100">
           <Header />
           {children}
         </body>

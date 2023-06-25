@@ -47,7 +47,7 @@ export function FormNewExercise({ exerciseTableId }: FormNewExerciceProps) {
 
   return (
     <form
-      className="grid w-full grid-cols-3 items-center justify-between gap-4 border-t border-gray-400 pt-4"
+      className="grid w-full grid-cols-3 items-center justify-between gap-4 border-t border-zinc-50  pt-4 dark:border-zinc-400"
       onSubmit={handleSubmit(handleNewExercise)}
     >
       <div className="flex flex-col">
@@ -55,7 +55,7 @@ export function FormNewExercise({ exerciseTableId }: FormNewExerciceProps) {
           type="text"
           {...register('name')}
           placeholder="Nome do exercicio"
-          className="rounded bg-gray-600 px-1 py-1 placeholder:text-xs"
+          className="rounded bg-zinc-100 px-1 py-1 placeholder:text-xs dark:bg-zinc-600"
         />
         {errors.name && (
           <span className="px-1 py-1 text-xs text-red-300">
@@ -70,7 +70,7 @@ export function FormNewExercise({ exerciseTableId }: FormNewExerciceProps) {
             type="number"
             {...register('series')}
             placeholder="Series"
-            className="w-full rounded bg-gray-600 px-1 py-1 placeholder:text-xs"
+            className="w-full rounded bg-zinc-100 px-1 py-1 placeholder:text-xs dark:bg-zinc-600"
           />
           {errors.series && (
             <span className="px-1 py-1 text-xs text-red-300">
@@ -84,7 +84,7 @@ export function FormNewExercise({ exerciseTableId }: FormNewExerciceProps) {
             type="number"
             {...register('volume')}
             placeholder="Volume"
-            className="w-full rounded bg-gray-600 px-1 py-1 placeholder:text-xs"
+            className="w-full rounded bg-zinc-100 px-1 py-1 placeholder:text-xs dark:bg-zinc-600"
           />
           {errors.volume && (
             <span className="px-1 py-1 text-xs text-red-300">

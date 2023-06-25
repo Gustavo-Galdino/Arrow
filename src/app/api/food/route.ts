@@ -11,13 +11,14 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  const { foodName, amount, category, carbo, protein, fat, stokeId } =
+  const { foodName, amount, category, carbo, type, protein, fat, stokeId } =
     await req.json()
 
   const createNewFood = await prisma.food.create({
     data: {
       foodName,
       amount,
+      type,
       category,
       carbo,
       protein,

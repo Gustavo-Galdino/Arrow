@@ -12,16 +12,18 @@ export function UserInformations() {
   if (!user) return null
 
   return (
-    <section className="mt-16 flex w-full justify-between border-b pb-2">
+    <section className="mt-16 flex w-full justify-between border-b border-b-zinc-400 pb-2">
       <div className="flex flex-col">
         <div>
           <strong className="text-xs">
-            <span className="text-green-300">Nv: {u?.nivel}</span> - exp:{' '}
-            {u?.experience}
+            <span className="text-green-500 dark:text-green-300">
+              Nv: {u?.nivel}
+            </span>{' '}
+            - exp: {u?.experience}
           </strong>
 
           <Progress.Root
-            className="relative h-0.5 w-36 overflow-hidden rounded-full bg-gray-100"
+            className="relative h-1 w-36 overflow-hidden rounded-full bg-gray-900 dark:bg-gray-100"
             value={10}
           >
             <Progress.Indicator

@@ -51,7 +51,7 @@ export function Achievements() {
       {achievements.map((conquest, index) => (
         <div
           key={index}
-          className={`flex w-32 flex-col items-center justify-center gap-2 rounded-lg bg-gray-800 py-6 shadow-md ${
+          className={`flex w-32 flex-col items-center justify-center gap-2 rounded-lg bg-zinc-200 py-6 shadow-md dark:bg-zinc-800 ${
             conquest.nivel > user.nivel && 'opacity-50'
           }`}
         >

@@ -95,7 +95,7 @@ export function ButtonCheck({
       {completed ? (
         <div className="flex items-center gap-2">
           <span>
-            <Check className="text-green-300 " />
+            <Check className="text-green-700 dark:text-green-300" />
           </span>
           <button onClick={() => restart()}>
             <RotateCcw size={18} />
@@ -105,7 +105,7 @@ export function ButtonCheck({
         <button
           type="button"
           disabled={completed}
-          className="box-border rounded bg-gray-500 px-2 py-1 text-xs shadow-lg hover:bg-green-500 hover:transition-colors"
+          className="box-border rounded bg-zinc-100 px-2 py-1 text-xs shadow-lg hover:bg-green-500 hover:transition-colors dark:bg-zinc-500"
           onClick={() => handleChecked()}
         >
           <strong className="px-1 text-sm font-semibold ">Concluir</strong>

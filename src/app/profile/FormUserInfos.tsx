@@ -94,7 +94,7 @@ export function FormUserInfos() {
               <input
                 type="number"
                 {...register('weight')}
-                className="w-14 rounded bg-gray-500 px-2 py-1"
+                className="w-14 rounded bg-zinc-100 px-2 py-1 dark:bg-zinc-500"
               />
             </label>
 
@@ -110,7 +110,7 @@ export function FormUserInfos() {
             <p className="">Peso: {user?.weight} kg</p>
             <button
               type="button"
-              className="hover:text-gray-200"
+              className="hover:text-zinc-200"
               onClick={() => setEditWeight(true)}
             >
               <Edit2 size={14} />
@@ -129,7 +129,7 @@ export function FormUserInfos() {
           >
             <select
               {...register('goal')}
-              className="rounded bg-gray-500 px-2 py-1"
+              className="rounded bg-zinc-100 px-2 py-1 dark:bg-zinc-500"
             >
               <option value="-500">Cutting</option>
               <option value="0">Normocalorica</option>
@@ -148,7 +148,7 @@ export function FormUserInfos() {
             <p className="">Atividade: {goal}</p>
             <button
               type="button"
-              className="hover:text-gray-200"
+              className="hover:text-zinc-200"
               onClick={() => setEditGoal(true)}
             >
               <Edit2 size={14} />

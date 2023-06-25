@@ -39,7 +39,7 @@ export function DeleteModal({
 
       <Dialog.Portal>
         <Dialog.Overlay className="absolute" />
-        <Dialog.Content className="fixed left-2/4 top-2/4 -translate-x-1/2 -translate-y-1/2 rounded-md bg-zinc-700 p-6">
+        <Dialog.Content className="fixed left-2/4 top-2/4 -translate-x-1/2 -translate-y-1/2 rounded-md bg-zinc-400 p-6 dark:bg-zinc-700">
           <Dialog.Title className="mb-5 text-2xl font-bold">
             {title}
           </Dialog.Title>
@@ -54,7 +54,7 @@ export function DeleteModal({
             </Dialog.Close>
             <Dialog.Close asChild>
               <button
-                className="rounded-md bg-red-500 px-2 py-1 font-semibold hover:bg-red-600"
+                className="rounded-md bg-red-500 px-2 py-1 font-semibold text-zinc-100 hover:bg-red-600 dark:text-zinc-900"
                 onClick={() => handleDeleteTask(exerciseId)}
               >
                 Deletar

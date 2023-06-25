@@ -22,10 +22,10 @@ export function Table() {
           <h2 className="my-4 text-2xl">{category}</h2>
 
           <table className="w-full table-auto text-left">
-            <thead className="border-b-2 border-gray-300 text-center">
+            <thead className="border-b-2 border-gray-400 text-center">
               <tr>
                 <th className="px-4">Nome</th>
-                <th className="px-4">Quantidade</th>
+                <th className="px-4">Porção</th>
                 <th className="px-4">Carboidratos</th>
                 <th className="px-4">Proteínas</th>
                 <th className="px-4">Gorduras</th>
@@ -41,15 +41,17 @@ export function Table() {
                       {food.foodName}
                     </td>
                     <td className="border-b border-gray-500 p-1">
-                      {food.amount}
+                      {food.amount} {food.type}
                     </td>
                     <td className="border-b border-gray-500 p-1">
-                      {food.carbo}
+                      {food.carbo}g
                     </td>
                     <td className="border-b border-gray-500 p-1">
-                      {food.protein}
+                      {food.protein}g
                     </td>
-                    <td className="border-b border-gray-500 p-1">{food.fat}</td>
+                    <td className="border-b border-gray-500 p-1">
+                      {food.fat}g
+                    </td>
                     <td className="border-b border-gray-500 p-1">
                       <DeleteModal
                         description={`Ao deletar ${food.foodName}, sera apagado tambem da sua lista de dieta`}
