@@ -81,7 +81,7 @@ export function FormUserInfos() {
       <span className="text-sm text-purple-400">Nivel: {user.nivel}</span>
       <section className="flex flex-col items-start justify-center gap-2">
         <p className="mb-4 text-xl">
-          Taxa Metabolica Basal: <span>{calcMetabolism.toFixed(0)} kcal</span>
+          Ideia de consumo diario: <span>{calcMetabolism.toFixed(0)} kcal</span>
         </p>
 
         {editWeight ? (

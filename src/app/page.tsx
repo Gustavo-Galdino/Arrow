@@ -84,6 +84,7 @@ export default function Home() {
       <footer className="flex w-full flex-col items-start bg-zinc-400 p-6 dark:bg-zinc-900 md:items-end">
         <div className="mr-6 flex flex-col gap-2">
           <Link
+            target="_blank"
             href="https://github.com/Gustavo-Galdino"
             className="flex items-center gap-1"
           >
@@ -91,6 +92,7 @@ export default function Home() {
             Github
           </Link>
           <Link
+            target="_blank"
             href="https://www.linkedin.com/in/gustavo-galdinom/"
             className="flex items-center gap-1"
           >

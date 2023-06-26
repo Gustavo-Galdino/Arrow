@@ -31,7 +31,7 @@ export function EditUl({ id }: EditUlProps) {
     const meal = getValues('meal')
     const time = getValues('time')
     try {
-      await api.patch('/api/dietTable', {
+      await api.patch('/api/dietList', {
         id,
         meal,
         time,
