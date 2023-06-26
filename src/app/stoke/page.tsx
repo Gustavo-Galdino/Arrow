@@ -13,7 +13,7 @@ export default async function Stock() {
 
   const token = await getToken()
 
-  const response = await fetch('https://arrow-alpha.vercel.app/api/user', {
+  const response = await fetch('https://arrow-iota.vercel.app//api/user', {
     headers: {
       Authorization: `Bearer ${token}`,
     },
