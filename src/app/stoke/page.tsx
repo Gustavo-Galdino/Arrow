@@ -3,6 +3,7 @@ import { StoreInitializer } from '@/components/StoreInitializer'
 import { auth } from '@clerk/nextjs'
 import { Table } from './table'
 import { UserInformations } from '@/components/UserInformations'
+import { Header } from '@/components/Header'
 
 export default async function Stock() {
   const { getToken, userId } = auth()
@@ -25,7 +26,7 @@ export default async function Stock() {
   return (
     <main className="px-10">
       <StoreInitializer user={user} />
-
+      <Header />
       <UserInformations />
 
       <div className="mt-10">

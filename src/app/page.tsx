@@ -6,10 +6,14 @@ import foodIcon from '@/assets/food.png'
 import stokeIcon from '@/assets/stoke.png'
 import Link from 'next/link'
 import { ArrowRight, Github, Linkedin, Mail } from 'lucide-react'
+import { Header } from '@/components/Header'
 
 export default function Home() {
   return (
     <main className="flex flex-col items-center">
+      <div className="w-full">
+        <Header />
+      </div>
       <Hero />
 
       <div className="mb-32 mt-10 flex w-full flex-col items-center justify-center">

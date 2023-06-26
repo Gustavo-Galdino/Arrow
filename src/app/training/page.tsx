@@ -3,6 +3,7 @@ import { UserInformations } from '@/components/UserInformations'
 import { User, useStore } from '@/context/store'
 import { StoreInitializer } from '@/components/StoreInitializer'
 import { Table } from './Table'
+import { Header } from '@/components/Header'
 
 export default async function Training() {
   const { getToken, userId } = auth()
@@ -25,7 +26,7 @@ export default async function Training() {
   return (
     <main className="px-10">
       <StoreInitializer user={user} />
-
+      <Header />
       <UserInformations />
       <Table />
     </main>

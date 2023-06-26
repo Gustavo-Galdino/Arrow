@@ -8,8 +8,8 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 const userSchema = z.object({
-  weight: z.number().nonnegative().min(1),
-  height: z.number().nonnegative().min(1),
+  weight: z.string(),
+  height: z.string(),
   age: z.string(),
 })
 
@@ -50,8 +50,8 @@ export default function Register() {
   }
 
   return (
-    <main className="px-10">
-      <div className="m-auto mt-16 w-96 space-y-5 rounded-lg bg-gray-600 p-6 shadow-md">
+    <main className="px-4 md:px-10">
+      <div className="m-auto mt-4 w-full space-y-5 rounded-lg bg-zinc-200 p-4 shadow-md dark:bg-zinc-600 md:mt-16 md:w-96 md:p-6">
         <strong className="text-xl font-bold uppercase">{user.fullName}</strong>
         <form
           className="flex flex-col items-start justify-center gap-2"
@@ -62,7 +62,7 @@ export default function Register() {
             <input
               type="number"
               {...register('weight')}
-              className="rounded bg-gray-500 px-2 py-1"
+              className="w-full rounded bg-zinc-100 px-2 py-1 dark:bg-zinc-500"
             />
             {errors.weight && (
               <span className="px-1 py-1 text-xs text-red-300">
@@ -76,7 +76,7 @@ export default function Register() {
             <input
               type="number"
               {...register('height')}
-              className="rounded bg-gray-500 px-2 py-1"
+              className="w-full rounded bg-zinc-100 px-2 py-1 dark:bg-zinc-500"
             />
             {errors.height && (
               <span className="px-1 py-1 text-xs text-red-300">
@@ -90,7 +90,7 @@ export default function Register() {
             <input
               type="date"
               {...register('age')}
-              className="rounded bg-gray-500 px-2 py-1"
+              className="w-full rounded bg-zinc-100 px-2 py-1 dark:bg-zinc-500"
             />
             {errors.age && (
               <span className="px-1 py-1 text-xs text-red-300">
@@ -103,7 +103,7 @@ export default function Register() {
             <span className="block">Objetivo</span>
             <select
               {...register('goal')}
-              className="rounded bg-gray-500 px-2 py-1"
+              className="w-full rounded bg-zinc-100 px-2 py-1 dark:bg-zinc-500"
             >
               <option value="-500">Cutting</option>
               <option value="0">Normocalorica</option>
@@ -113,7 +113,7 @@ export default function Register() {
 
           <button
             type="submit"
-            className="mt-2 rounded-md bg-violet-500 px-4 py-2 hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300 active:bg-violet-700 dark:md:hover:bg-fuchsia-600"
+            className="mt-2 w-full rounded-md bg-violet-500 px-4 py-2 hover:bg-violet-600 focus:outline-none focus:ring focus:ring-violet-300 active:bg-violet-700 dark:md:hover:bg-fuchsia-600"
           >
             Salvar
           </button>

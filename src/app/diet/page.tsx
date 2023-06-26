@@ -4,6 +4,7 @@ import { Table } from './Table'
 import { auth } from '@clerk/nextjs'
 import { User, useStore } from '@/context/store'
 import { UserInformations } from '@/components/UserInformations'
+import { Header } from '@/components/Header'
 
 export default async function Diet() {
   const { getToken, userId } = auth()
@@ -26,7 +27,7 @@ export default async function Diet() {
   return (
     <main className="px-10">
       <StoreInitializer user={user} />
-
+      <Header />
       <UserInformations />
       <Table />
     </main>

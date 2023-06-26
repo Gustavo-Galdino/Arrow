@@ -2,6 +2,7 @@ import { auth } from '@clerk/nextjs'
 import { UserInfos } from './UserInfos'
 import { User, useStore } from '@/context/store'
 import { StoreInitializer } from '@/components/StoreInitializer'
+import { Header } from '@/components/Header'
 
 export default async function Profile() {
   const { getToken } = auth()
@@ -20,7 +21,7 @@ export default async function Profile() {
   return (
     <main className="px-10">
       <StoreInitializer user={user} />
-
+      <Header />
       <UserInfos />
     </main>
   )

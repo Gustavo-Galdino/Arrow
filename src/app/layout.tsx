@@ -3,7 +3,6 @@ import { ReactNode } from 'react'
 import { Roboto } from 'next/font/google'
 import { ClerkProvider } from '@clerk/nextjs'
 import { ptBR } from '@clerk/localizations'
-import { Header } from '@/components/Header'
 
 export const metadata = {
   title: 'Arrow',
@@ -19,7 +18,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <ClerkProvider localization={ptBR}>
       <html lang="pt-BR" className={roboto.className}>
         <body className="bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-100">
-          <Header />
           {children}
         </body>
       </html>
