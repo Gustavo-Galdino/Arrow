@@ -47,7 +47,7 @@ export function FormNewExercise({ exerciseTableId }: FormNewExerciceProps) {
 
   return (
     <form
-      className="grid w-full grid-cols-3 items-center justify-between gap-4 border-t border-zinc-50  pt-4 dark:border-zinc-400"
+      className="flex flex-col items-start justify-between gap-2 border-t  border-zinc-50 pt-4 dark:border-zinc-400 sm:flex-row sm:items-center"
       onSubmit={handleSubmit(handleNewExercise)}
     >
       <div className="flex flex-col">
@@ -55,7 +55,7 @@ export function FormNewExercise({ exerciseTableId }: FormNewExerciceProps) {
           type="text"
           {...register('name')}
           placeholder="Nome do exercicio"
-          className="rounded bg-zinc-100 px-1 py-1 placeholder:text-xs dark:bg-zinc-600"
+          className="w-full rounded bg-zinc-100 px-1 py-1 placeholder:text-xs dark:bg-zinc-600"
         />
         {errors.name && (
           <span className="px-1 py-1 text-xs text-red-300">
@@ -92,13 +92,13 @@ export function FormNewExercise({ exerciseTableId }: FormNewExerciceProps) {
             </span>
           )}
         </div>
+        <button
+          type="submit"
+          className=" h-full rounded bg-indigo-500 px-2 text-white transition duration-200 ease-in-out hover:bg-indigo-600"
+        >
+          <Check size={16} />
+        </button>
       </div>
-      <button
-        type="submit"
-        className="justify-self-start rounded bg-indigo-500 px-2 py-1 text-white transition duration-200 ease-in-out hover:bg-indigo-600"
-      >
-        <Check size={16} />
-      </button>
     </form>
   )
 }

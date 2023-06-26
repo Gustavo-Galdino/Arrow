@@ -44,36 +44,32 @@ export function NewDiet({ dietTableId }: NewDietProps) {
 
   return (
     <form
-      className=" rounded bg-zinc-400 p-4 shadow-md dark:bg-zinc-900"
+      className="rounded bg-zinc-400 p-4 shadow-md dark:bg-zinc-700"
       onSubmit={handleSubmit(handleNewDiet)}
     >
-      <div className="flex items-center gap-2">
-        <label
-          htmlFor="diet"
-          className="text-sm text-zinc-600 dark:text-zinc-700"
-        >
-          Nova Tabela:
-        </label>
-        <div className="flex flex-grow flex-col">
-          {errors.title && (
-            <span className="px-1 py-1 text-xs text-red-300">
-              {(errors.title as FieldError).message}
-            </span>
-          )}
+      <label className="text-sm">
+        <span>Nova Tabela</span>
+        <div className="flex items-center gap-2">
           <input
             type="text"
-            id="diet"
             {...register('title')}
             placeholder="ex: Segunda, Terça..."
-            className="w-full rounded-lg border-2 border-zinc-400 bg-zinc-100 px-3 py-2 outline-none dark:border-zinc-600 dark:bg-zinc-700"
+            className="w-full rounded-lg border-2 border-zinc-400 bg-zinc-100 px-1 py-2 outline-none dark:border-zinc-600 dark:bg-zinc-500"
           />
+          <button
+            type="submit"
+            className="rounded-md bg-blue-500 px-2 py-2 font-semibold text-white shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+          >
+            Criar
+          </button>
         </div>
-        <button
-          type="submit"
-          className="rounded-lg bg-blue-500 px-4 py-2 font-semibold text-white shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
-        >
-          Criar
-        </button>
+      </label>
+      <div className="flex flex-grow flex-col">
+        {errors.title && (
+          <span className="px-1 py-1 text-xs text-red-300">
+            {(errors.title as FieldError).message}
+          </span>
+        )}
       </div>
     </form>
   )

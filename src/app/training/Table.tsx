@@ -37,8 +37,8 @@ export function Table() {
                 />
               </div>
 
-              <div className="flex items-center gap-2 xl:flex-col 2xl:flex-row">
-                <h2 className="text-2xl font-bold">{tableExercise.title}</h2>
+              <div className="mt-4 flex items-center gap-2 xl:flex-col 2xl:flex-row">
+                <h2 className=" text-2xl font-bold">{tableExercise.title}</h2>
                 <ButtonCheck
                   userId={user.id}
                   tableId={tableExercise.id}

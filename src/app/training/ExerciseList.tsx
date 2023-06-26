@@ -27,7 +27,7 @@ export function ExerciseList({
         <Accordion.Trigger asChild>
           <div
             onClick={() => setOpen(!open)}
-            className="box-border grid grid-cols-3 items-center justify-between gap-2 rounded-md border border-zinc-50 px-2 py-1.5 text-sm transition-colors duration-200 ease-in-out hover:bg-zinc-400 dark:border-zinc-500 dark:hover:bg-zinc-500 sm:text-base"
+            className="flex items-center justify-between rounded-md bg-zinc-100 px-2 py-1.5 text-sm hover:bg-zinc-400 dark:border-zinc-500 dark:bg-zinc-600 dark:hover:bg-zinc-500 sm:text-base"
           >
             <div className="flex items-center gap-1">
               <div className="cursor-pointer">
@@ -35,13 +35,10 @@ export function ExerciseList({
               </div>
               <strong className="overflow-hidden font-normal">{name}</strong>
             </div>
-            <span className="justify-self-end">
-              <span className="text-xs text-zinc-700 dark:text-zinc-400">
-                Series:
-              </span>{' '}
-              {series} / {volume}
-            </span>
-            <div className="flex gap-2 justify-self-end">
+            <div className="flex items-center justify-between gap-2">
+              <span>
+                Series: {series} / {volume}
+              </span>
               <DeleteModal
                 exerciseId={exerciseId}
                 title="Deletar Exercicio?"

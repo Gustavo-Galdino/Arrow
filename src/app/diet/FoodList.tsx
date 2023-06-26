@@ -7,7 +7,7 @@ import { useForm, FieldError } from 'react-hook-form'
 import { z } from 'zod'
 
 const gramsSchema = z.object({
-  grams: z.number().nonnegative().min(1),
+  grams: z.string(),
 })
 
 interface FoodListProps {
@@ -98,7 +98,7 @@ export function FoodList({
             className="flex w-full items-center gap-1"
           >
             <input
-              type="text"
+              type="number"
               {...register('grams')}
               placeholder={`${grams}`}
               className="w-2/4 rounded bg-zinc-100 dark:bg-zinc-50"
@@ -113,7 +113,7 @@ export function FoodList({
             </button>
           </form>
         ) : (
-          <div className="flex items-center gap-1">
+          <div className="flex items-center justify-between gap-1">
             <span className="font-bold">
               {grams}
               {type}

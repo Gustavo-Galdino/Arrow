@@ -16,6 +16,7 @@ export default async function Diet() {
   const token = await getToken()
 
   const response = await fetch('https://arrow-iota.vercel.app/api/user', {
+    cache: 'no-store',
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -25,7 +26,7 @@ export default async function Diet() {
   useStore.setState({ user })
 
   return (
-    <main className="px-10">
+    <main className="px-2 sm:px-10">
       <StoreInitializer user={user} />
       <Header />
       <UserInformations />

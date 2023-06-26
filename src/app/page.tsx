@@ -34,7 +34,7 @@ export default function Home() {
               Cadastre seu plano de treinamento e anotações por exercicios.
             </p>
             <Link
-              href="/stoke"
+              href="/training"
               className="flex w-full items-center justify-center gap-2 rounded-md bg-purple-400 py-2 font-semibold hover:bg-purple-300"
             >
               Começar
@@ -49,10 +49,11 @@ export default function Home() {
               className="h-16 w-16 rounded-full object-cover"
             />
             <p className="text-center">
-              Cadastre seu plano de treinamento e anotações por exercicios.
+              Cadastre seu plano alimentar, acompanhe o consumo diario de
+              macronutrientes.
             </p>
             <Link
-              href="/stoke"
+              href="/diet"
               className="flex w-full items-center justify-center gap-2 rounded-md bg-purple-400 py-2 font-semibold hover:bg-purple-300"
             >
               Começar
@@ -67,7 +68,7 @@ export default function Home() {
               className="h-16 w-16 rounded-full object-cover"
             />
             <p className="text-center">
-              Cadastre seu plano de treinamento e anotações por exercicios.
+              Personalze seu estoque com os alimentos de sua dieta.
             </p>
             <Link
               href="/stoke"
@@ -82,11 +83,17 @@ export default function Home() {
 
       <footer className="flex w-full flex-col items-start bg-zinc-400 p-6 dark:bg-zinc-900 md:items-end">
         <div className="mr-6 flex flex-col gap-2">
-          <Link href="/github" className="flex items-center gap-1">
+          <Link
+            href="https://github.com/Gustavo-Galdino"
+            className="flex items-center gap-1"
+          >
             <Github />
             Github
           </Link>
-          <Link href="/github" className="flex items-center gap-1">
+          <Link
+            href="https://www.linkedin.com/in/gustavo-galdinom/"
+            className="flex items-center gap-1"
+          >
             <Linkedin />
             LinkedIn
           </Link>

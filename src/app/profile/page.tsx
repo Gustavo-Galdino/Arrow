@@ -10,6 +10,7 @@ export default async function Profile() {
   const token = await getToken()
 
   const response = await fetch('https://arrow-iota.vercel.app/api/user', {
+    cache: 'no-store',
     headers: {
       Authorization: `Bearer ${token}`,
     },

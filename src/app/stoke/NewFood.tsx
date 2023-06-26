@@ -47,7 +47,7 @@ export function NewFoodStoke({ stokeId }: NewFoodProps) {
   return (
     <form
       onSubmit={handleSubmit(handleNewFood)}
-      className="flex flex-col flex-wrap items-start gap-2 rounded-md bg-zinc-200 px-1 py-2 text-sm dark:bg-zinc-700 md:flex-row md:items-center"
+      className="flex flex-col flex-wrap items-start gap-2 rounded-md bg-zinc-200 p-4 px-1 py-2 text-sm dark:bg-zinc-700 md:flex-row md:items-center"
     >
       <select
         {...register('category')}
@@ -82,22 +82,22 @@ export function NewFoodStoke({ stokeId }: NewFoodProps) {
 
       <div className="mb-2 flex w-full flex-col gap-2 md:mb-0 md:w-auto md:flex-row">
         <input
-          type="text"
+          type="number"
           placeholder="Carboidrato"
           {...register('carbo')}
-          className="rounded bg-zinc-100 px-1 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-zinc-600"
+          className="w-2/4 rounded bg-zinc-100 px-1  py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-zinc-600"
         />
         <input
-          type="text"
+          type="number"
           placeholder="Proteina"
           {...register('protein')}
-          className="rounded bg-zinc-100 px-1 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-zinc-600"
+          className="w-2/4 rounded bg-zinc-100 px-1  py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-zinc-600"
         />
         <input
-          type="text"
+          type="number"
           placeholder="Gordura"
           {...register('fat')}
-          className="rounded bg-zinc-100 px-1 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-zinc-600"
+          className="w-2/4 rounded bg-zinc-100 px-1  py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-zinc-600"
         />
       </div>
 

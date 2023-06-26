@@ -47,7 +47,7 @@ export function FormNewMeal({ id }: FormNewListProps) {
 
   return (
     <form
-      className="flex flex-wrap items-center gap-2 rounded border-t border-zinc-50 p-2 pt-2 dark:border-zinc-400 dark:bg-zinc-700"
+      className="flex flex-wrap items-center gap-2 border-t border-zinc-50 p-2 pt-2 dark:border-zinc-400 dark:bg-zinc-700"
       onSubmit={handleSubmit(handleNewList)}
     >
       <div className="flex w-full flex-col gap-1 sm:w-auto">
@@ -80,7 +80,7 @@ export function FormNewMeal({ id }: FormNewListProps) {
           )}
           <button
             type="submit"
-            className="rounded bg-indigo-600 px-2 py-1 font-bold text-white hover:bg-indigo-500"
+            className="rounded bg-indigo-600 px-2 py-2 font-bold text-white hover:bg-indigo-500"
           >
             <Check size={16} />
           </button>

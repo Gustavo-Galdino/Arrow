@@ -47,7 +47,7 @@ export function NewTraining({ workoutTableId }: NewTrainingProps) {
   return (
     <form
       onSubmit={handleSubmit(handleNewTraining)}
-      className="box-border flex flex-col items-center justify-center gap-2 rounded border bg-zinc-400 p-6 shadow-md dark:border-zinc-500 dark:bg-zinc-700/20"
+      className="box-border flex flex-col items-center justify-center gap-2 rounded border bg-zinc-200 p-6 shadow-md dark:border-zinc-500 dark:bg-zinc-700/20"
     >
       <div className="flex flex-col">
         <label className="self-start text-xs" htmlFor="title">

@@ -24,7 +24,7 @@ export default async function Training() {
   useStore.setState({ user })
 
   return (
-    <main className="px-10">
+    <main className="px-2 sm:px-10">
       <StoreInitializer user={user} />
       <Header />
       <UserInformations />
