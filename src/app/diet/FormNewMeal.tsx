@@ -5,8 +5,9 @@ import { FieldError, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
-const schema = z.object({
-  meal: z.string().nonempty({ message: '⚠️  Refeição é obrigatória' }),
+const formSchema = z.object({
+  meal: z.string().nonempty({ message: 'Por favor, insira uma refeição' }),
+  time: z.string().nonempty({ message: 'Por favor, insira o tempo' }),
 })
 
 interface FormNewListProps {
@@ -21,7 +22,7 @@ export function FormNewMeal({ id }: FormNewListProps) {
     getValues,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(formSchema),
   })
 
   async function handleNewList() {
@@ -60,6 +61,11 @@ export function FormNewMeal({ id }: FormNewListProps) {
             id="time"
             className="w-full rounded-md bg-zinc-100 p-1 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-zinc-600 sm:w-24"
           />
+          {errors.time && (
+            <span className="px-1 py-1 text-xs text-red-300">
+              {(errors.time as FieldError).message}
+            </span>
+          )}
           <input
             id={id}
             type="text"

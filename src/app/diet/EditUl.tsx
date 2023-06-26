@@ -1,15 +1,30 @@
 import { useStore } from '@/context/store'
 import { api } from '@/lib/api'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { Check, Pencil } from 'lucide-react'
 import { useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { useForm, FieldError } from 'react-hook-form'
+import { z } from 'zod'
+
+const formSchema = z.object({
+  meal: z.string().nonempty({ message: 'Por favor, insira uma refeição' }),
+  time: z.string().nonempty({ message: 'Por favor, insira o tempo' }),
+})
 
 interface EditUlProps {
   id: string
 }
 
 export function EditUl({ id }: EditUlProps) {
-  const { handleSubmit, reset, register, getValues } = useForm()
+  const {
+    handleSubmit,
+    reset,
+    register,
+    getValues,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(formSchema),
+  })
   const [isEditing, setIsEditing] = useState(false)
 
   async function handleEdit() {
@@ -47,12 +62,22 @@ export function EditUl({ id }: EditUlProps) {
               id="time"
               className="w-full rounded-md bg-gray-600 p-1 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:w-24"
             />
+            {errors.time && (
+              <span className="px-1 py-1 text-xs text-red-300">
+                {(errors.time as FieldError).message}
+              </span>
+            )}
             <input
               type="text"
               {...register('meal')}
               placeholder="Refeição, ex: Almoço..."
               className="w-full rounded-md bg-gray-600 p-1 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:w-72"
             />
+            {errors.meal && (
+              <span className="px-1 py-1 text-xs text-red-300">
+                {(errors.meal as FieldError).message}
+              </span>
+            )}
 
             <button
               type="submit"

@@ -2,12 +2,27 @@
 
 import { api } from '@/lib/api'
 import { useUser } from '@clerk/nextjs'
-import { useForm } from 'react-hook-form'
+import { useForm, FieldError } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+
+const userSchema = z.object({
+  weight: z.number().nonnegative().min(1),
+  height: z.number().nonnegative().min(1),
+  age: z.string(),
+})
 
 export default function Register() {
   const { user } = useUser()
-  const { handleSubmit, register, getValues } = useForm()
+  const {
+    handleSubmit,
+    register,
+    getValues,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(userSchema),
+  })
 
   const router = useRouter()
 
@@ -49,6 +64,11 @@ export default function Register() {
               {...register('weight')}
               className="rounded bg-gray-500 px-2 py-1"
             />
+            {errors.weight && (
+              <span className="px-1 py-1 text-xs text-red-300">
+                {(errors.weight as FieldError).message}
+              </span>
+            )}
           </label>
 
           <label className="block">
@@ -58,6 +78,11 @@ export default function Register() {
               {...register('height')}
               className="rounded bg-gray-500 px-2 py-1"
             />
+            {errors.height && (
+              <span className="px-1 py-1 text-xs text-red-300">
+                {(errors.height as FieldError).message}
+              </span>
+            )}
           </label>
 
           <label className="block">
@@ -67,6 +92,11 @@ export default function Register() {
               {...register('age')}
               className="rounded bg-gray-500 px-2 py-1"
             />
+            {errors.age && (
+              <span className="px-1 py-1 text-xs text-red-300">
+                {(errors.age as FieldError).message}
+              </span>
+            )}
           </label>
 
           <label className="block">

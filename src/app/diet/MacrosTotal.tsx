@@ -38,7 +38,7 @@ export function MacrosTotal({ dietBox }: MacrosTotalProps) {
   const percentFat = (totalFatCal / calcMetabolism) * 100
 
   return (
-    <div className="my-5 flex flex-col items-center text-center text-white">
+    <div className="my-5 flex flex-col items-center text-center">
       <h2 className="text-2xl font-bold">
         Total Macros: {calcMetabolism.toFixed(0)} calorias
       </h2>
@@ -54,7 +54,7 @@ export function MacrosTotal({ dietBox }: MacrosTotalProps) {
         <span className="mr-2 inline-block h-3 w-3 rounded-full bg-orange-500"></span>
         Total Fat: {totalFat}g ({percentFat.toFixed(2)}%)
       </p>
-      <div className="mt-3 flex h-2 w-2/4 overflow-hidden rounded border border-gray-500 bg-gray-600">
+      <div className="mt-3 flex h-2 w-2/4 overflow-hidden rounded border border-zinc-100 bg-zinc-50 dark:border-gray-500 dark:bg-gray-600">
         <div style={{ width: `${percentCarbo}%` }} className="bg-green-500" />
         <div style={{ width: `${percentProtein}%` }} className="bg-blue-500" />
         <div style={{ width: `${percentFat}%` }} className="bg-orange-500" />

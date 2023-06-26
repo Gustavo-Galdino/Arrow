@@ -14,5 +14,6 @@ Consolidar conhecimentos em Nextjs e typescript
 - [x] adicionar unidade ao estoque
 - [x] refatorar responsivo
 - [x] adicionar modo light e dark
-- [ ] refazer home page
-- [ ] utilizar docker na db junto a planetscale
+- [x] utilizar docker na db junto a planetscale
+- [x] refazer home page
+- [ ] adicionar validaçoes com zod

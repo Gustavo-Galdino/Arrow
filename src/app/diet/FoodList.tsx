@@ -1,8 +1,14 @@
 import { useStore } from '@/context/store'
 import { api } from '@/lib/api'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { Edit2, X } from 'lucide-react'
 import { useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { useForm, FieldError } from 'react-hook-form'
+import { z } from 'zod'
+
+const gramsSchema = z.object({
+  grams: z.number().nonnegative().min(1),
+})
 
 interface FoodListProps {
   name: string
@@ -26,7 +32,14 @@ export function FoodList({
   idGrams,
 }: FoodListProps) {
   const [editGrams, setEditGrams] = useState(false)
-  const { register, getValues, handleSubmit } = useForm()
+  const {
+    register,
+    getValues,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(gramsSchema),
+  })
 
   async function handleEditGrams() {
     try {
@@ -90,6 +103,11 @@ export function FoodList({
               placeholder={`${grams}`}
               className="w-2/4 rounded bg-zinc-100 dark:bg-zinc-50"
             />
+            {errors.grams && (
+              <span className="px-1 py-1 text-xs text-red-300">
+                {(errors.grams as FieldError).message}
+              </span>
+            )}
             <button type="submit" className="rounded-lg border px-1">
               ok
             </button>
