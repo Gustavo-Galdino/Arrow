@@ -3,8 +3,9 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 model User {
@@ -30,6 +31,7 @@ model WorkoutTable {
   WorkoutTableExercise WorkoutTableExercise[]
   User                 User                   @relation(fields: [userId], references: [id])
 
+  @@index([userId])
   @@map("workoutTables")
 }
 
@@ -42,6 +44,7 @@ model WorkoutTableExercise {
   WorkoutTable   WorkoutTable @relation(fields: [workoutTableId], references: [id])
   workoutTableId String
 
+  @@index([workoutTableId])
   @@map("workoutTableExercises")
 }
 
@@ -64,6 +67,7 @@ model DietTable {
   dietBox DietBox[]
   User    User      @relation(fields: [userId], references: [id])
 
+  @@index([userId])
   @@map("dietTables")
 }
 
@@ -75,6 +79,7 @@ model DietBox {
   dietTableId String
   dietList    DietList[]
 
+  @@index([dietTableId])
   @@map("dietTableExercises")
 }
 
@@ -87,6 +92,8 @@ model DietList {
 
   food      FoodInGrams[]
   dietBoxId String
+
+  @@index([dietBoxId])
 }
 
 model Food {
@@ -103,6 +110,7 @@ model Food {
   stokeId     String?
   FoodInGrams FoodInGrams[]
 
+  @@index([stokeId])
   @@map("foods")
 }
 
@@ -113,6 +121,9 @@ model FoodInGrams {
   foodId     String
   DietList   DietList? @relation(fields: [dietListId], references: [id])
   dietListId String?
+
+  @@index([foodId])
+  @@index([dietListId])
 }
 
 model Stoke {
@@ -121,5 +132,6 @@ model Stoke {
   userId String
   User   User   @relation(fields: [userId], references: [id])
 
+  @@index([userId])
   @@map("stoke")
 }

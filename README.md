@@ -15,3 +15,4 @@ Consolidar conhecimentos em Nextjs e typescript
 - [x] refatorar responsivo
 - [x] adicionar modo light e dark
 - [ ] refazer home page
+- [ ] utilizar docker na db junto a planetscale
