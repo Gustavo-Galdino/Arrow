@@ -31,13 +31,13 @@ export function EditUl({ id }: EditUlProps) {
     const meal = getValues('meal')
     const time = getValues('time')
     try {
-      await api.patch('/api/dietList', {
+      await api.patch('/api/dietTable', {
         id,
         meal,
         time,
       })
 
-      const response = await api.get('/api/users')
+      const response = await api.get('/api/user')
       const user = response.data
       useStore.setState({ user })
 
@@ -54,8 +54,8 @@ export function EditUl({ id }: EditUlProps) {
         <Pencil size={14} />
       </button>
       {isEditing && (
-        <form className="" onSubmit={handleSubmit(handleEdit)}>
-          <div className="flex w-full gap-1 sm:w-auto">
+        <form onSubmit={handleSubmit(handleEdit)}>
+          <div className="flex flex-col items-start gap-1">
             <input
               type="time"
               {...register('time')}

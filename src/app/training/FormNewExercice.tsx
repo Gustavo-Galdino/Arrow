@@ -55,7 +55,7 @@ export function FormNewExercise({ exerciseTableId }: FormNewExerciceProps) {
           type="text"
           {...register('name')}
           placeholder="Nome do exercicio"
-          className="w-full rounded bg-zinc-100 px-1 py-1 placeholder:text-xs dark:bg-zinc-600"
+          className="w-full rounded bg-zinc-100 px-1 py-1 placeholder:text-xs dark:bg-zinc-500"
         />
         {errors.name && (
           <span className="px-1 py-1 text-xs text-red-300">
@@ -70,7 +70,7 @@ export function FormNewExercise({ exerciseTableId }: FormNewExerciceProps) {
             type="number"
             {...register('series')}
             placeholder="Series"
-            className="w-full rounded bg-zinc-100 px-1 py-1 placeholder:text-xs dark:bg-zinc-600"
+            className="w-full rounded bg-zinc-100 px-1 py-1 placeholder:text-xs dark:bg-zinc-500"
           />
           {errors.series && (
             <span className="px-1 py-1 text-xs text-red-300">
@@ -84,7 +84,7 @@ export function FormNewExercise({ exerciseTableId }: FormNewExerciceProps) {
             type="number"
             {...register('volume')}
             placeholder="Volume"
-            className="w-full rounded bg-zinc-100 px-1 py-1 placeholder:text-xs dark:bg-zinc-600"
+            className="w-full rounded bg-zinc-100 px-1 py-1 placeholder:text-xs dark:bg-zinc-500"
           />
           {errors.volume && (
             <span className="px-1 py-1 text-xs text-red-300">
@@ -94,7 +94,7 @@ export function FormNewExercise({ exerciseTableId }: FormNewExerciceProps) {
         </div>
         <button
           type="submit"
-          className=" h-full rounded bg-indigo-500 px-2 text-white transition duration-200 ease-in-out hover:bg-indigo-600"
+          className=" h-full rounded bg-indigo-500 px-2 text-white transition duration-200 ease-in-out hover:bg-indigo-500"
         >
           <Check size={16} />
         </button>

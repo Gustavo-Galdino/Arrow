@@ -1,4 +1,5 @@
 import { useStore } from '@/context/store'
+import Link from 'next/link'
 import { api } from '@/lib/api'
 import { useForm } from 'react-hook-form'
 import Select from 'react-select'
@@ -73,6 +74,10 @@ export function NewFood({ dietListId }: NewFoodProps) {
         borderColor: '#4B5563',
       },
     }),
+    input: (provided: any) => ({
+      ...provided,
+      color: '#fff',
+    }),
     singleValue: (provided: any) => ({
       ...provided,
       color: '#D1D5DB',
@@ -115,13 +120,18 @@ export function NewFood({ dietListId }: NewFoodProps) {
           placeholder="Alimento"
           styles={customStyles}
           className="w-full"
+          noOptionsMessage={() => (
+            <Link href="/stoke" className="text-black dark:text-white">
+              Cadastrar Novo Alimento
+            </Link>
+          )}
         />
 
         <input
           type="number"
           {...register('amount')}
           placeholder="g | un"
-          className="w-full rounded bg-zinc-600 px-1 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 md:w-24"
+          className="w-full rounded bg-zinc-600 px-1 py-2 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 md:w-24"
         />
       </div>
 
