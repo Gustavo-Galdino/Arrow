@@ -11,7 +11,9 @@ export async function GET() {
   const foods = await prisma.food.findFirst({
     where: {
       Stoke: {
-        userId,
+        User: {
+          userId,
+        },
       },
     },
   })
