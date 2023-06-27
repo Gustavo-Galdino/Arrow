@@ -10,7 +10,9 @@ export async function GET() {
 
   const foods = await prisma.stoke.findFirst({
     where: {
-      userId,
+      User: {
+        userId,
+      },
     },
     include: {
       food: true,
