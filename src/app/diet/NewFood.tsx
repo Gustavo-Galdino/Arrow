@@ -30,7 +30,7 @@ export function NewFood({ dietListId }: NewFoodProps) {
 
   const loadOptions = async (inputValue: string) => {
     if (!inputValue) return
-    const response = await api.get('/api/foodInGrams', {
+    const response = await api.get('/api/food', {
       params: {
         search: inputValue,
       },

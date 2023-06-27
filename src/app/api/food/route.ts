@@ -1,4 +1,23 @@
 import { prisma } from '@/lib/prisma'
+import { auth } from '@clerk/nextjs'
+
+export async function GET() {
+  const { userId } = auth()
+
+  if (!userId) {
+    return new Response('Unauthorized', { status: 401 })
+  }
+
+  const foods = await prisma.food.findFirst({
+    where: {
+      Stoke: {
+        userId,
+      },
+    },
+  })
+
+  return new Response(JSON.stringify(foods), { status: 200 })
+}
 
 export async function POST(req: Request) {
   const { foodName, amount, category, carbo, type, protein, fat, stokeId } =
