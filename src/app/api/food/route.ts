@@ -1,15 +1,5 @@
 import { prisma } from '@/lib/prisma'
 
-export async function GET() {
-  const foods = await prisma.food.findMany({
-    include: {
-      FoodInGrams: true,
-    },
-  })
-
-  return new Response(JSON.stringify(foods), { status: 200 })
-}
-
 export async function POST(req: Request) {
   const { foodName, amount, category, carbo, type, protein, fat, stokeId } =
     await req.json()
