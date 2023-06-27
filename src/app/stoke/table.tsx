@@ -17,56 +17,6 @@ export function Table() {
 
   return (
     <>
-      {categories.map((category) => (
-        <div key={category}>
-          <h2 className="my-4 text-2xl">{category}</h2>
-
-          <table className="w-full table-auto text-left">
-            <thead className="border-b-2 border-gray-400 text-center">
-              <tr>
-                <th className="px-4">Nome</th>
-                <th className="px-4">Porção</th>
-                <th className="px-4">Carboidratos</th>
-                <th className="px-4">Proteínas</th>
-                <th className="px-4">Gorduras</th>
-              </tr>
-            </thead>
-            <tbody className="text-center">
-              {user
-                .stoke!.flatMap((stokeItem) => stokeItem.food)
-                .filter((food) => food.category === category)
-                .map((food) => (
-                  <tr key={food.id}>
-                    <td className="border-b border-gray-500 p-1 text-start">
-                      {food.foodName}
-                    </td>
-                    <td className="border-b border-gray-500 p-1">
-                      {food.amount} {food.type}
-                    </td>
-                    <td className="border-b border-gray-500 p-1">
-                      {food.carbo}g
-                    </td>
-                    <td className="border-b border-gray-500 p-1">
-                      {food.protein}g
-                    </td>
-                    <td className="border-b border-gray-500 p-1">
-                      {food.fat}g
-                    </td>
-                    <td className="border-b border-gray-500 p-1">
-                      <DeleteModal
-                        description={`Ao deletar ${food.foodName}, sera apagado tambem da sua lista de dieta`}
-                        exerciseId={food.id}
-                        title={`Deletar ${food.foodName}?`}
-                        whereApi="stoke"
-                      />
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        </div>
-      ))}
-
       <div className="mt-8">
         <h2 className="mb-4 text-2xl">Adicionar novo alimento</h2>
         <div>
@@ -75,6 +25,47 @@ export function Table() {
           ))}
         </div>
       </div>
+      <section className="mt-10 flex flex-col items-center justify-center gap-6 sm:flex-row sm:gap-12">
+        {categories.map((category) => (
+          <div
+            key={category}
+            className=" w-full rounded-md border px-4 py-2 sm:self-start"
+          >
+            <h2 className="my-4 text-2xl">{category}</h2>
+
+            {user
+              .stoke!.flatMap((stokeItem) => stokeItem.food)
+              .filter((food) => food.category === category)
+              .map((food) => (
+                <div
+                  key={food.id}
+                  className="flex flex-col items-center border-b"
+                >
+                  <span className="font-semibold uppercase underline underline-offset-2">
+                    {food.foodName}
+                  </span>
+                  <span>
+                    {food.amount}
+                    {food.type}
+                  </span>
+                  <div className="space-x-2 border-t border-gray-500 py-1">
+                    <span>C: {food.carbo}g</span>
+                    <span>P: {food.protein}g</span>
+                    <span>G: {food.fat}g</span>
+                  </div>
+                  <span>
+                    <DeleteModal
+                      description={`Ao deletar ${food.foodName}, sera apagado tambem da sua lista de dieta`}
+                      exerciseId={food.id}
+                      title={`Deletar ${food.foodName}?`}
+                      whereApi="stoke"
+                    />
+                  </span>
+                </div>
+              ))}
+          </div>
+        ))}
+      </section>
     </>
   )
 }

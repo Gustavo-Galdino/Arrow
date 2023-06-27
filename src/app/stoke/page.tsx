@@ -30,9 +30,7 @@ export default async function Stock() {
       <Header />
       <UserInformations />
 
-      <div className="mt-10">
-        <Table />
-      </div>
+      <Table />
     </main>
   )
 }
