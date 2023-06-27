@@ -8,7 +8,7 @@ export async function GET() {
     return new Response('Unauthorized', { status: 401 })
   }
 
-  const foods = await prisma.food.findFirst({
+  const foods = await prisma.food.findMany({
     where: {
       Stoke: {
         User: {
