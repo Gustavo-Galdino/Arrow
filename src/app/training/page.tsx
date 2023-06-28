@@ -14,7 +14,7 @@ export default async function Training() {
 
   const token = await getToken()
 
-  const response = await fetch('https://arrow-iota.vercel.app/api/user', {
+  const response = await fetch('https://arrow-two.vercel.app/api/user', {
     cache: 'no-store',
     headers: {
       Authorization: `Bearer ${token}`,
