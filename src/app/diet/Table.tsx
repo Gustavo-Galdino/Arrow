@@ -53,7 +53,7 @@ export function Table() {
                               className="flex cursor-pointer flex-col gap-4 hover:text-zinc-600 dark:hover:text-zinc-200"
                               onClick={() => setOpen(!open)}
                             >
-                              <div className="flex items-center gap-1.5">
+                              <div className="flex items-center justify-between gap-1">
                                 {open ? (
                                   <ChevronDown size={14} />
                                 ) : (
@@ -63,7 +63,15 @@ export function Table() {
                                 <h2 className="text-xl font-semibold uppercase">
                                   {list.time} - {list.meal}
                                 </h2>
-                                <EditUl id={list.id} />
+                                <div className="flex items-center gap-2 justify-self-end">
+                                  <EditUl id={list.id} />
+                                  <DeleteModal
+                                    description="Deseja deletar essa refeição?"
+                                    title="Deletar Refeição"
+                                    exerciseId={list.id}
+                                    whereApi="dietList"
+                                  />
+                                </div>
                               </div>
                             </ul>
                           </Accordion.Trigger>

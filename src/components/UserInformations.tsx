@@ -34,7 +34,7 @@ export function UserInformations() {
         </div>
         <div className="flex items-center gap-1">
           <strong className="text-xl uppercase leading-relaxed tracking-widest">
-            {user.fullName}
+            {user.username}
           </strong>
           <span className="font-bold">|</span>
           <UserTitle />
